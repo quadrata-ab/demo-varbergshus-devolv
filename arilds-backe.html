@@ -1,0 +1,3213 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script>
+        window.isIe = false;
+        (function () {
+            if (window.navigator.userAgent.indexOf("MSIE ") > 0 || navigator.userAgent.match(/Trident.*rv\:11\./))  // If Internet Explorer, return version number
+            {
+                window.isIe = true;
+            }
+        })();
+    </script>
+    
+    <style>
+				.houseselector__infos {
+    position: relative;
+}
+.houseselector__info {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+    cursor: pointer;
+}
+.houseselector__info > div {
+    position: relative;
+    z-index: 1;
+}
+.houseselector__info-visible {
+    opacity: 1;
+    pointer-events: all;
+}
+.houseselector__svg > svg {
+    position: absolute;
+}
+.houseselector__overlay {
+    opacity: 0.3;
+    cursor: pointer;
+    position: relative;
+}
+.AHUS .houseselector__overlay {
+    opacity: 0.45;
+}
+.houseselector__overlay:hover, .houseselector__overlay-hover, .houseselector__overlay-selected {
+    opacity: 0.6;
+}
+
+.houseselector__views {
+    position: relative;
+}
+.houseselector__view-scroll {
+    position: relative;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+}
+@supports not (aspect-ratio: 16 / 9) {
+    .houseselector__view-scroll {
+        height: calc(100vw * (9 / 16));
+    }
+}
+.houseselector__view {
+    position: absolute;
+    width: 100%;
+}
+.houseselector__view > img {
+    width: 100%;
+}
+.houseselector__previus {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    background-color: red;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 0;
+    cursor: pointer;
+}
+.houseselector__next {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    background-color: blue;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 0;
+    cursor: pointer;
+}
+.houseselector__zoom {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    background-color: green;
+    top: 0;
+    right: 0;
+    cursor: pointer;
+    display: none;
+}
+.houseselector__filter select {
+    color: black;
+}
+.houseselector__filters {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    background-color: red;
+    pointer-events: none;
+    opacity: 0;
+    z-index: 1;
+}
+.houseselector__filters-visible {
+    pointer-events: all;
+    opacity: 1;
+}
+.houseselector__filters-btn {
+    position: absolute;
+    bottom: -1px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 200px;
+    height: 50px;
+    background-color: red;
+    cursor: pointer;
+}
+.houseselector__invisible {
+    opacity: 0;
+}
+
+.current-product {
+    position: absolute;
+    background-color: #93B18C;
+    color: #fff;
+    line-height: 20px;
+    width: 70px;
+    border-radius: 50%;
+    aspect-ratio: 1;
+    max-width: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    z-index: 1;
+    pointer-events: none;
+}
+
+@media(min-width: 600px) {
+    .current-product {
+        transform: translate(-50%, -50%);
+    }
+}
+
+@media(max-width: 600px) {
+    .houseselector__filters-btn {
+        bottom: -1px;
+        opacity: 0;
+        pointer-events: none;
+        max-width: 100%;
+    }
+
+    .houseselector__views-zoom .houseselector__filters-btn {
+        opacity: 1;
+        pointer-events: all;
+    }
+
+    .houseselector__view-scroll {
+        margin-bottom: -10px;
+    }
+
+    .houseselector__views-zoom .houseselector__view-scroll {
+        aspect-ratio: 2 / 3;
+        overflow-x: scroll;
+        overflow-y: hidden;
+    }
+
+    @supports not (aspect-ratio: 2 / 3) {
+        .houseselector__views-zoom .houseselector__view-scroll {
+            height: calc(100vw * (3 / 2));
+        }
+    }
+
+    .houseselector__views-zoom .houseselector__view {
+        width: 268%;
+    }
+
+    .houseselector__zoom {
+        display: block;
+    }
+
+    .current-product {
+        max-width: 55px;
+        font-size: 13px;
+        line-height: 15px;
+    }
+
+    .current-product.right {
+        border-top-right-radius: 0;
+        transform: translate(-100%, 5px);
+    }
+    .current-product.left {
+        border-top-left-radius: 0;
+        transform: translateX(0, 5px);
+    }
+}
+
+			</style>
+    
+<!-- OneTrust Cookies Consent Notice start for varbergshus.se -->
+
+<script src="https://cdn.cookielaw.org/scripttemplates/otSDKStub.js" data-language="sv" type="text/javascript" charset="UTF-8" data-domain-script="ecec178b-5fd2-41a9-90ec-862f8d51c5e4" ></script>
+
+<script type="text/javascript">
+
+function OptanonWrapper() { }
+
+</script>
+
+<!-- OneTrust Cookies Consent Notice end for varbergshus.se -->
+
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0" />
+<title>Lediga tomter p&#xE5; Arilds Backe, Arild | Varbergshus</title>
+
+
+<link href="https://www.varbergshus.se/ui/css/site.min.css?t=2026-06-10 12:40:27" rel="stylesheet" type="text/css"></link>
+
+
+    <link rel="apple-touch-icon" href="https://www.varbergshus.se/storage/9A2EFB712A07DB8D7A8EB872BD1E3542B73316FAC8A88553D086CCB3925F81FB/baef5b49ba3b4b21ade9b48a136f4af5/180-180-1-png.Png/media/d455fe378e314d5e97033e896159c38e/favicon.png" type="" />
+    <link rel="icon" href="https://www.varbergshus.se/storage/547C87AE98C4D30D028C7EA56CC30E640E8736B7401FC9AD0DD9D1E044FE0CDD/baef5b49ba3b4b21ade9b48a136f4af5/192-192-1-png.Png/media/d455fe378e314d5e97033e896159c38e/favicon.png" type="image/png" />
+    <link rel="icon" href="https://www.varbergshus.se/storage/1B32D9B093B56296318AC2482A1FA1B4CF99B34A41E897AA1F087A16A9C9E2C6/baef5b49ba3b4b21ade9b48a136f4af5/96-96-1-png.Png/media/d455fe378e314d5e97033e896159c38e/favicon.png" type="image/png" />
+    <link rel="icon" href="https://www.varbergshus.se/storage/A5ADE965702E8322FDB586AE98327F05236825EDC64487BE050344D74673F629/baef5b49ba3b4b21ade9b48a136f4af5/32-32-1-png.Png/media/d455fe378e314d5e97033e896159c38e/favicon.png" type="image/png" />
+    <link rel="icon" href="https://www.varbergshus.se/storage/0B45E213CC86C02BD52DF85E2FACD99E254A373BEB90FE95BF53CD28E3C20387/baef5b49ba3b4b21ade9b48a136f4af5/16-16-1-png.Png/media/d455fe378e314d5e97033e896159c38e/favicon.png" type="image/png" />
+    <link rel="shortcut icon" href="https://www.varbergshus.se/storage/6AE298C71BE3A40AA7D64BF81DD554E831F5593D8F2E9D6F1A234CFEBA0C1218/baef5b49ba3b4b21ade9b48a136f4af5/16-16-1-png.Icon/media/d455fe378e314d5e97033e896159c38e/favicon.ico" type="" />
+
+    <meta name="description" content="K&#xF6;p en tomt i Arild. Bygg ditt dr&#xF6;mhus p&#xE5; en tomt p&#xE5; Arilds Backe. Bygg nytt hus med Varbergshus. " />
+
+    <link rel="canonical" href="https://www.varbergshus.se/tomter-och-omraden/omraden/arilds-backe" />
+
+    <meta name="robots" content="index,follow" />
+   
+<meta property="og:title" content="Lediga tomter p&#xE5; Arilds Backe, Arild" />
+<meta property="og:type" content="website" />
+    <meta property="og:image" content="https://www.varbergshus.se/storage/0CA17F6BF68C9E2EF38E08C0ACCBE07E43D03EE374A8C21E35055D6346742C7F/c5cd211aeaf34ae09a4bbfa8f611b418/jpg/media/a904df8d89c7437a9f29cb6529a2aa5f/260421%20Tomtmarkering%20Arild.jpg" />
+    <meta property="og:image" content="https://www.varbergshus.se/storage/4C90BCB503AB4F0881C52488AC191667DA0A181F47BE32541E545201DF3623E6/b0e0462cf2c94210a76a385f0e1d2617/svg/media/3533d4b1de3746cb845d7d84444812ad/vh-logo-white.svg" />
+<meta property="og:url" content="https://www.varbergshus.se/tomter-och-omraden/omraden/arilds-backe" />
+<meta property="og:description" content="K&#xF6;p en tomt i Arild. Bygg ditt dr&#xF6;mhus p&#xE5; en tomt p&#xE5; Arilds Backe. Bygg nytt hus med Varbergshus. " />
+<meta property="og:locale" content="sv_SE" />
+<meta property="og:site_name" content="| Varbergshus" />
+<!-- Google Tag Manager -->
+                    <script>
+                        !function(){"use strict";
+                        function l(e){for(var t=e,r=0,n=document.cookie.split(";");r<n.length;r++){var o=n[r].split("=");if(o[0].trim()===t)return o[1]}}
+                        function s(e){return localStorage.getItem(e)}
+                        function u(e){return window[e]}
+                        function A(e,t){e=document.querySelector(e);return t?null==e?void 0:e.getAttribute(t):null==e?void 0:e.textContent}
+                        var e=window,t=document,r="script",n="dataLayer",o="https://s.varbergshus.se",a="https://load.s.varbergshus.se",i="2bhfnfmzdss",c="ccfm3f=GhdZPTkrQysiQTM9PkAYW0FdVVwJCFMQEgEGHx8BHQ4GAEoJCA%3D%3D",g="stapeUserId",v="",E="",d=!1;
+                        try{var d=!!g&&(m=navigator.userAgent,!!(m=new RegExp("Version/([0-9._]+)(.*Mobile)?.*Safari.*").exec(m)))&&16.4<=parseFloat(m[1]),f="stapeUserId"===g,I=d&&!f?function(e,t,r){void 0===t&&(t="");
+                        var n={cookie:l,localStorage:s,jsVariable:u,cssSelector:A},t=Array.isArray(t)?t:[t];if(e&&n[e])for(var o=n[e],a=0,i=t;a<i.length;a++){var c=i[a],c=r?o(c,r):o(c);if(c)return c}else console.warn("invalid uid source",e)}(g,v,E):void 0;d=d&&(!!I||f)}catch(e){console.error(e)}var m=e,g=(m[n]=m[n]||[],m[n].push({"gtm.start":(new Date).getTime(),event:"gtm.js"}),t.getElementsByTagName(r)[0]),v=I?"&bi="+encodeURIComponent(I):"",E=t.createElement(r),f=(d&&(i=8<i.length?i.replace(/([a-z]{8}$)/,"kp$1"):"kp"+i),!d&&a?a:o);
+                        E.async=!0,E.src=f+"/"+i+".js?"+c+v,null!=(e=g.parentNode)&&e.insertBefore(E,g)}();
+                    </script>
+                    <!-- End Google Tag Manager -->
+    
+    
+<script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?version=4.8.0&features=Element.prototype.matches%2CArray.prototype.includes%2CString.prototype.includes%2CIntersectionObserver%2CIntersectionObserverEntry%2CCustomEvent%2CArray.prototype.forEach%2CNodeList.prototype.forEach%2CArray.prototype.find%2CArray.from%2CPromise%2Cfetch" crossorigin="anonymous" nomodule></script>
+<script type="text/javascript">
+	try {
+		window.localStorage.setItem('requestVerificationToken', 'CfDJ8Af67gqemkJBlvhJURw_F8MfN8YAUrbm6Y5Hr541jmgpqi8Y1e9BjdBxR6345JXAOT2hTqRhd1w4eTHf7JJfbWcVO23PuvWqZCPDrruCA9thocxUoL8obdsDaJgbrFggdUaIqsgO9IDxGIYN8qiCwm8');
+	}
+	catch (error) {
+		console.error(error);
+	}
+	window.__litium = window.__litium || {};
+	window.__litium.requestContext = {"channelSystemId":"ab5ae212-1c5c-48ed-ae5e-66a8dbc9aaf2","currentPageSystemId":"846282c0-be2a-45e9-a6a5-de21eebfb3e6","productCategorySystemId":"83af016a-329f-4f86-12e1-08d8e0194ecd","previewPageData":null};
+	window.__litium.preloadState = window.__litium.preloadState || {};
+	window.__litium.translation = {"checkout.customerinfo.lastname":"Efternamn","filter.showmore":"Visa mer","facet.header.sortCriteria":"Sortera","checkout.customerinfo.cellphone":"Telefon","checkout.terms.acceptTermsOfCondition":"Jag har läst och accepterar","general.cancel":"Avbryt","checkout.customerinfo.signupandlogin":"Registrera dig och logga in","checkout.terms.acceptterms":"Jag har läst och accepterar","filter.showless":"Visa mindre","checkout.order.grandTotal":"Totalt ink moms","validation.personalnumber":"Personnummer","checkout.customerinfo.companyname":"Företagsnamn","mypage.person.add":"Lägg till","checkout.cart.total":"Totalt","checkout.cart.empty":"Din varukorg är tom","checkout.customerinfo.country.placeholder":"Välj ett land","mypage.address.city":"Stad","google.optimize.id":"Google Optimize Account Id","mypage.address.phonenumber":"Telefon","mypage.address.subtitle":"Adresser","checkout.cart.compaignprice":"Kampanjpris","facet.header.categories":"Kategorier","checkout.customerinfo.companyaddress.placeholder":"Välj en adress","search.yourfilter":"Dina filter","checkout.customerinfo.country":"Land","checkout.customerinfo.email":"E-post","mypage.address.edittitle":"Ändra","general.search":"Sök ","checkout.order.discount":"Rabatt","mypage.person.email":"E-post","validation.emailinused":"Denna e-post finns redan registrerad, försök med en annan.","validation.email":"E-posten är inte giltig","validation.phone":"Telefon","checkout.customerinfo.address":"Adress","mypage.login.title":"Inloggningsuppgifter","checkout.order.paymentcost":"Avgift","mypage.person.addtitle":"Lägg till","checkout.order.title":"Din order","general.save":"Spara","checkout.customerinfo.reference":"Referens","mypage.info.title":"Mina uppgifter","mypage.address.add":"Lägg till","mypage.address.title":"Adresser","mypage.person.title":"Personer","minicart.total":"Totalt","validation.unique":"Värdet är inte unikt","checkout.placeorder":"Bekräfta","checkout.payment.title":"Betalsätt","minicart.numberofproduct":"produkter","checkout.customerinfo.phonenumber":"Telefon","mypage.address.address":"Adress","mypage.person.firstname":"Förnamn","minicart.checkout":"Kassa","checkout.cart.header.quantity":"Antal","checkout.login.to.placeorder":"Login to place order","checkout.customerinfo.clicktologin":"Klicka för att logga in. ","checkout.customerinfo.personalnumbersecondpart":" ","checkout.customerinfo.firstname":"Förnamn","checkout.cart.title":"Varukorg","mypage.person.role.buyer":"Orderläggare","general.remove":"Ta bort","checkout.title":"Kassa","mypage.person.lastname":"Efternamn","checkout.customerinfo.businesscustomer":"Företagskund?","checkout.customerinfo.title":"Kunduppgifter","validation.required":"Obligatoriskt","checkout.delivery.title":"Leveranssätt","mypage.person.role.approver":"Ordergodkännare","checkout.cart.header.price":"Pris","checkout.order.total":"Totalt","checkout.customerinfo.privatecustomer":"Privatkund","favourite.since":"Sparad sedan {0}","mypage.person.subtitle":"Personer i företaget","checkout.terms.link":"villkoren","validation.invalidusername":"Användarnamnet är inte giltigt","checkout.customerinfo.personalnumber":"Personnummer","checkout.customerinfo.zipcode":"Postnummer","mypage.address.addtitle":"Lägg till","checkout.customerinfo.personalnumberfirstpart":"Personnummer","checkout.customerinfo.careof":"c/o","checkout.customerinfo.city":"Land","mypage.person.phone":"Telefon","mypage.person.edittitle":"Ändra","checkout.order.vat":"Moms","checkout.cart.header.total":"Total","checkout.customerinfo.existingcustomer":"Redan kund? ","checkout.order.message":"Meddelande till kundtjänst","tooltip.addedtocart":"Produkten har lagts i varukorgen","mypage.person.name":"Namn","mypage.address.country":"Land","general.select":"Välj","checkout.order.deliverycost":"Leveranskostnad","mypage.address.postnumber":"Postnummer","general.ok":"OK","mypage.order.title":"Ordrar","mypage.person.role":"Roll","facet.header.filter":"Filtrera"};
+</script>
+	<script src="https://www.varbergshus.se//www.google.com/recaptcha/api.js?render=6Lc7m_gcAAAAAM1hzm0aK9PC2HBMnkoXSwAbcP6y"></script>
+
+
+    <link rel="preconnect" href="https://www.devolv.com" crossorigin>
+    <script src="https://www.devolv.com/widget/widget.js" defer></script>
+</head>
+
+<body class="varbergshus" data-target="#scrollspy" data-spy="scroll" data-offset="45" data-module="./favourites">
+    <!-- Google Tag Manager (noscript) --> 
+<noscript><iframe src="https://load.s.varbergshus.se/ns.html?id=GTM-MQ2WGS" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript> 
+<!-- End Google Tag Manager (noscript) -->
+
+<!-- Adform Tracking Code BEGIN -->
+<noscript><p style="margin:0;padding:0;border:0;"><img src="https://track.adform.net/Serving/TrackPoint/?pm=241178&ADFPageName=WebsiteName|SectionName|SubSection|PageName&ADFdivider=|" width="1" height="1" alt="" /></p></noscript>
+<!-- Adform Tracking Code END -->
+    
+<header id="header" role="banner" class="header" data-scroll="sticky">
+	<div class="header__row compact-header header__row--one-row">
+		<div class="header__logo">
+			<a href="https://www.varbergshus.se/"><div style="width: 188px; height: 26px; background-image: url('https://www.varbergshus.se/storage/4C90BCB503AB4F0881C52488AC191667DA0A181F47BE32541E545201DF3623E6/b0e0462cf2c94210a76a385f0e1d2617/svg/media/3533d4b1de3746cb845d7d84444812ad/vh-logo-white.svg'); background-size: contain; background-repeat: no-repeat;"></div></a>
+		</div>
+		<div class="header__logo--mobile">
+			<a href="https://www.varbergshus.se/"><div style="width: 145px; height: 20px; background-image: url('https://www.varbergshus.se/storage/4C90BCB503AB4F0881C52488AC191667DA0A181F47BE32541E545201DF3623E6/b0e0462cf2c94210a76a385f0e1d2617/svg/media/3533d4b1de3746cb845d7d84444812ad/vh-logo-white.svg'); background-size: contain; background-repeat: no-repeat;"></div></a>
+		</div>
+
+		
+<div class="header__navigation">
+	<nav role="navigation" class="navbar">
+		<div class="navbar__icon--menu navbar__icon mobile-menu-toggler"></div>
+
+		<ul class="navbar__menu ">
+					<li class="navbar__item ">
+						<div class="navbar__header ">
+							<a href="https://www.varbergshus.se/husmodeller" class="navbar__link  " target="">Id&#xE9;hus</a>
+						</div>
+					</li>
+					<li class="navbar__item active">
+						<div class="navbar__header active">
+							<a href="https://www.varbergshus.se/tomter-och-omraden" class="navbar__link  active" target="">Lediga tomter</a>
+						</div>
+					</li>
+					<li class="navbar__item ">
+						<div class="navbar__header ">
+							<a href="https://www.varbergshus.se/visningar" class="navbar__link has-children " target="">Visningar</a>
+								<i class="navbar__icon navbar__icon--close mobile-menu-toggler"></i>
+						</div>
+		<ul class="navbar__menu ">
+					<li class="navbar__item ">
+						<div class="navbar__header ">
+							<a href="https://www.varbergshus.se/visningar/fysiska" class="navbar__link  " target="">Fysiska</a>
+						</div>
+					</li>
+					<li class="navbar__item ">
+						<div class="navbar__header ">
+							<a href="https://www.varbergshus.se/visningar/digitala" class="navbar__link  " target="">Digitala</a>
+						</div>
+					</li>
+		</ul>
+					</li>
+					<li class="navbar__item ">
+						<div class="navbar__header ">
+							<a href="https://www.varbergshus.se/att-bygga-hus" class="navbar__link has-children " target="">Att bygga hus</a>
+								<i class="navbar__icon navbar__icon--close mobile-menu-toggler"></i>
+						</div>
+		<ul class="navbar__menu ">
+					<li class="navbar__item ">
+						<div class="navbar__header ">
+							<a href="https://www.varbergshus.se/att-bygga-hus/losvirkeshus" class="navbar__link  " target="">L&#xF6;svirkeshus</a>
+						</div>
+					</li>
+					<li class="navbar__item ">
+						<div class="navbar__header ">
+							<a href="https://www.varbergshus.se/att-bygga-hus/totalentreprenad" class="navbar__link  " target="">Totalentreprenad</a>
+						</div>
+					</li>
+					<li class="navbar__item ">
+						<div class="navbar__header ">
+							<a href="https://www.varbergshus.se/att-bygga-hus/byggsats" class="navbar__link  " target="">Byggsats</a>
+						</div>
+					</li>
+					<li class="navbar__item ">
+						<div class="navbar__header ">
+							<a href="https://www.varbergshus.se/att-bygga-hus/vaxavilla" class="navbar__link  " target="">V&#xE4;xavilla</a>
+						</div>
+					</li>
+					<li class="navbar__item ">
+						<div class="navbar__header ">
+							<a href="https://www.varbergshus.se/att-bygga-hus/bygg-en-del-sjalv" class="navbar__link  " target="">Bygg en del sj&#xE4;lv</a>
+						</div>
+					</li>
+					<li class="navbar__item ">
+						<div class="navbar__header ">
+							<a href="https://www.varbergshus.se/att-bygga-hus/husprocessen" class="navbar__link  " target="">Husprocessen</a>
+						</div>
+					</li>
+					<li class="navbar__item ">
+						<div class="navbar__header ">
+							<a href="https://www.varbergshus.se/att-bygga-hus/vad-ingar" class="navbar__link has-children " target="">Materialval</a>
+								<i class="navbar__icon navbar__icon--close mobile-menu-toggler"></i>
+						</div>
+		<ul class="navbar__menu ">
+					<li class="navbar__item ">
+						<div class="navbar__header ">
+							<a href="https://www.varbergshus.se/att-bygga-hus/vad-ingar/kok" class="navbar__link  " target="">K&#xF6;k</a>
+						</div>
+					</li>
+					<li class="navbar__item ">
+						<div class="navbar__header ">
+							<a href="https://www.varbergshus.se/att-bygga-hus/vad-ingar/badrum" class="navbar__link  " target="">Badrum</a>
+						</div>
+					</li>
+					<li class="navbar__item ">
+						<div class="navbar__header ">
+							<a href="https://www.varbergshus.se/att-bygga-hus/vad-ingar/ovrig-interior" class="navbar__link  " target="">&#xD6;vrig interi&#xF6;r</a>
+						</div>
+					</li>
+					<li class="navbar__item ">
+						<div class="navbar__header ">
+							<a href="https://www.varbergshus.se/att-bygga-hus/vad-ingar/stilpaket" class="navbar__link  " target="">Stilpaket</a>
+						</div>
+					</li>
+		</ul>
+					</li>
+					<li class="navbar__item ">
+						<div class="navbar__header ">
+							<a href="https://www.varbergshus.se/att-bygga-hus/hallbarhet" class="navbar__link has-children " target="">H&#xE5;llbarhet</a>
+								<i class="navbar__icon navbar__icon--close mobile-menu-toggler"></i>
+						</div>
+		<ul class="navbar__menu ">
+					<li class="navbar__item ">
+						<div class="navbar__header ">
+							<a href="https://www.varbergshus.se/att-bygga-hus/hallbarhet/energisnala-hus" class="navbar__link  " target="">Energisn&#xE5;la hus</a>
+						</div>
+					</li>
+		</ul>
+					</li>
+					<li class="navbar__item ">
+						<div class="navbar__header ">
+							<a href="https://www.varbergshus.se/att-bygga-hus/vara-husserier" class="navbar__link  " target="">V&#xE5;ra husserier</a>
+						</div>
+					</li>
+					<li class="navbar__item ">
+						<div class="navbar__header ">
+							<a href="https://www.varbergshus.se/att-bygga-hus/fragor-svar" class="navbar__link  " target="">Fr&#xE5;gor &amp; svar</a>
+						</div>
+					</li>
+					<li class="navbar__item ">
+						<div class="navbar__header ">
+							<a href="https://www.varbergshus.se/att-bygga-hus/leverantorer" class="navbar__link  " target="">Leverant&#xF6;rer</a>
+						</div>
+					</li>
+		</ul>
+					</li>
+					<li class="navbar__item ">
+						<div class="navbar__header ">
+							<a href="https://www.varbergshus.se/inspiration" class="navbar__link  " target="">Inspiration</a>
+						</div>
+					</li>
+					<li class="navbar__item ">
+						<div class="navbar__header ">
+							<a href="https://www.varbergshus.se/kontakta-oss" class="navbar__link has-children " target="">Kontakta oss</a>
+								<i class="navbar__icon navbar__icon--close mobile-menu-toggler"></i>
+						</div>
+		<ul class="navbar__menu ">
+					<li class="navbar__item ">
+						<div class="navbar__header ">
+							<a href="https://www.varbergshus.se/kontakta-oss/om-oss" class="navbar__link  " target="">Om oss</a>
+						</div>
+					</li>
+					<li class="navbar__item ">
+						<div class="navbar__header ">
+							<a href="https://www.varbergshus.se/kontakta-oss/kontakta-oss_" class="navbar__link  " target="">Kontakta oss</a>
+						</div>
+					</li>
+					<li class="navbar__item ">
+						<div class="navbar__header ">
+							<a href="https://www.varbergshus.se/kontakta-oss/salja-mark" class="navbar__link  " target="">S&#xE4;lja mark</a>
+						</div>
+					</li>
+					<li class="navbar__item ">
+						<div class="navbar__header ">
+							<a href="https://www.varbergshus.se/kontakta-oss/anmal-dig-till-nyhetsbrev" class="navbar__link  " target="">Anm&#xE4;l dig till nyhetsbrev</a>
+						</div>
+					</li>
+					<li class="navbar__item ">
+						<div class="navbar__header ">
+							<a href="https://www.varbergshus.se/kontakta-oss/jobba-hos-oss" class="navbar__link  " target="">Jobba hos oss</a>
+						</div>
+					</li>
+					<li class="navbar__item ">
+						<div class="navbar__header ">
+							<a href="https://www.varbergshus.se/kontakta-oss/press-media" class="navbar__link  " target="">Press &amp; Media</a>
+						</div>
+					</li>
+					<li class="navbar__item ">
+						<div class="navbar__header ">
+							<a href="https://www.varbergshus.se/kontakta-oss/for-dig-som-bor-i-ett-varbergshus_1" class="navbar__link  " target="">F&#xF6;r dig som bor i ett Varbergshus</a>
+						</div>
+					</li>
+					<li class="navbar__item ">
+						<div class="navbar__header ">
+							<a href="https://www.varbergshus.se/kontakta-oss/reklamation" class="navbar__link  " target="">Reklamation</a>
+						</div>
+					</li>
+					<li class="navbar__item ">
+						<div class="navbar__header ">
+							<a href="https://www.varbergshus.se/kontakta-oss/integritetspolicy" class="navbar__link  " target="">Integritetspolicy</a>
+						</div>
+					</li>
+		</ul>
+					</li>
+					<li class="navbar__item ">
+						<div class="navbar__header ">
+							<a href="https://www.varbergshus.se/bestall-katalog" class="navbar__link  " target="">Best&#xE4;ll katalog</a>
+						</div>
+					</li>
+		<li class="navbar__item navbar__quickfind">
+			<div class="navbar__header">
+				<p class="navbar__link navbar__quickfind">Hitta snabbt</p>
+
+				<i class="navbar__icon navbar__icon--quickfind navbar__icon--close mobile-menu-toggler"></i>
+			</div>
+
+			<ul class="navbar__menu ">
+					<li class="navbar__item">
+						<div class="navbar__header">
+							<a href="https://www.varbergshus.se/kontakta-oss" class="navbar__link">Kontakta oss</a>
+						</div>
+					</li>
+					<li class="navbar__item">
+						<div class="navbar__header">
+							<a href="https://www.varbergshus.se/bestall-katalog" class="navbar__link">Best&#xE4;ll katalog</a>
+						</div>
+					</li>
+					<li class="navbar__item">
+						<div class="navbar__header">
+							<a href="https://www.varbergshus.se/kontakta-oss/anmal-dig-till-nyhetsbrev" class="navbar__link">Anm&#xE4;l dig till nyhetsbrev</a>
+						</div>
+					</li>
+					<li class="navbar__item">
+						<div class="navbar__header">
+							<a href="https://www.varbergshus.se/kontakta-oss/reklamation" class="navbar__link">Reklamation</a>
+						</div>
+					</li>
+					<li class="navbar__item">
+						<div class="navbar__header">
+							<a href="https://www.varbergshus.se/kontakta-oss/integritetspolicy" class="navbar__link">Integritetspolicy</a>
+						</div>
+					</li>
+			</ul>
+		</li>
+		</ul>
+	</nav>
+</div>
+
+
+
+		<div class="header__components">
+			
+<div id="quickSearch">
+	<div>
+		<div class="quick-search " role="search">
+			<a class="quick-search__link--block"><i class="quick-search__icon" aria-label="Sök"></i></a>
+			<form class="quick-search__form" action="/sokresultat" role="search" method="GET">
+				<div class="quick-search__form-inner">
+					<button class="quick-search__submit-button" type="submit"><i class="quick-search__submit-icon quick-search__submit-icon--dark"></i></button>
+					<input name="q" autocomplete="off" id="quick-search-input" class="quick-search__input" placeholder="Sök" type="search" value=""><i class="quick-search__close-icon"></i>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+
+
+				<div id="favourite">
+					<div class="favourite">
+						<a class="favourite__link--block" href="https://www.varbergshus.se/mina-favoriter"><i class="favourite__icon"></i> <span class="favourite__badge"></span></a>
+					</div>
+				</div>
+		</div>
+		<div class="header__break"></div>
+	</div>
+</header>
+
+    <main class="main-content">
+        
+
+<div class="product__header">
+    <div class="row expanded">
+        <div class="columns medium-10" style="margin: 0 auto;">
+            <div class="row">
+                <div class="columns medium-12">
+                    <div class="breadcrumbs-container breadcrumbs--wo-image">
+                        <div class="breadcrumbs">
+            <a href="https://www.varbergshus.se/">Start</a>
+ /             <a href="https://www.varbergshus.se/tomter-och-omraden">Tomter &amp; omr&#xE5;den</a>
+ /             <a href="https://www.varbergshus.se/omraden/skane">Sk&#xE5;ne</a>
+ /             <a href="https://www.varbergshus.se/omraden/skane/hoganas">H&#xF6;gan&#xE4;s</a>
+ /             <span>Omr&#xE5;de: Arilds Backe</span>
+
+</div>
+                    </div>
+
+                    <h1>Omr&#xE5;de: Arilds Backe</h1>
+
+                    <div class="product__status">
+                        <i class="icon-status-salesongoing"></i> <span>F&#xF6;rs&#xE4;ljning p&#xE5;g&#xE5;r</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<nav id="scrollspy" class="sticky-nav-container" data-scroll="sticky">
+	<div class="sticky-nav background-color-sand15">
+		<div class="dropdown hide-for-large">
+			<button class="dropdown-btn dropdown-toggle" type="button" data-toggle="dropdown" data-dropdown-hover="true" aria-haspopup="true" aria-expanded="false">Hitta på sidan</button>
+			<div class="dropdown-menu"></div>
+		</div>
+		<ul class="sticky-nav-sections show-for-large"></ul>
+	</div>
+</nav>
+<div class="relative">
+        <script defer>
+            window.addEventListener('DOMContentLoaded', () => {
+                let houseselectorView = document.querySelector('.houseselector__view');
+                let container = document.createElement('div');
+                let image = document.createElement('img');
+
+                container.appendChild(image);
+
+                if (houseselectorView) {
+                    houseselectorView.appendChild(container);
+                }
+            });
+        </script>
+
+	<div class="houseselector background-color-none" style="padding-bottom: 0px;" id="guid-6a6460b6-2f9d-4b63-b0b2-6dd274db762b" data-spy="navigation" data-title="" data-spy-show="False" data-spy-order="0">
+		<div>
+			<div>
+				<div class="text-center">
+				</div>
+				<div class="houseselector__viewswrapper">
+					
+				<div class="houseselector__views">
+					<div class="houseselector__view-scroll">
+						
+				<div class="houseselector__view" data-id="view-6f563d90-3f4b-4102-ab84-db99c173fb3e">
+					<div class="houseselector__svg">
+						
+						<svg viewBox="0 0 1920 1080" xmlns="http://www.w3.org/2000/svg">
+							<polygon class="houseselector__invisible" data-id="overlay-6f563d90-3f4b-4102-ab84-db99c173fb3e.e628a273-4790-4d41-e399-08dbae9f0940" points="1243,367 1290,375 1297,370 1340,361 1357,378 1357,387 1369,388 1378,399 1318,415 1287,409 1286,397 1266,381 1243,393 1184,379" /> <polygon class="houseselector__invisible" data-id="overlay-6f563d90-3f4b-4102-ab84-db99c173fb3e.c7a45041-9fc9-45e2-b4a3-d53b4cddb363" points="1189,487 1204,509 1233,517 1248,529 1267,536 1346,569 1248,609 1221,591 1162,573 1119,558 1116,546 1108,541 1072,529 1082,529 1090,519 1107,524 1108,515 1124,503" /> <polygon class="houseselector__invisible" data-id="overlay-6f563d90-3f4b-4102-ab84-db99c173fb3e.37d9b643-df42-4378-943b-d8dd3e027b6b" points="988,544 1062,520 1068,529 1073,529 1109,541 1117,546 1120,559 1222,592 1248,609 1130,658 1098,641 964,589 963,583 955,565" /> <polygon class="houseselector__invisible" data-id="overlay-6f563d90-3f4b-4102-ab84-db99c173fb3e.a140ea95-4b94-4a7d-82d8-8407f8d0d133" points="950,556 963,583 965,590 1096,641 1129,659 948,727 932,712 799,625 799,614 785,602 795,602 793,595 810,584 828,590 834,596 842,596 841,591 855,578" /> <polygon class="houseselector__invisible" data-id="overlay-6f563d90-3f4b-4102-ab84-db99c173fb3e.cb5449b5-6e00-4f44-a119-ddcba85ff78d" points="683,622 718,608 742,606 743,598 759,587 775,592 799,615 799,626 932,712 948,727 628,846 586,827" /> <polygon class="houseselector__invisible" data-id="overlay-6f563d90-3f4b-4102-ab84-db99c173fb3e.ebfad9d7-d0a3-492a-9707-7c59d6778929" points="1104,397 1185,379 1243,394 1266,382 1286,397 1287,409 1319,415 1309,417 1285,441 1281,440 1280,436 1264,431 1264,423 1246,403 1201,414 1197,417" /> <polygon class="houseselector__invisible" data-id="overlay-6f563d90-3f4b-4102-ab84-db99c173fb3e.031b9310-7686-4e6d-b2c3-c010c79667fe" points="1105,397 1196,417 1200,415 1245,403 1264,424 1263,432 1280,436 1281,441 1219,463 1190,453 1189,448 1169,426 1133,418 1127,426 1112,423 1104,430 1032,412" /> <polygon class="houseselector__invisible" data-id="overlay-6f563d90-3f4b-4102-ab84-db99c173fb3e.2e793f74-12be-4239-8740-feb1013a1d6c" points="1032,413 1105,430 1113,423 1127,426 1133,418 1170,426 1189,448 1189,453 1219,463 1163,491 1136,491 1098,476 1082,455 1064,459 1013,444 1010,446 963,426" /> <polygon class="houseselector__invisible" data-id="overlay-6f563d90-3f4b-4102-ab84-db99c173fb3e.68770a2f-0c5e-4ff0-9bf4-f7589cab3996" points="956,427 1010,449 1013,444 1064,459 1082,455 1097,475 1098,483 1119,489 1125,502 1024,523 983,510 984,501 967,480 950,485 891,470 830,452" /> <polygon class="houseselector__invisible" data-id="overlay-6f563d90-3f4b-4102-ab84-db99c173fb3e.1fb12e41-2754-41aa-bbdb-4c184dd4decb" points="786,508 754,487 747,492 713,480 829,453 951,486 966,480 984,501 982,510 1024,523 910,558 908,550 880,543 879,534 870,529 830,515 824,521" /> <polygon class="houseselector__invisible" data-id="overlay-6f563d90-3f4b-4102-ab84-db99c173fb3e.af9d1bed-ffe9-4953-af4b-db8e93569bd4" points="747,492 755,487 787,509 824,521 830,516 869,529 879,534 881,543 909,550 911,558 848,578 708,593 673,583 695,484 713,480" /> <polygon class="houseselector__invisible" data-id="overlay-6f563d90-3f4b-4102-ab84-db99c173fb3e.549a9a92-7c0b-4aca-9b74-42225be65002" points="1355,441 1401,450 1406,456 1501,477 1445,511 1326,483 1325,474 1321,470 1289,464 1284,457 1302,443 1344,429" /> <polygon class="houseselector__invisible" data-id="overlay-6f563d90-3f4b-4102-ab84-db99c173fb3e.1b35ae77-4721-42d0-ae71-a1cfa183cc16" points="1321,470 1326,475 1327,483 1444,512 1351,565 1272,533 1244,524 1234,517 1205,509 1197,495 1209,491 1209,487 1233,471 1281,454 1289,465" />
+						</svg>
+					</div>
+					
+					<img data-id="image-6f563d90-3f4b-4102-ab84-db99c173fb3e" src="https://www.varbergshus.se/houseselector-img/?systemId=217874f6-7488-454e-8ce9-3283c44df976" alt="Arild" />
+				</div>
+            
+						
+					<svg class="houseingselector-overview-svg" viewBox="0 0 1920 1080" xmlns="http://www.w3.org/2000/svg">
+						
+                <image x="1299" y="317" width="38" height="55" href="https://www.varbergshus.se/houseselector-img/?pin=u" />
+                <text x="1318" y="339" fill="#FFFFFF" font-size="18" dominant-baseline="middle" class="pin-text" text-anchor="middle">1</text>
+			 
+                <image x="1213" y="507" width="38" height="55" href="https://www.varbergshus.se/houseselector-img/?pin=u" />
+                <text x="1232" y="530" fill="#FFFFFF" font-size="18" dominant-baseline="middle" class="pin-text" text-anchor="middle">10</text>
+			 
+                <image x="1093" y="536" width="38" height="55" href="https://www.varbergshus.se/houseselector-img/?pin=u" />
+                <text x="1112" y="558" fill="#FFFFFF" font-size="18" dominant-baseline="middle" class="pin-text" text-anchor="middle">11</text>
+			 
+                <image x="965" y="611" width="38" height="55" href="https://www.varbergshus.se/houseselector-img/?pin=u" />
+                <text x="984" y="633" fill="#FFFFFF" font-size="18" dominant-baseline="middle" class="pin-text" text-anchor="middle">12</text>
+			 
+                <image x="786" y="646" width="38" height="55" href="https://www.varbergshus.se/houseselector-img/?pin=u" />
+                <text x="805" y="669" fill="#FFFFFF" font-size="18" dominant-baseline="middle" class="pin-text" text-anchor="middle">13</text>
+			 
+                <image x="1235" y="338" width="38" height="55" href="https://www.varbergshus.se/houseselector-img/?pin=u" />
+                <text x="1254" y="360" fill="#FFFFFF" font-size="18" dominant-baseline="middle" class="pin-text" text-anchor="middle">2</text>
+			 
+                <image x="1197" y="362" width="38" height="55" href="https://www.varbergshus.se/houseselector-img/?pin=u" />
+                <text x="1216" y="384" fill="#FFFFFF" font-size="18" dominant-baseline="middle" class="pin-text" text-anchor="middle">3</text>
+			 
+                <image x="1122" y="392" width="38" height="55" href="https://www.varbergshus.se/houseselector-img/?pin=u" />
+                <text x="1141" y="415" fill="#FFFFFF" font-size="18" dominant-baseline="middle" class="pin-text" text-anchor="middle">4</text>
+			 
+                <image x="1029" y="414" width="38" height="55" href="https://www.varbergshus.se/houseselector-img/?pin=u" />
+                <text x="1048" y="437" fill="#FFFFFF" font-size="18" dominant-baseline="middle" class="pin-text" text-anchor="middle">5</text>
+			 
+                <image x="914" y="445" width="38" height="55" href="https://www.varbergshus.se/houseselector-img/?pin=u" />
+                <text x="933" y="467" fill="#FFFFFF" font-size="18" dominant-baseline="middle" class="pin-text" text-anchor="middle">6</text>
+			 
+                <image x="724" y="458" width="38" height="55" href="https://www.varbergshus.se/houseselector-img/?pin=u" />
+                <text x="743" y="480" fill="#FFFFFF" font-size="18" dominant-baseline="middle" class="pin-text" text-anchor="middle">7</text>
+			 
+                <image x="1414" y="432" width="38" height="55" href="https://www.varbergshus.se/houseselector-img/?pin=u" />
+                <text x="1434" y="455" fill="#FFFFFF" font-size="18" dominant-baseline="middle" class="pin-text" text-anchor="middle">8</text>
+			 
+                <image x="1328" y="464" width="38" height="55" href="https://www.varbergshus.se/houseselector-img/?pin=u" />
+                <text x="1347" y="486" fill="#FFFFFF" font-size="18" dominant-baseline="middle" class="pin-text" text-anchor="middle">9</text>
+			
+					</svg>
+				
+					</div>
+					
+					<div class="houseselector__zoom">
+					</div>
+				</div>
+			
+				</div>
+			</div>
+		</div>
+
+		<div class="houseselector__filters">
+			<div class="houseselector__filters-top">
+					<div class="houseselector__filter">
+						<div class="houseselector__filter-name">Tomtarea</div>
+						<div class="houseselector__filter-min">
+							<select data-min="Tomtarea">
+									<option value="800">Minst 800 kvm</option>
+									<option value="900">Minst 900 kvm</option>
+									<option value="1000">Minst 1&#xA0;000 kvm</option>
+									<option value="1100">Minst 1&#xA0;100 kvm</option>
+									<option value="1200">Minst 1&#xA0;200 kvm</option>
+									<option value="1300">Minst 1&#xA0;300 kvm</option>
+							</select>
+						</div>
+						<div class="houseselector__filter-max">
+							<select data-max="Tomtarea">
+									<option value="800">Max 800 kvm</option>
+									<option value="900">Max 900 kvm</option>
+									<option value="1000">Max 1&#xA0;000 kvm</option>
+									<option value="1100">Max 1&#xA0;100 kvm</option>
+									<option value="1200">Max 1&#xA0;200 kvm</option>
+									<option value="1300">Max 1&#xA0;300 kvm</option>
+							</select>
+						</div>
+					</div>
+			</div>
+			<div class="houseselector__filters-info">
+				<div class="houseselector__filters-count"><span data-found></span>/<span data-total></span> tomter</div>
+				<div class="houseselector__filters-show"><button data-hide>Visa resultat</button></div>
+				<div class="houseselector__filters-clear"><button data-clear>Rensa filter</button></div>
+			</div>
+		</div>
+		<div class="houseselector__filters-btn">
+			Filtrera
+		</div>
+
+		
+				<div class="houseselector__infos">
+					
+								<div class="houseselector__info" data-id="info-e628a273-4790-4d41-e399-08dbae9f0940">
+									
+			<div class="house-info">
+				<div class="arrow-bottom"></div>
+				<div style="fonst-size: 22px; font-weight: bold;">Arilds backe, tomt 1 - Såld</div>
+				<div>
+				Adress: Nimisvägen 13 </div><div>Tomtarea: 840 kvm
+					<div></div>
+				</div>
+				<div style="margin-top: 10px">
+				
+				</div>
+			</div>
+		
+								</div>
+							 
+								<div class="houseselector__info" data-id="info-c7a45041-9fc9-45e2-b4a3-d53b4cddb363">
+									
+			<div class="house-info">
+				<div class="arrow-bottom"></div>
+				<div style="fonst-size: 22px; font-weight: bold;">Arilds backe, tomt 10 - Såld</div>
+				<div>
+				Adress: Nimisvägen 8 </div><div>Tomtarea: 847 kvm
+					<div></div>
+				</div>
+				<div style="margin-top: 10px">
+				
+				</div>
+			</div>
+		
+								</div>
+							 
+								<div class="houseselector__info" data-id="info-37d9b643-df42-4378-943b-d8dd3e027b6b">
+									
+			<div class="house-info">
+				<div class="arrow-bottom"></div>
+				<div style="fonst-size: 22px; font-weight: bold;">Arilds backe, tomt 11 - Såld</div>
+				<div>
+				Adress: Nimisvägen 6 </div><div>Tomtarea: 927 kvm
+					<div></div>
+				</div>
+				<div style="margin-top: 10px">
+				
+				</div>
+			</div>
+		
+								</div>
+							 
+								<div class="houseselector__info" data-id="info-a140ea95-4b94-4a7d-82d8-8407f8d0d133">
+									
+			<div class="house-info">
+				<div class="arrow-bottom"></div>
+				<div style="fonst-size: 22px; font-weight: bold;">Arilds backe, tomt 12 - Bokad</div>
+				<div>
+				Adress: Nimisvägen 4 </div><div>Tomtarea: 824 kvm
+					<div></div>
+				</div>
+				<div style="margin-top: 10px">
+				
+				</div>
+			</div>
+		
+								</div>
+							 
+								<div class="houseselector__info" data-id="info-cb5449b5-6e00-4f44-a119-ddcba85ff78d">
+									
+			<div class="house-info">
+				<div class="arrow-bottom"></div>
+				<div style="fonst-size: 22px; font-weight: bold;">Arilds backe, tomt 13 - Såld</div>
+				<div>
+				Adress: Nimisvägen 2 </div><div>Tomtarea: 1 115 kvm
+					<div></div>
+				</div>
+				<div style="margin-top: 10px">
+				
+				</div>
+			</div>
+		
+								</div>
+							 
+								<div class="houseselector__info" data-id="info-ebfad9d7-d0a3-492a-9707-7c59d6778929">
+									
+			<div class="house-info">
+				<div class="arrow-bottom"></div>
+				<div style="fonst-size: 22px; font-weight: bold;">Arilds backe, tomt 2 - Såld</div>
+				<div>
+				Adress: Nimisvägen 11 </div><div>Tomtarea: 956 kvm
+					<div></div>
+				</div>
+				<div style="margin-top: 10px">
+				
+				</div>
+			</div>
+		
+								</div>
+							 
+								<div class="houseselector__info" data-id="info-031b9310-7686-4e6d-b2c3-c010c79667fe">
+									
+			<div class="house-info">
+				<div class="arrow-bottom"></div>
+				<div style="fonst-size: 22px; font-weight: bold;">Arilds backe, tomt 3 - Såld</div>
+				<div>
+				Adress: Nimisvägen 9 </div><div>Tomtarea: 963 kvm
+					<div></div>
+				</div>
+				<div style="margin-top: 10px">
+				
+				</div>
+			</div>
+		
+								</div>
+							 
+								<div class="houseselector__info" data-id="info-2e793f74-12be-4239-8740-feb1013a1d6c">
+									
+			<div class="house-info">
+				<div class="arrow-bottom"></div>
+				<div style="fonst-size: 22px; font-weight: bold;">Arilds backe, tomt 4 - Såld</div>
+				<div>
+				Adress: Nimisvägen 7 </div><div>Tomtarea: 959 kvm
+					<div></div>
+				</div>
+				<div style="margin-top: 10px">
+				
+				</div>
+			</div>
+		
+								</div>
+							 
+								<div class="houseselector__info" data-id="info-68770a2f-0c5e-4ff0-9bf4-f7589cab3996">
+									
+			<div class="house-info">
+				<div class="arrow-bottom"></div>
+				<div style="fonst-size: 22px; font-weight: bold;">Arilds backe, tomt 5 - Såld</div>
+				<div>
+				Adress: Nimisvägen 5 </div><div>Tomtarea: 1 255 kvm
+					<div></div>
+				</div>
+				<div style="margin-top: 10px">
+				
+				</div>
+			</div>
+		
+								</div>
+							 
+								<div class="houseselector__info" data-id="info-1fb12e41-2754-41aa-bbdb-4c184dd4decb">
+									
+			<div class="house-info">
+				<div class="arrow-bottom"></div>
+				<div style="fonst-size: 22px; font-weight: bold;">Arilds backe, tomt 6 - Såld</div>
+				<div>
+				Adress: Nimisvägen 3 </div><div>Tomtarea: 1 158 kvm
+					<div></div>
+				</div>
+				<div style="margin-top: 10px">
+				
+				</div>
+			</div>
+		
+								</div>
+							 
+								<div class="houseselector__info" data-id="info-af9d1bed-ffe9-4953-af4b-db8e93569bd4">
+									
+			<div class="house-info">
+				<div class="arrow-bottom"></div>
+				<div style="fonst-size: 22px; font-weight: bold;">Arilds backe, tomt 7 - Såld</div>
+				<div>
+				Adress: Nimisvägen 1 </div><div>Tomtarea: 823 kvm
+					<div></div>
+				</div>
+				<div style="margin-top: 10px">
+				
+				</div>
+			</div>
+		
+								</div>
+							 
+								<div class="houseselector__info" data-id="info-549a9a92-7c0b-4aca-9b74-42225be65002">
+									
+			<div class="house-info">
+				<div class="arrow-bottom"></div>
+				<div style="fonst-size: 22px; font-weight: bold;">Arilds backe, tomt 8 - Såld</div>
+				<div>
+				Adress: Nimisvägen 12 </div><div>Tomtarea: 941 kvm
+					<div></div>
+				</div>
+				<div style="margin-top: 10px">
+				
+				</div>
+			</div>
+		
+								</div>
+							 
+								<div class="houseselector__info" data-id="info-1b35ae77-4721-42d0-ae71-a1cfa183cc16">
+									
+			<div class="house-info">
+				<div class="arrow-bottom"></div>
+				<div style="fonst-size: 22px; font-weight: bold;">Arilds backe, tomt 9 - Såld</div>
+				<div>
+				Adress: Nimisvägen 10 </div><div>Tomtarea: 965 kvm
+					<div></div>
+				</div>
+				<div style="margin-top: 10px">
+				
+				</div>
+			</div>
+		
+								</div>
+							
+				</div>
+				<div id="05a5fb77-9abd-463f-96fc-b25a4a8c2ab9"></div>
+				
+				<script>
+					var houseSelector = houseSelector ?? {};
+					houseSelector['05a5fb77-9abd-463f-96fc-b25a4a8c2ab9'] = {
+						views: ['6f563d90-3f4b-4102-ab84-db99c173fb3e'],
+						houses: [{"id":"e628a273-4790-4d41-e399-08dbae9f0940","name":"Arilds backe, tomt 1","number":1,"information":[{"name":"Adress","value":"Nimisv\u00E4gen 13","unit":null,"filterStep":null},{"name":"Tomtarea","value":"840","unit":"kvm","filterStep":100}],"buttons":[],"overlayColor":null,"isAvailable":false,"isReserved":false,"isPlanned":false,"url":"/tomter-och-omraden/tomter/arilds-backe-tomt-1","showSelectedProductVariantPin":false,"productGuid":null,"categoryGuid":null,"pageGuid":null,"externalUrl":null,"statusText":"S\u00E5ld"},{"id":"c7a45041-9fc9-45e2-b4a3-d53b4cddb363","name":"Arilds backe, tomt 10","number":10,"information":[{"name":"Adress","value":"Nimisv\u00E4gen 8","unit":null,"filterStep":null},{"name":"Tomtarea","value":"847","unit":"kvm","filterStep":100}],"buttons":[],"overlayColor":null,"isAvailable":false,"isReserved":false,"isPlanned":false,"url":"/tomter-och-omraden/tomter/arilds-backe-tomt-10","showSelectedProductVariantPin":false,"productGuid":null,"categoryGuid":null,"pageGuid":null,"externalUrl":null,"statusText":"S\u00E5ld"},{"id":"37d9b643-df42-4378-943b-d8dd3e027b6b","name":"Arilds backe, tomt 11","number":11,"information":[{"name":"Adress","value":"Nimisv\u00E4gen 6","unit":null,"filterStep":null},{"name":"Tomtarea","value":"927","unit":"kvm","filterStep":100}],"buttons":[],"overlayColor":null,"isAvailable":false,"isReserved":false,"isPlanned":false,"url":"/tomter-och-omraden/tomter/arilds-backe-tomt-11","showSelectedProductVariantPin":false,"productGuid":null,"categoryGuid":null,"pageGuid":null,"externalUrl":null,"statusText":"S\u00E5ld"},{"id":"a140ea95-4b94-4a7d-82d8-8407f8d0d133","name":"Arilds backe, tomt 12","number":12,"information":[{"name":"Adress","value":"Nimisv\u00E4gen 4","unit":null,"filterStep":null},{"name":"Tomtarea","value":"824","unit":"kvm","filterStep":100}],"buttons":[],"overlayColor":null,"isAvailable":false,"isReserved":false,"isPlanned":false,"url":"/tomter-och-omraden/tomter/arilds-backe-tomt-12","showSelectedProductVariantPin":false,"productGuid":null,"categoryGuid":null,"pageGuid":null,"externalUrl":null,"statusText":"Bokad"},{"id":"cb5449b5-6e00-4f44-a119-ddcba85ff78d","name":"Arilds backe, tomt 13","number":13,"information":[{"name":"Adress","value":"Nimisv\u00E4gen 2","unit":null,"filterStep":null},{"name":"Tomtarea","value":"1115","unit":"kvm","filterStep":100}],"buttons":[],"overlayColor":null,"isAvailable":false,"isReserved":false,"isPlanned":false,"url":"/tomter-och-omraden/tomter/arilds-backe-tomt-13","showSelectedProductVariantPin":false,"productGuid":null,"categoryGuid":null,"pageGuid":null,"externalUrl":null,"statusText":"S\u00E5ld"},{"id":"ebfad9d7-d0a3-492a-9707-7c59d6778929","name":"Arilds backe, tomt 2","number":2,"information":[{"name":"Adress","value":"Nimisv\u00E4gen 11","unit":null,"filterStep":null},{"name":"Tomtarea","value":"956","unit":"kvm","filterStep":100}],"buttons":[],"overlayColor":null,"isAvailable":false,"isReserved":false,"isPlanned":false,"url":"/tomter-och-omraden/tomter/arilds-backe-tomt-2","showSelectedProductVariantPin":false,"productGuid":null,"categoryGuid":null,"pageGuid":null,"externalUrl":null,"statusText":"S\u00E5ld"},{"id":"031b9310-7686-4e6d-b2c3-c010c79667fe","name":"Arilds backe, tomt 3","number":3,"information":[{"name":"Adress","value":"Nimisv\u00E4gen 9","unit":null,"filterStep":null},{"name":"Tomtarea","value":"963","unit":"kvm","filterStep":100}],"buttons":[],"overlayColor":null,"isAvailable":false,"isReserved":false,"isPlanned":false,"url":"/tomter-och-omraden/tomter/arilds-backe-tomt-3","showSelectedProductVariantPin":false,"productGuid":null,"categoryGuid":null,"pageGuid":null,"externalUrl":null,"statusText":"S\u00E5ld"},{"id":"2e793f74-12be-4239-8740-feb1013a1d6c","name":"Arilds backe, tomt 4","number":4,"information":[{"name":"Adress","value":"Nimisv\u00E4gen 7","unit":null,"filterStep":null},{"name":"Tomtarea","value":"959","unit":"kvm","filterStep":100}],"buttons":[],"overlayColor":null,"isAvailable":false,"isReserved":false,"isPlanned":false,"url":"/tomter-och-omraden/tomter/arilds-backe-tomt-4","showSelectedProductVariantPin":false,"productGuid":null,"categoryGuid":null,"pageGuid":null,"externalUrl":null,"statusText":"S\u00E5ld"},{"id":"68770a2f-0c5e-4ff0-9bf4-f7589cab3996","name":"Arilds backe, tomt 5","number":5,"information":[{"name":"Adress","value":"Nimisv\u00E4gen 5","unit":null,"filterStep":null},{"name":"Tomtarea","value":"1255","unit":"kvm","filterStep":100}],"buttons":[],"overlayColor":null,"isAvailable":false,"isReserved":false,"isPlanned":false,"url":"/tomter-och-omraden/tomter/arilds-backe-tomt-5","showSelectedProductVariantPin":false,"productGuid":null,"categoryGuid":null,"pageGuid":null,"externalUrl":null,"statusText":"S\u00E5ld"},{"id":"1fb12e41-2754-41aa-bbdb-4c184dd4decb","name":"Arilds backe, tomt 6","number":6,"information":[{"name":"Adress","value":"Nimisv\u00E4gen 3","unit":null,"filterStep":null},{"name":"Tomtarea","value":"1158","unit":"kvm","filterStep":100}],"buttons":[],"overlayColor":null,"isAvailable":false,"isReserved":false,"isPlanned":false,"url":"/tomter-och-omraden/tomter/arilds-backe-tomt-6","showSelectedProductVariantPin":false,"productGuid":null,"categoryGuid":null,"pageGuid":null,"externalUrl":null,"statusText":"S\u00E5ld"},{"id":"af9d1bed-ffe9-4953-af4b-db8e93569bd4","name":"Arilds backe, tomt 7","number":7,"information":[{"name":"Adress","value":"Nimisv\u00E4gen 1","unit":null,"filterStep":null},{"name":"Tomtarea","value":"823","unit":"kvm","filterStep":100}],"buttons":[],"overlayColor":null,"isAvailable":false,"isReserved":false,"isPlanned":false,"url":"/tomter-och-omraden/tomter/arilds-backe-tomt-7","showSelectedProductVariantPin":false,"productGuid":null,"categoryGuid":null,"pageGuid":null,"externalUrl":null,"statusText":"S\u00E5ld"},{"id":"549a9a92-7c0b-4aca-9b74-42225be65002","name":"Arilds backe, tomt 8","number":8,"information":[{"name":"Adress","value":"Nimisv\u00E4gen 12","unit":null,"filterStep":null},{"name":"Tomtarea","value":"941","unit":"kvm","filterStep":100}],"buttons":[],"overlayColor":null,"isAvailable":false,"isReserved":false,"isPlanned":false,"url":"/tomter-och-omraden/tomter/arilds-backe-tomt-8","showSelectedProductVariantPin":false,"productGuid":null,"categoryGuid":null,"pageGuid":null,"externalUrl":null,"statusText":"S\u00E5ld"},{"id":"1b35ae77-4721-42d0-ae71-a1cfa183cc16","name":"Arilds backe, tomt 9","number":9,"information":[{"name":"Adress","value":"Nimisv\u00E4gen 10","unit":null,"filterStep":null},{"name":"Tomtarea","value":"965","unit":"kvm","filterStep":100}],"buttons":[],"overlayColor":null,"isAvailable":false,"isReserved":false,"isPlanned":false,"url":"/tomter-och-omraden/tomter/arilds-backe-tomt-9","showSelectedProductVariantPin":false,"productGuid":null,"categoryGuid":null,"pageGuid":null,"externalUrl":null,"statusText":"S\u00E5ld"}],
+						filters: [{"name":"Tomtarea","unit":"kvm","step":100,"values":["840","847","927","824","1115","956","963","959","1255","1158","823","941","965"],"ranges":[800,900,1000,1100,1200,1300]}],
+						overview: false
+					};
+				</script>
+			
+			
+	</div>
+
+
+
+
+</div>
+
+<div class="hide" itemtype="http://schema.org/Product" itemscope>
+    <meta itemprop="sku" content="omr&#xE5;de_arild_arilds_backe" />
+    <meta itemprop="name" content="Omr&#xE5;de: Arilds Backe" />
+    <meta itemprop="description" content="K&#xF6;p en tomt i Arild. Bygg ditt dr&#xF6;mhus p&#xE5; en tomt p&#xE5; Arilds Backe. Bygg nytt hus med Varbergshus. " />
+        <link itemprop="url" href="https://www.varbergshus.se/tomter-och-omraden/omraden/arilds-backe" />
+            <link itemprop="image" href="https://www.varbergshus.se/storage/0CA17F6BF68C9E2EF38E08C0ACCBE07E43D03EE374A8C21E35055D6346742C7F/c5cd211aeaf34ae09a4bbfa8f611b418/jpg/media/a904df8d89c7437a9f29cb6529a2aa5f/260421%20Tomtmarkering%20Arild.jpg" />
+
+
+</div>
+
+
+
+<div class="product__content housepresentation" data-ga-type="Tomtflikar">
+    <div id="guid-8ba98814-77a3-4fd4-9562-360c26c7517f">
+        <div class="product__content-text">
+            <div class="product__content-favourite">
+                <a href="#" data-favourite-marker="4e9c6cab-3603-431b-befc-92395bb78391|/tomter-och-omraden/omraden/arilds-backe|project" data-favourite-text="Favoritmarkera">Favoritmarkera</a>
+            </div>
+
+            <h2>V&#xE4;lkommen till Arilds Backe</h2>
+
+            <p class="block-description">Lediga tomter mellan vinstockar och salta bad</p>
+
+                <div class="text-block-fullwidth__text">
+                    <p><b>Semesterk&auml;nsla &aring;ret runt p&aring; Kullahalv&ouml;n</b></p>
+
+<p>P&aring; Kullahalv&ouml;ns &ouml;stra sida hittar du vackra Arild och v&aring;ra tomter p&aring; Arilds Backe.&nbsp;Omr&aring;det ligger mellan Stubbarps byav&auml;g och Blossav&auml;gen. H&auml;r bor du i en h&auml;rlig milj&ouml; och i ett riktigt semesterparadis n&auml;ra str&auml;nder och badplatser. H&auml;r kan du leva ett aktivt liv med n&auml;rhet till vandringsleder, golfbanor och en h&auml;rlig fiskekultur. Precis runt knuten av omr&aring;det hittar vi Arilds ving&aring;rd som erbjuder goda viner och middagar.&nbsp;En liten gemytlig f&ouml;rskola och skola till &aring;k 9 hittar vi i Brunnby ca 1 km fr&aring;n tomterna.</p>
+
+<p>&nbsp;</p>
+
+<p><b>Bygg ditt dr&ouml;mhus</b></p>
+
+<p>Tomterna har en gener&ouml;s byggr&auml;tt. H&auml;r kan du bygga ditt eget dr&ouml;mboende och v&auml;lja vilken husmodell som passar dig b&auml;st. Du kan anpassa huset precis som du vill ha det, s&aring; l&auml;nge det f&ouml;ljer detaljplanen.</p>
+
+<p>&nbsp;</p>
+
+<p><b>Vill du veta mer?</b></p>
+
+<p>Tomterna s&auml;ljs via <a href="https://www.svenskfast.se/nyproduktionsprojekt/skane/hoganas/arild/arild/arilds-backe/381153" target="_blank"><u>Svensk Fastighetsf&ouml;rmedling</u></a> i H&ouml;gan&auml;s, kontrakt uppr&auml;ttas av m&auml;klare. &Auml;r du intresserad av tomterna tveka inte p&aring; att kontakta Varbergshus s&auml;ljare och husdesigner Annika eller m&auml;klaren Richard.</p>
+
+                </div>
+
+        </div>
+    </div>
+</div>
+
+
+<section style="padding: 0; margin: 0;">
+    <div style="display: flex; justify-content: center; padding: 1.5rem 0; background: linear-gradient(135deg, #541f2d 0%, #6b2a3a 100%);">
+        <devolv-widget appid="NdbYaZbg" embedtype="dialog" autostart="false" sketchurl="https://www.devolv.com/projects/mXwYjZbl/sketches/V6nNl36W?public=true" brandcolor="#1a1a1a" buttoncolor="white" style="width: max-content; height: auto;">
+            <button slot="trigger" style="display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.75rem 2rem; background: white; color: #541f2d; border: none; border-radius: 6px; font-family: Roboto, sans-serif; font-size: 1rem; font-weight: 500; cursor: pointer; box-shadow: 0 2px 8px rgba(0,0,0,0.15);">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                Utforska området i 3D
+            </button>
+        </devolv-widget>
+    </div>
+</section>
+<section style="padding: 0; margin: 0;">
+    <div class="block-margins background-color-none" style="padding: 2rem 0;">
+        <div class="row">
+            <div class="columns small-12 large-10 large-offset-1">
+                <div class="text-center" style="margin-bottom: 1.5rem;">
+                    <h2 class="block-title">Utforska Arilds Backe</h2>
+                    <p class="block-description">Se hur ditt framtida hus kan se ut på en av våra lediga tomter i Arilds Backe.</p>
+                </div>
+                <div style="border-radius: 12px; overflow: hidden; box-shadow: 0 2px 12px rgba(0,0,0,0.1);">
+                    <devolv-widget appid="NdbYaZbg" embedtype="inline" autostart="true" sketchurl="https://www.devolv.com/projects/mXwYjZbl/sketches/V6nNl36W?public=true" brandcolor="#1a1a1a" buttoncolor="#541f2d" style="height: 80vh;"></devolv-widget>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section data-litium-block-id="8dda0f21-f914-440b-8f25-e8889202a482"><span id="/block/fakta" style="position: relative; top: -100px;"></span>
+	<div class="technical-specifications with-map background-color-white" id="guid-add8314a-de8a-45e1-a0d3-699cc287362b" data-spy="navigation" data-title="Fakta" data-spy-show="True" data-spy-order="10">
+		<div class="product__content-facts">
+			<div class="product__content-facts-container">
+				<div class="product__content-left">
+					<h2 class="block-title">Fakta</h2>
+
+					<div class="product__property-container">
+								<div class="product__property">
+									<span>L&#xE4;n</span>
+										<span>Skåne</span>
+								</div>
+								<div class="product__property">
+									<span>Kommun</span>
+										<span>Höganäs</span>
+								</div>
+								<div class="product__property">
+									<span>Adress</span>
+										<span>Nimisvägen</span>
+								</div>
+								<div class="product__property">
+									<span>Tomtarea</span>
+										<span>   823 -   1 255 kvm</span>
+								</div>
+								<div class="product__property">
+									<span>VA</span>
+										<span>Kommunalt</span>
+								</div>
+								<div class="product__property">
+									<span>Lediga</span>
+										<span>0 av 13</span>
+								</div>
+
+						<div class="product__property-documents">
+									<div class="product__property">
+										<a href="https://www.varbergshus.se/storage/8A17B9F6F1F52E5B6BF69CBE1B25343E2A442B1A18D10151039B762BF164CAD5/82bfbedb225d42c9bf6a6ab1e6f34bfa/pdf/media/ccec6c122b3c493ba110b2e46e253e91/Plankarta_A3_antagande.pdf" target="_blank" class="document"><i class="pdf__file"></i> <span>Detaljplan</span></a>
+									</div>
+									<div class="product__property">
+										<a href="https://www.varbergshus.se/storage/892C29C82A84956CD94D43C6529ABB2D1CF5B75F71068A70638765ED53387B53/e327e525254542cb99055e361de008e3/pdf/media/4330add7e701464987aa5cfd71290420/Tomt%2012%20%C3%84ngaviken%20Produktionskostnadskalkyl.pdf" target="_blank" class="document"><i class="pdf__file"></i> <span>Produktionskostnadskalkyl tomt 12 Villa &#xC4;ngaviken</span></a>
+									</div>
+									<div class="product__property">
+										<a href="https://www.varbergshus.se/storage/6F03C93D626C5B928A964FF32DF163E680B553D5C58D6FD6A2F7A6CA105233DA/290c04f562b9429abc915a4d36a72e5d/pdf/media/7f98608acb7c4c8fa43261cd00d56e82/Tomt%2012%20Villa%20Torekov%202%20T%20Produktionskostnadskalkyl.pdf" target="_blank" class="document"><i class="pdf__file"></i> <span>Produktionskostnadskalkyl tomt 12 Villa Torekov</span></a>
+									</div>
+									<div class="product__property">
+										<a href="https://www.varbergshus.se/storage/F53213136DA772E1C3E3F0F01381CB07F60332654BFAB6DF3472BAA03F06882A/6eba64313b634c57813935a0c4a04fa7/pdf/media/7b816bef7e8c4dcdb27c31b4b8723bae/Tomt%2012%20%C3%84ngalyckan%20Produktionskostnadskalkyl.pdf" target="_blank" class="document"><i class="pdf__file"></i> <span>Produktionskostnadskalkyl tomt 12 Villa &#xC4;ngalyckan</span></a>
+									</div>
+									<div class="product__property">
+										<a href="https://www.varbergshus.se/storage/69B54E3AAB366790B3006B6662872361F48197DE6F2A1B2D4C6A079C3B54B998/fb0184e03a104aea92ba4453f2634fbc/pdf/media/294a137e754b4f429e7923e985b92279/Tomt%2012%20Solhaga%201T%20Produktionskostnadskalkyl.pdf" target="_blank" class="document"><i class="pdf__file"></i> <span>Produktionskostnadskalkyl tomt 12 Villa Solhaga</span></a>
+									</div>
+
+									<div class="product__property">
+										<a href="https://issuu.com/deromegruppen/docs/230830_arilds_backe_broschyr?fr=xKAE9_zU1NQ" target="_blank" class="link"><i class="external__link"></i> <span>Informationsbroschyr Arilds Backe</span></a>
+									</div>
+									<div class="product__property">
+										<a href="https://www.svenskfast.se/nyproduktionsprojekt/skane/hoganas/arild/arild/arilds-backe/381153" target="_blank" class="link"><i class="external__link"></i> <span>L&#xE4;nk till m&#xE4;klarens hemsida</span></a>
+									</div>
+						</div>
+					</div>
+				</div>
+				<div class="product__content-right">
+					<div class="product__content-map">
+						<div style="height: 445px; position: relative;">
+								<input type="hidden" id="map-block-markers" value="size%3asmall%7cicon%3a%2fui%2fimages%2fmap-icons%2fgeneral.svg%3fv%3d2%23370%3b511%7c56.2683%2c12.57826" />
+	<div class="google-static-map" data-module="./googlemaps" data-googlemaps-active="False" data-googlemaps="" data-googlemaps-url="https://maps.google.com/maps/api/staticmap?center=56.2682991,12.5782604&amp;zoom=15&amp;size=640x640&amp;scale=2&amp;language=sv&amp;markers=size:small%7Cicon:%2Fui%2Fimages%2Fmap-icons%2Fgeneral.svg%3Fv%3D2%23370%3B511%7C56.268299%2C12.578260&amp;key=AIzaSyDZUrT-hPtB0gIkAzPv3AExrCN15bo1XB0" data-googlemaps-link="https://www.google.se/maps/place/56%C2%B016&#x27;05.8%22N&#x2B;12%C2%B034&#x27;42.1%22E/@56.26827,12.5761773,721m/data=!3m2!1e3!4b1!4m14!1m7!3m6!1s0x4652279b6e77d033:0x5711635a4123793f!2sStubbarps&#x2B;byav%C3%A4g,&#x2B;263&#x2B;73!3b1!8m2!3d56.2681969!4d12.5752944!3m5!1s0x0:0x48635b8f77620916!7e2!8m2!3d56.2682674!4d12.5783664" data-markersquery="[id=&#x27;map-block-markers&#x27;]" data-clusterize-markers="false">
+			<button class="google-static-map__link">
+				Större karta &amp; vägbeskrivning <i class="icon icon-map-link"></i>
+			</button>
+	</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+<section data-litium-block-id="9e796fe1-a672-44c7-881c-8f301ff39c62"><span id="/block/kontakta-oss" style="position: relative; top: -100px;"></span>
+<div class="block-margins contact-form-row with-contacts background-color-green15" id="guid-4003271f-931f-4819-af35-7976f0c24526" data-spy="navigation" data-title="Kontakta oss" data-spy-show="True" data-spy-order="99" >
+    <div class="text-center">
+        <h2 class="block-title nouppercase otherfont">Kontakta oss</h2>
+
+        <div class="block-description">S&#xE5; roligt att du vill komma i kontakt! Ring, maila eller fyll i formul&#xE4;ret s&#xE5; &#xE5;terkommer vi s&#xE5; snart vi kan. Vi tr&#xE4;ffar dig g&#xE4;rna p&#xE5; tomten som du &#xE4;r intresserad av.</div>
+    </div>
+
+<form action="/contactformcontacts/submit" class="forms forms-stacked" data-action="Skicka formul&#xE4;r" data-captcha-action="contact" data-captcha-key="6Lc7m_gcAAAAAM1hzm0aK9PC2HBMnkoXSwAbcP6y" data-category="Kontakt" data-form="9e796fe1-a672-44c7-881c-8f301ff39c62" data-ga="track" data-label="Kontakt s&#xE4;ljkontor - formul&#xE4;r" data-result-id="9e796fe1-a672-44c7-881c-8f301ff39c62-body" data-result-json="1" id="9e796fe1-a672-44c7-881c-8f301ff39c62-form" method="post"><input id="ContactForm_GoogleCaptchaToken" name="ContactForm.GoogleCaptchaToken" type="hidden" value="" /><input id="ContactForm_LandPlotName" name="ContactForm.LandPlotName" type="hidden" value="" /><input id="ContactForm_ProjectName" name="ContactForm.ProjectName" type="hidden" value="Omr&#xE5;de: Arilds Backe" /><input data-val="true" data-val-required="The SystemId field is required." id="ContactForm_SystemId" name="ContactForm.SystemId" type="hidden" value="9e796fe1-a672-44c7-881c-8f301ff39c62" /><input id="ContactForm_MailList" name="ContactForm.MailList" type="hidden" value="WyJhbm5pa2Eua3Jvb25AZGVyb21lLnNlIl0=" /><input id="ContactForm_PageName" name="ContactForm.PageName" type="hidden" value="Omr&#xE5;de: Arilds Backe" /><input id="ContactForm_MailSubject" name="ContactForm.MailSubject" type="hidden" value="Tnl0dCBtZWRkZWxhbmRlIGZyw6VuIGt1bmQgdmlhIHZhcmJlcmdzaHVzLnNl" /><input id="ContactForm_SubmitMessage" name="ContactForm.SubmitMessage" type="hidden" value="PHA&#x2B;Um9saWd0IGF0dCBkdSBoaXR0YXQgdGlsbCBvc3MgcCZhcmluZzsgVmFyYmVyZ3NodXMhIFZpICZhcmluZzt0ZXJrb21tZXIgdGlsbCBkaWcgaW5vbSBrb3J0LjwvcD4KCjxwPkhhIGRldCBmaW50IHMmYXJpbmc7IGwmYXVtbDtuZ2UhPC9wPgoKPHA&#x2B;ViZhdW1sO25saWdhIGgmYXVtbDtsc25pbmdhciw8YnIgLz4KVmFyYmVyZ3NodXM8L3A&#x2B;Cg==" />                <input type="hidden" name="ContactForm.ShowInterestCheckbox" value="false" />
+                <input type="hidden" name="litium-request-context" />
+                <div class="row" id="9e796fe1-a672-44c7-881c-8f301ff39c62-body">
+                    <div class="columns small-12 large-6 contact-form-contacts">
+                        <section class="staff-list" itemscope="" itemtype="http://schema.org/Person">
+                                <div class="staff-list__item">
+                                    <div class="staff-list__item-container">
+                                        <div class="photo__container">
+                                            <div class="photo" data-seoimg-title="Annika Kroon - S&#xE4;ljare/Husdesigner" data-seoimg-alt="Annika Kroon - S&#xE4;ljare/Husdesigner" style="background-image: url('https://www.varbergshus.se/imagecache/7e7d246c-cf78-4b95-8d50-e4d99a7b5865-800x800/Annika Kroon.jpg#id=7e7d246c-cf78-4b95-8d50-e4d99a7b5865');" data-seoimg-url="/imagecache/7e7d246c-cf78-4b95-8d50-e4d99a7b5865-800x800/Annika Kroon.jpg#id=7e7d246c-cf78-4b95-8d50-e4d99a7b5865"></div>
+                                        </div>
+                                        <div class="contact__container">
+                                            <div class="name" itemprop="name">Annika  Kroon</div>
+                                            <div class="position" itemprop="jobTitle">S&#xE4;ljare &amp; husdesigner</div>
+                                            <div class="county" itemprop="workLocation">B&#xE5;stad, Helsingborg, H&#xF6;gan&#xE4;s &amp; &#xC4;ngelholm</div>
+                                                    <div class="contact phone"><a href="tel:+46431491649" target="_blank" itemprop="phone">0431-49 16 49</a></div>
+                                            <div class="contact mail"><a href="mailto:annika.kroon@derome.se" itemprop="email" data-track-clipboard>annika.kroon@derome.se</a></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="staff-list__item">
+                                    <div class="staff-list__item-container">
+                                        <div class="photo__container">
+                                            <div class="photo" data-seoimg-title="" data-seoimg-alt="" style="background-image: url('https://www.varbergshus.se/imagecache/8df76aa5-d4a9-4e55-a1ee-e58ac5ace30d-1024x992/SF H&#xF6;gan&#xE4;s.jpg#id=8df76aa5-d4a9-4e55-a1ee-e58ac5ace30d');" data-seoimg-url="/imagecache/8df76aa5-d4a9-4e55-a1ee-e58ac5ace30d-1024x992/SF H&#xF6;gan&#xE4;s.jpg#id=8df76aa5-d4a9-4e55-a1ee-e58ac5ace30d"></div>
+                                        </div>
+                                        <div class="contact__container">
+                                            <div class="name" itemprop="name">Svensk fastighetsf&#xF6;rmedling </div>
+                                            <div class="position" itemprop="jobTitle">M&#xE4;klare i H&#xF6;gan&#xE4;s</div>
+                                            <div class="county" itemprop="workLocation"></div>
+                                                    <div class="contact phone"><a href="tel:+4642362290" target="_blank" itemprop="phone">042-36 22 90</a></div>
+                                            <div class="contact mail"><a href="mailto:arildsbacke@svenskfast.se" itemprop="email" data-track-clipboard>arildsbacke@svenskfast.se</a></div>
+                                        </div>
+                                    </div>
+                                </div>
+                        </section>
+                    </div>
+                    <div class="columns small-12 large-6">
+                        <div class="row">
+                            <div class="columns small-12 large-6">
+                                <h4>Namn*</h4>
+                                <input class="forms-input-1" data-val="true" data-val-required="Ange namn" id="ContactForm_Name" name="ContactForm.Name" placeholder="F&#xF6;r- och efternamn" type="text" value="" />
+                                <span class="field-validation-valid" data-valmsg-for="ContactForm.Name" data-valmsg-replace="true"></span>
+                            </div>
+                            <div class="columns small-12 large-6">
+                                <h4>Telefonnummer*</h4>
+                                <input class="forms-input-1" data-val="true" data-val-phone="Telefonnummret &#xE4;r inte giltigt" data-val-required="Ange telefonnummer" id="ContactForm_Phone" name="ContactForm.Phone" placeholder="Telefon dagtid" type="text" value="" />
+                                <span class="field-validation-valid" data-valmsg-for="ContactForm.Phone" data-valmsg-replace="true"></span>
+                            </div>
+                            <div class="small-12">
+                                <h4>E-postadress*</h4>
+                                <input class="forms-input-1" data-val="true" data-val-email="E-postadressen &#xE4;r inte giltig" data-val-required="Ange e-post" id="ContactForm_Email" name="ContactForm.Email" placeholder="Din e-postadress" type="text" value="" />
+                                <span class="field-validation-valid" data-valmsg-for="ContactForm.Email" data-valmsg-replace="true"></span>
+                            </div>
+                            <h4>Meddelande</h4>
+                            <textarea class="forms-input-1" id="ContactForm_Message" name="ContactForm.Message" placeholder="Vad kan vi hj&#xE4;lpa dig med?" rows="5">
+</textarea>
+
+                            <div class="terms">
+                                <div class="terms__checkbox">
+                                    <div class="custom-control custom-checkbox">
+                                        <input autocomplete="off" class="custom-control-input" data-val="true" data-val-required="Anv&#xE4;ndarvilkoren m&#xE5;ste godk&#xE4;nnas" id="ContactForm_Gdpr" name="ContactForm.Gdpr" type="checkbox" value="true" />
+                                        <label class="custom-control-label" for="ContactForm_Gdpr">Jag godkänner att informationen sparas enligt Varbergshus <a href='/kontakta-oss/integritetspolicy'>integritetspolicy & användarvillkor</a>.</label>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="submit-button">
+                            <button type="submit" class="button">Skicka förfrågan</button>
+                            <small class="terms__checkbox">
+                                <div>Den här webbsidan skyddas av Recaptcha och Googles <a href="https://policies.google.com/privacy" target="_blank">sekretesspolicy</a> och <a href="https://policies.google.com/terms" target="_blank">användarvillkor</a> gäller.</div>
+                            </small>
+                            <span class="field-validation-valid" data-valmsg-for="ContactForm.Gdpr" data-valmsg-replace="true"></span>
+                        </div>
+                    </div>
+                </div>
+<input name="__RequestVerificationToken" type="hidden" value="CfDJ8Af67gqemkJBlvhJURw_F8MfN8YAUrbm6Y5Hr541jmgpqi8Y1e9BjdBxR6345JXAOT2hTqRhd1w4eTHf7JJfbWcVO23PuvWqZCPDrruCA9thocxUoL8obdsDaJgbrFggdUaIqsgO9IDxGIYN8qiCwm8" /><input name="ContactForm.Gdpr" type="hidden" value="false" /></form></div>
+	<div class="modal" id="guid-9e796fe1-a672-44c7-881c-8f301ff39c62-modal" tabindex="-1" role="dialog" aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered modal-lg">
+			<div class="contactform modal-content">
+				<div class="modal-header">
+					<h4 class="modal-title">Kontakta oss</h4>
+					<button type="button" class="close" data-dismiss="modal"></button>
+				</div>
+				<div class="modal-header" style="padding-top: 0px">
+					<div>S&#xE5; roligt att du vill komma i kontakt! Ring, maila eller fyll i formul&#xE4;ret s&#xE5; &#xE5;terkommer vi s&#xE5; snart vi kan. Vi tr&#xE4;ffar dig g&#xE4;rna p&#xE5; tomten som du &#xE4;r intresserad av.</div>
+				</div>
+				<div class="modal-body" id="9e796fe1-a672-44c7-881c-8f301ff39c62-modal-body">
+				</div>
+			</div>
+		</div>
+	</div>
+	<script>
+    (function () {
+        var form = document.getElementById("9e796fe1-a672-44c7-881c-8f301ff39c62-form");
+        var modal = document.getElementById("guid-9e796fe1-a672-44c7-881c-8f301ff39c62-modal");
+        if (form && modal) {
+            var modalBody = document.getElementById("9e796fe1-a672-44c7-881c-8f301ff39c62-modal-body");
+            var parent = form.parentElement;
+            var nextSibling = form.nextSibling;
+            var placeholder = document.createElement("div");
+
+            var updateSize = function () {
+                var formRect = form.getBoundingClientRect();
+                var height = formRect.bottom - formRect.top;
+                if (height > 0)
+                    placeholder.style.height = height + "px";
+            };
+
+            modal.addEventListener('modal.show', function (e) {
+                window.addEventListener("resize", updateSize);
+                updateSize();
+                parent.insertBefore(placeholder, nextSibling);
+                modalBody.appendChild(form);
+            }, false);
+            modal.addEventListener('modal.hidden', function (e) {
+                window.removeEventListener("resize", updateSize);
+                placeholder.remove();
+                parent.insertBefore(form, nextSibling);
+            }, false);
+        }
+    })();
+
+    function handleCheckboxChange(e) {
+        console.log(e)
+    }
+	</script>
+</section>
+<section data-litium-block-id="386c3be9-a370-4389-a0cb-cbb17a4084e7"><span id="/block/husforslag" style="position: relative; top: -100px;"></span>
+	<div class="row block-margins background-color-sand15" id="guid-75de4bfe-aac0-44af-8d4f-58373a48497a" data-spy="navigation" data-title="Husf&#xF6;rslag" data-spy-show="False" data-spy-order="0">
+		<div class="columns small-12 text-center">
+			<h2 class="block-title">Husf&#xF6;rslag</h2>
+				<div class="block-description">
+					Detta &#xE4;r f&#xF6;rslag p&#xE5; hus som passar i omr&#xE5;det. Men sj&#xE4;lvklart kan du sj&#xE4;lv best&#xE4;mma och utforma ditt hus s&#xE5; som du vill ha det, s&#xE5; l&#xE4;nge du f&#xF6;ljer omr&#xE5;dets best&#xE4;mmelser. 
+				</div>
+		</div>
+		<div class="columns small-12 large-10 large-offset-1 product-detail">
+			<ul class="product-detail__items">
+					<li class="product-list__item">
+						
+<div>
+    <div class="product__figure-container housepresentation">
+        <div class="mobile">
+                <div class="product__figure-slider">
+                    <div class="carousel">
+                        <div class="carousel-inner noslide">
+                            <div class="carousel-item active">
+                                <a href="https://www.varbergshus.se/husmodeller/villa-angaviken-modern">
+                                    <img src="https://www.varbergshus.se/imagecache/7AE2DE11-3750-488E-B454-C21534BB619E/placeholder.png#id=273867d0-97b1-4733-9f5f-a9adbe768545" class="carousel-image" style="z-index: 1000" title="3D-bild av Villa &#xC4;ngaviken 1 M fr&#xE5;n Varbergshus" alt="Visualisering av laserat enplanshus med svarta spr&#xF6;jsade f&#xF6;nster i modern stil" />
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        </div>
+
+            <div class="product__exhibition-digital product__exhibition-digital-collapse">
+                <a class="product__exhibition__link--block" href="https://www.varbergshus.se/husmodeller/villa-angaviken-modern#digital-exhibitions"><img src="https://www.varbergshus.se/ui/images/vh-digital.svg" /></a>
+            </div>
+        <div class="product__favourite">
+            <a class="product__favourite__link--block" href="#" data-favourite-marker="3680bf6e-70dd-4d33-1289-08d9aa6091cb|/husmodeller/villa-angaviken-modern|housepresentation"><i class="icon-vh-heart"></i></a>
+        </div>
+    </div>
+
+	<article class="product__info housepresentation" onclick="document.location = '/husmodeller/villa-angaviken-modern'" style="cursor: pointer;">
+		<div class="product--area__name housepresentation"><span>1-plan</span></div>
+
+		<h4 itemprop="name" class="product__name housepresentation" data-dynamicsort-attr="name" data-dynamicsort-value="&#xC4;ngaviken">&#xC4;ngaviken<div class="hide"></div></h4>
+		<div class="product--area__style"><span>Modern</span></div>
+
+            <div class="info-short"><div>&nbsp;</div></div>
+
+		<div class="housepresentation__info" data-match-height="housepresentation__info">
+			<div class="product__facts housepresentation">
+						<span>102,4 kvm | 4 rum och k&#xF6;k</span>
+			</div>
+		</div>
+	</article>
+</div>
+
+
+					</li>
+					<li class="product-list__item">
+						
+<div>
+    <div class="product__figure-container housepresentation">
+        <div class="mobile">
+                <div class="product__figure-slider">
+                    <div class="carousel">
+                        <div class="carousel-inner noslide">
+                            <div class="carousel-item active">
+                                <a href="https://www.varbergshus.se/husmodeller/villa-torekov-traditionell-2t">
+                                    <img src="https://www.varbergshus.se/imagecache/7AE2DE11-3750-488E-B454-C21534BB619E/placeholder.png#id=26a3e0ba-7746-476b-b719-264785658018" class="carousel-image" style="z-index: 1000" title="3D-bild av Villa Torekov 2T fr&#xE5;n Varbergshus" alt="Visualisering av ett vitt enplanshus med spr&#xF6;js i modern stil" />
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        </div>
+
+        <div class="product__favourite">
+            <a class="product__favourite__link--block" href="#" data-favourite-marker="f7ea3f2f-6519-4bee-5895-08db2f5546a9|/husmodeller/villa-torekov-traditionell-2t|housepresentation"><i class="icon-vh-heart"></i></a>
+        </div>
+    </div>
+
+	<article class="product__info housepresentation" onclick="document.location = '/husmodeller/villa-torekov-traditionell-2t'" style="cursor: pointer;">
+		<div class="product--area__name housepresentation"><span>1-plan</span></div>
+
+		<h4 itemprop="name" class="product__name housepresentation" data-dynamicsort-attr="name" data-dynamicsort-value="Torekov">Torekov<div class="hide"></div></h4>
+		<div class="product--area__style"><span>Traditionell</span></div>
+
+            <div class="info-short"><div class="banner">Finns i flera storlekar</div></div>
+
+		<div class="housepresentation__info" data-match-height="housepresentation__info">
+			<div class="product__facts housepresentation">
+						<span>116,3 kvm | 4 rum och k&#xF6;k</span>
+			</div>
+		</div>
+	</article>
+</div>
+
+
+					</li>
+					<li class="product-list__item">
+						
+<div>
+    <div class="product__figure-container housepresentation">
+        <div class="mobile">
+                <div class="product__figure-slider">
+                    <div class="carousel">
+                        <div class="carousel-inner noslide">
+                            <div class="carousel-item active">
+                                <a href="https://www.varbergshus.se/husmodeller/ramsvik-modern">
+                                    <img src="https://www.varbergshus.se/imagecache/7AE2DE11-3750-488E-B454-C21534BB619E/placeholder.png#id=6f874e2d-fbb2-4b6c-901d-69f3af34db24" class="carousel-image" style="z-index: 1000" title="3D-bild av Villa Ramsvik M fr&#xE5;n Varbergshus " alt="Visualisering av gr&#xF6;nt enplanshus i vinkel i modern stil" />
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        </div>
+
+            <div class="product__exhibition-digital product__exhibition-digital-collapse">
+                <a class="product__exhibition__link--block" href="https://www.varbergshus.se/husmodeller/ramsvik-modern#digital-exhibitions"><img src="https://www.varbergshus.se/ui/images/vh-digital.svg" /></a>
+            </div>
+        <div class="product__favourite">
+            <a class="product__favourite__link--block" href="#" data-favourite-marker="b7d15b47-a8b9-4d79-43ea-08d9a4df4054|/husmodeller/ramsvik-modern|housepresentation"><i class="icon-vh-heart"></i></a>
+        </div>
+    </div>
+
+	<article class="product__info housepresentation" onclick="document.location = '/husmodeller/ramsvik-modern'" style="cursor: pointer;">
+		<div class="product--area__name housepresentation"><span>1-plan</span></div>
+
+		<h4 itemprop="name" class="product__name housepresentation" data-dynamicsort-attr="name" data-dynamicsort-value="Ramsvik">Ramsvik<div class="hide"></div></h4>
+		<div class="product--area__style"><span>Modern</span></div>
+
+            <div class="info-short"><div>&nbsp;</div></div>
+
+		<div class="housepresentation__info" data-match-height="housepresentation__info">
+			<div class="product__facts housepresentation">
+						<span>127,2 kvm | 5 rum och k&#xF6;k</span>
+			</div>
+		</div>
+	</article>
+</div>
+
+
+					</li>
+					<li class="product-list__item">
+						
+<div>
+    <div class="product__figure-container housepresentation">
+        <div class="mobile">
+                <div class="product__figure-slider">
+                    <div class="carousel">
+                        <div class="carousel-inner noslide">
+                            <div class="carousel-item active">
+                                <a href="https://www.varbergshus.se/husmodeller/villa-solhaga-traditionell">
+                                    <img src="https://www.varbergshus.se/imagecache/7AE2DE11-3750-488E-B454-C21534BB619E/placeholder.png#id=fa2a1979-2b37-4172-8975-5737177aeffc" class="carousel-image" style="z-index: 1000" title="3D-bild av Villa Solhaga 1T fr&#xE5;n Varbergshus " alt="Visualisering av vitt 1,5-planshus i l&#xF6;svirke i klassisk stil, " />
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        </div>
+
+        <div class="product__favourite">
+            <a class="product__favourite__link--block" href="#" data-favourite-marker="16d633ae-b91a-4768-128c-08d9aa6091cb|/husmodeller/villa-solhaga-traditionell|housepresentation"><i class="icon-vh-heart"></i></a>
+        </div>
+    </div>
+
+	<article class="product__info housepresentation" onclick="document.location = '/husmodeller/villa-solhaga-traditionell'" style="cursor: pointer;">
+		<div class="product--area__name housepresentation"><span>1,5-plan</span></div>
+
+		<h4 itemprop="name" class="product__name housepresentation" data-dynamicsort-attr="name" data-dynamicsort-value="Solhaga">Solhaga<div class="hide"></div></h4>
+		<div class="product--area__style"><span>Traditionell</span></div>
+
+            <div class="info-short"><div>&nbsp;</div></div>
+
+		<div class="housepresentation__info" data-match-height="housepresentation__info">
+			<div class="product__facts housepresentation">
+						<span>175,6 kvm | 6 rum och k&#xF6;k</span>
+			</div>
+		</div>
+	</article>
+</div>
+
+
+					</li>
+			</ul>
+		</div>
+	</div>
+</section>
+<section data-litium-block-id="f6bac9d9-7151-4540-bab1-84085cb9ebc4"><span id="/block/intresseanmalan" style="position: relative; top: -100px;"></span>
+</section>
+<section data-litium-block-id="34c888b9-d2f9-4d8f-aabe-7a27aba34612"><span id="/block/film-fran-omradet" style="position: relative; top: -100px;"></span>
+
+</section>
+<section data-litium-block-id="018ea5d0-dc84-4ceb-8bbc-e03d4005d90d"><span id="/block/bilder" style="position: relative; top: -100px;"></span>    <div class="galery__content block-margins background-color-white" id="guid-9aab5b2d-fcdd-48f7-90dd-7daa6a1d9baa" data-module="./lightbox" data-spy="navigation" data-title="Bilder" data-spy-show="True" data-spy-order="20">
+        <div class="row">
+	        <div class="columns small-12 large-10 large-offset-1">
+                <div class="text-center">
+	                <h2 class="block-title" style="margin-top: 0!important;">Bilder</h2>
+                    <p class="block-description"></p>
+                </div>
+	        </div>
+        </div>
+                <div data-module="./gallery" class="galery__images" data-width="2;3;4;4" data-height="1;1;1;1" data-group="96fe9b86-dad4-4e91-9455-e143d8897cac" style="height: 25vw;">
+                <div data-lightbox-title="Illstrationsbild &#xF6;ver omr&#xE5;det i Arild" data-dynamicgrid="1" data-dynamicgrid-size="1x1" class="galery__image" data-lightbox-group="96fe9b86-dad4-4e91-9455-e143d8897cac" data-lightbox-id="0" title="Illstrationsbild &#xF6;ver omr&#xE5;det i Arild" data-lightbox-url="/imagecache/7AE2DE11-3750-488E-B454-C21534BB619E/placeholder.png#id=873ac7b4-911a-4f23-8df2-f4d49495f118" style="background-image: url('https://www.varbergshus.se/imagecache/7AE2DE11-3750-488E-B454-C21534BB619E/placeholder.png#id=873ac7b4-911a-4f23-8df2-f4d49495f118');" data-seoimg-alt="" data-seoimg-title="Illstrationsbild &#xF6;ver omr&#xE5;det i Arild" data-seoimg-url="/imagecache/7AE2DE11-3750-488E-B454-C21534BB619E/placeholder.png#id=873ac7b4-911a-4f23-8df2-f4d49495f118"></div>
+                <div data-lightbox-title="Bo mellan hav och vinrankor" data-dynamicgrid="1" data-dynamicgrid-size="1x1" class="galery__image" data-lightbox-group="96fe9b86-dad4-4e91-9455-e143d8897cac" data-lightbox-id="1" title="Bo mellan hav och vinrankor" data-lightbox-url="/imagecache/7AE2DE11-3750-488E-B454-C21534BB619E/placeholder.png#id=62f099ba-537c-416d-9853-b7de7d07f550" style="background-image: url('https://www.varbergshus.se/imagecache/7AE2DE11-3750-488E-B454-C21534BB619E/placeholder.png#id=62f099ba-537c-416d-9853-b7de7d07f550');" data-seoimg-alt="" data-seoimg-title="Bo mellan hav och vinrankor" data-seoimg-url="/imagecache/7AE2DE11-3750-488E-B454-C21534BB619E/placeholder.png#id=62f099ba-537c-416d-9853-b7de7d07f550"></div>
+                <div data-lightbox-title="Ca 600 m till havet" data-dynamicgrid="1" data-dynamicgrid-size="1x1" class="galery__image" data-lightbox-group="96fe9b86-dad4-4e91-9455-e143d8897cac" data-lightbox-id="2" title="Ca 600 m till havet" data-lightbox-url="/imagecache/7AE2DE11-3750-488E-B454-C21534BB619E/placeholder.png#id=77eb369b-df37-49ec-8ed4-92eb45821d4c" style="background-image: url('https://www.varbergshus.se/imagecache/7AE2DE11-3750-488E-B454-C21534BB619E/placeholder.png#id=77eb369b-df37-49ec-8ed4-92eb45821d4c');" data-seoimg-alt="" data-seoimg-title="Ca 600 m till havet" data-seoimg-url="/imagecache/7AE2DE11-3750-488E-B454-C21534BB619E/placeholder.png#id=77eb369b-df37-49ec-8ed4-92eb45821d4c"></div>
+                <div data-lightbox-title="Arilds mysiga sm&#xE5;b&#xE5;tshamn" data-dynamicgrid="1" data-dynamicgrid-size="1x1" class="galery__image" data-lightbox-group="96fe9b86-dad4-4e91-9455-e143d8897cac" data-lightbox-id="3" title="Arilds mysiga sm&#xE5;b&#xE5;tshamn" data-lightbox-url="/imagecache/7AE2DE11-3750-488E-B454-C21534BB619E/placeholder.png#id=ac711799-10f4-4ff3-8eb3-8b826ca13841" style="background-image: url('https://www.varbergshus.se/imagecache/7AE2DE11-3750-488E-B454-C21534BB619E/placeholder.png#id=ac711799-10f4-4ff3-8eb3-8b826ca13841');" data-seoimg-alt="" data-seoimg-title="Arilds mysiga sm&#xE5;b&#xE5;tshamn" data-seoimg-url="/imagecache/7AE2DE11-3750-488E-B454-C21534BB619E/placeholder.png#id=ac711799-10f4-4ff3-8eb3-8b826ca13841"></div>
+                <div data-lightbox-title="Upplev stillheten vid havet" data-dynamicgrid="1" data-dynamicgrid-size="1x1" class="galery__image" data-lightbox-group="96fe9b86-dad4-4e91-9455-e143d8897cac" data-lightbox-id="4" title="Upplev stillheten vid havet" data-lightbox-url="/imagecache/7AE2DE11-3750-488E-B454-C21534BB619E/placeholder.png#id=b9a6916d-890b-41fd-a1ec-dccce8aad07f" style="background-image: url('https://www.varbergshus.se/imagecache/7AE2DE11-3750-488E-B454-C21534BB619E/placeholder.png#id=b9a6916d-890b-41fd-a1ec-dccce8aad07f');" data-seoimg-alt="" data-seoimg-title="Upplev stillheten vid havet" data-seoimg-url="/imagecache/7AE2DE11-3750-488E-B454-C21534BB619E/placeholder.png#id=b9a6916d-890b-41fd-a1ec-dccce8aad07f"></div>
+                <div data-lightbox-title="Illustration av ett Villa Strandlyckan" data-dynamicgrid="1" data-dynamicgrid-size="1x1" class="galery__image" data-lightbox-group="96fe9b86-dad4-4e91-9455-e143d8897cac" data-lightbox-id="5" title="Illustration av ett Villa Strandlyckan" data-lightbox-url="/imagecache/7AE2DE11-3750-488E-B454-C21534BB619E/placeholder.png#id=3ef0f41e-395d-4269-ae3a-de89fc0d3a04" style="background-image: url('https://www.varbergshus.se/imagecache/7AE2DE11-3750-488E-B454-C21534BB619E/placeholder.png#id=3ef0f41e-395d-4269-ae3a-de89fc0d3a04');" data-seoimg-alt="" data-seoimg-title="Illustration av ett Villa Strandlyckan" data-seoimg-url="/imagecache/7AE2DE11-3750-488E-B454-C21534BB619E/placeholder.png#id=3ef0f41e-395d-4269-ae3a-de89fc0d3a04"></div>
+                <div data-lightbox-title="" data-dynamicgrid="1" data-dynamicgrid-size="1x1" class="galery__image" data-lightbox-group="96fe9b86-dad4-4e91-9455-e143d8897cac" data-lightbox-id="6" title="" data-lightbox-url="/imagecache/7AE2DE11-3750-488E-B454-C21534BB619E/placeholder.png#id=b7418505-6d76-46fd-be4c-b422d51f914d" style="background-image: url('https://www.varbergshus.se/imagecache/7AE2DE11-3750-488E-B454-C21534BB619E/placeholder.png#id=b7418505-6d76-46fd-be4c-b422d51f914d');" data-seoimg-alt="" data-seoimg-title="" data-seoimg-url="/imagecache/7AE2DE11-3750-488E-B454-C21534BB619E/placeholder.png#id=b7418505-6d76-46fd-be4c-b422d51f914d"></div>
+                <div data-lightbox-title="Illustration av ett Villa Torekov 2T" data-dynamicgrid="1" data-dynamicgrid-size="1x1" class="galery__image" data-lightbox-group="96fe9b86-dad4-4e91-9455-e143d8897cac" data-lightbox-id="7" title="Illustration av ett Villa Torekov 2T" data-lightbox-url="/imagecache/7AE2DE11-3750-488E-B454-C21534BB619E/placeholder.png#id=8f403433-0c5d-4b69-89c5-6d7486ffef57" style="background-image: url('https://www.varbergshus.se/imagecache/7AE2DE11-3750-488E-B454-C21534BB619E/placeholder.png#id=8f403433-0c5d-4b69-89c5-6d7486ffef57');" data-seoimg-alt="" data-seoimg-title="Illustration av ett Villa Torekov 2T" data-seoimg-url="/imagecache/7AE2DE11-3750-488E-B454-C21534BB619E/placeholder.png#id=8f403433-0c5d-4b69-89c5-6d7486ffef57"></div>
+                <div data-lightbox-title="Illustration av ett Villa &#xC4;ngalyckan" data-dynamicgrid="1" data-dynamicgrid-size="1x1" class="galery__image" data-lightbox-group="96fe9b86-dad4-4e91-9455-e143d8897cac" data-lightbox-id="8" title="Illustration av ett Villa &#xC4;ngalyckan" data-lightbox-url="/imagecache/7AE2DE11-3750-488E-B454-C21534BB619E/placeholder.png#id=4b9196a0-ed4c-4112-aa7d-accc8136f971" style="background-image: url('https://www.varbergshus.se/imagecache/7AE2DE11-3750-488E-B454-C21534BB619E/placeholder.png#id=4b9196a0-ed4c-4112-aa7d-accc8136f971');" data-seoimg-alt="" data-seoimg-title="Illustration av ett Villa &#xC4;ngalyckan" data-seoimg-url="/imagecache/7AE2DE11-3750-488E-B454-C21534BB619E/placeholder.png#id=4b9196a0-ed4c-4112-aa7d-accc8136f971"></div>
+                    <div data-dynamicgrid="1" data-dynamicgrid-size="1x1" data-dynamicgrid-index="1;2;3;3" class="galery__image galery__all-images"></div>
+                </div>
+    </div>
+
+</section>
+<section data-litium-block-id="710b2132-ffd5-4b83-9e27-9db5373be41f"><span id="/block/fragor-svar" style="position: relative; top: -100px;"></span>
+
+
+    <div class="block-margins background-color-none question-and-answers" id="guid-b739fa06-6a0a-4c36-ab13-24edbfde9049" data-spy="navigation" data-title="Fr&#xE5;gor &amp; Svar" data-spy-show="False" data-spy-order="0">
+            <div class="text center">
+
+                    <h2 class="block-title otherfont">Fr&#xE5;gor &amp; Svar</h2>
+
+            </div>
+
+
+        <div class="row" id="710b2132-ffd5-4b83-9e27-9db5373be41f-body">
+            <div class="small-12 large-8" style="margin: 0 auto;">
+                <div class="questions">
+                        <div class="questions-item">
+                            <span class="title">Vilken husmodell kan jag bygga? Kan jag g&#xF6;ra &#xE4;ndringar i planl&#xF6;sningen?</span>
+                            <span>Vi rekommenderar Villa &#xC4;ngaviken, Villa &#xC4;ngalyckan, Villa Ramsvik,  Villa Strandlyckan &amp; Villa Torekov traditionell. &#xD6;nskar du chans till havsutsikt s&#xE5; kan Villa Solhaga med balkong vara ett alternativ! Ja, du kan g&#xF6;ra &#xE4;ndringar i planl&#xF6;sningen</span>
+                        </div>
+                        <div class="questions-item">
+                            <span class="title">1&#x2013;,1,5 eller 2-planshus, vad f&#xE5;r jag bygga? </span>
+                            <span>1-plan&#x2B;1,5-plan</span>
+                        </div>
+                        <div class="questions-item">
+                            <span class="title">F&#xE5;r jag v&#xE4;lja kul&#xF6;r p&#xE5; fasad/tak? </span>
+                            <span>Ja, till en viss del. Det finns riktlinjer p&#xE5; l&#xE4;mpliga fasadkul&#xF6;rer.</span>
+                        </div>
+                        <div class="questions-item">
+                            <span class="title">F&#xE5;r jag bygga garage/carport/f&#xF6;rr&#xE5;d? </span>
+                            <span>Ja</span>
+                        </div>
+                        <div class="questions-item">
+                            <span class="title">F&#xE5;r jag ha solceller p&#xE5; mitt hus? </span>
+                            <span>Ja</span>
+                        </div>
+                        <div class="questions-item">
+                            <span class="title">F&#xE5;r jag ha laddstolpe? </span>
+                            <span>Ja</span>
+                        </div>
+                        <div class="questions-item">
+                            <span class="title">F&#xE5;r jag placera mitt hus hur jag vill</span>
+                            <span>Nej, husen ska placeras med l&#xE5;ngsida ut mot gata enligt illustrationen.</span>
+                        </div>
+                        <div class="questions-item">
+                            <span class="title">F&#xE5;r jag bygga fritidshus?</span>
+                            <span>P&#xE5; Arilds backe beh&#xF6;ver du inte bo permanent. Dock ska husen byggas i villastandard.</span>
+                        </div>
+                        <div class="questions-item">
+                            <span class="title">F&#xE5;r jag bara k&#xF6;pa tomten? </span>
+                            <span>Nej, tomterna s&#xE4;ljs endast till Varbergshus kunder och man ska vara beredd att skriva kontrakt p&#xE5; hus 1 m&#xE5;nad efter bokad tomt.</span>
+                        </div>
+                        <div class="questions-item">
+                            <span class="title">Vad finns det f&#xF6;r n&#xE4;rliggande service (mataff&#xE4;r mm)? </span>
+                            <span>N&#xE4;rmsta mataff&#xE4;r ligger i Nyhamnsl&#xE4;ge, vilket &#xE4;r ca 4 km fr&#xE5;n Arild</span>
+                        </div>
+                        <div class="questions-item">
+                            <span class="title">N&#xE4;r ska jag betala mitt hus?</span>
+                            <span>F&#xF6;rsta delbetalningen &#xE4;r efter gjuten bottenplatta, n&#xE4;sta n&#xE4;r huset &#xE4;r stomrest, d&#xE4;refter n&#xE4;r inredning &#xE4;r p&#xE5; plats och sista betalning &#xE4;r efter godk&#xE4;nd slutbesiktning.</span>
+                        </div>
+                        <div class="questions-item">
+                            <span class="title">N&#xE4;r &#xE4;r det inflyttning?</span>
+                            <span>Drygt 1 &#xE5;r efter kontraktsskrivning</span>
+                        </div>
+                        <div class="questions-item">
+                            <span class="title">Vilka &#xE4;ndringar kan jag INTE g&#xF6;ra? </span>
+                            <span>Du m&#xE5;ste ha minst 38 grader taklutning. Fastnar du f&#xF6;r ett id&#xE9;hus med ex 27 graders lutning s&#xE5; kan vi &#xE4;ndra det till 38 grader!</span>
+                        </div>
+                </div>
+            </div>
+            
+        </div>
+
+    </div>
+</section>
+<section data-litium-block-id="94994203-c65d-4dff-b356-33444c8557cb"><span id="/block/karta-over-tomtomrade" style="position: relative; top: -100px;"></span>
+
+    <div class="show-for-large landplot-map landplot-map-custom block-margins background-color-white">
+            <h2 class="block-title">Tomtkarta</h2>
+
+
+        <a data-toggle="modal" href="#modal-94994203-c65d-4dff-b356-33444c8557cb">
+            <img src="https://www.varbergshus.se/imagecache/a2a5cf5c-7caa-4f90-9d63-5a4f7757ce50-593x771/260421-Tomtkarta-Arild-.jpg#id=a2a5cf5c-7caa-4f90-9d63-5a4f7757ce50" />
+        </a>
+
+        <div id="modal-94994203-c65d-4dff-b356-33444c8557cb" aria-hidden="true" tabindex="-1" class="modal">
+            <div class="modal-landplot modal-dialog-centered modal-l maps">
+                <div class="landplot-modal modal-content" id="94994203-c65d-4dff-b356-33444c8557cb-modal-body">
+                    <button data-dismiss="modal" id="landplot-map-94994203-c65d-4dff-b356-33444c8557cb-close" class="close-button">✖</button>
+                    <img src="https://www.varbergshus.se/imagecache/7AE2DE11-3750-488E-B454-C21534BB619E/placeholder.png#id=a2a5cf5c-7caa-4f90-9d63-5a4f7757ce50" />
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="hide-for-large landplot-map block-margins background-color-white">
+            <h2 class="block-title">Tomtkarta</h2>
+        <img  src="https://www.varbergshus.se/imagecache/a2a5cf5c-7caa-4f90-9d63-5a4f7757ce50-593x771/260421-Tomtkarta-Arild-.jpg#id=a2a5cf5c-7caa-4f90-9d63-5a4f7757ce50"/>
+    </div>
+
+<script defer>
+    var modal = document.getElementById('modal-94994203-c65d-4dff-b356-33444c8557cb');
+
+    if (modal) {
+        modal.addEventListener('modal.show', function (e) {
+            window.addEventListener("resize", function (event) { });
+            setTimeout(function () {
+                window.dispatchEvent(new Event('resize'));
+            }, 100);
+
+        }, false);
+
+        modal.addEventListener('modal.hidden', function (e) {
+            window.removeEventListener("resize", function (event) { });
+
+        }, false);
+
+
+    }
+</script></section>
+<section data-litium-block-id="e61558f9-1d02-4f73-9c6c-aeffcb028494"><span id="/block/alla-tomter-i-omradet" style="position: relative; top: -100px;"></span>
+	<div class="row block-margins project-landplots background-color-sand15" id="guid-119ea92b-1157-4424-878f-ee95fc7c3b57" data-spy="navigation" data-title="Tomter" data-spy-show="True" data-spy-order="40">
+		<div class="columns small-12 text-center">
+			<h2 class="block-title">Alla tomter i omr&#xE5;det</h2>
+			<p class="block-description">
+				Tomterna i listan ingår i området <a href='/tomter-och-omraden/omraden/arilds-backe' target='_blank'>Område: Arilds Backe</a>
+			</p>
+		</div>
+		<div class="columns small-12 large-10 large-offset-1 filter-header">
+			<div>
+				<div class="dropdown">
+					<button class="dropdown-sort dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-dynamicsort-dropdown="e61558f9-1d02-4f73-9c6c-aeffcb028494"><i class="icon icon-vh-sort"></i> Sortera på</button>
+					<div class="dropdown-menu">
+						<a class="dropdown-item" href="#" data-dynamicsort data-dynamicsort-orderby="status" data-dynamicsort-order="asc">Status (Till salu - Såld)</a>
+						<a class="dropdown-item" href="#" data-dynamicsort data-dynamicsort-orderby="status" data-dynamicsort-order="desc">Status (Såld - Till salu)</a>
+						<a class="dropdown-item" href="#" data-dynamicsort data-dynamicsort-orderby="lotsize" data-dynamicsort-order="asc">Tomtarea - stigande</a>
+						<a class="dropdown-item" href="#" data-dynamicsort data-dynamicsort-orderby="lotsize" data-dynamicsort-order="desc">Tomtarea - fallande</a>
+						<a class="dropdown-item" href="#" data-dynamicsort data-dynamicsort-orderby="price" data-dynamicsort-order="asc">Pris - stigande</a>
+						<a class="dropdown-item" href="#" data-dynamicsort data-dynamicsort-orderby="price" data-dynamicsort-order="desc">Pris - fallande</a>
+					</div>
+				</div>
+			</div>
+			<div class="status-block">
+				<div class="icon-status-forsale"><span>Till salu</span></div>
+				<div class="icon-status-booked"><span>Reserverad/Bokad</span></div>
+                <div class="icon-status-sold"><span>Såld</span></div>
+			</div>
+		</div>
+		<div class="columns small-12 large-10 large-offset-1 product-list" data-module="./projectlandplot" data-projectlandplots-id="e61558f9-1d02-4f73-9c6c-aeffcb028494" data-dynamicsort-set="projectlandplots">
+			<ul class="product-list list" data-dynamicsort-list>
+					<li class="product-list__item" data-list-id="e61558f9-1d02-4f73-9c6c-aeffcb028494">
+						
+<article class="product__info">
+	<div class="product__info-header">
+		<div class="status-list" data-filter="status" data-status="4" data-dynamicsort-attr="status" data-dynamicsort-value="4" onclick="document.location = '/tomter-och-omraden/tomter/arilds-backe-tomt-1'">
+			<i class="icon-status-sold"></i>
+		</div>
+		<h4 itemprop="name" class="product__name" data-dynamicsort-attr="name" data-dynamicsort-value="Arilds backe, tomt 1" onclick="document.location = '/tomter-och-omraden/tomter/arilds-backe-tomt-1'">
+			Arilds backe, tomt 1
+		</h4>
+		<div class="product__favourite">
+			<a class="product__favourite__link--block" href="#" data-favourite-marker="94c96e95-27e7-4437-843a-4057ed4f7263|/tomter-och-omraden/tomter/arilds-backe-tomt-1|landplot"><i class="icon-vh-heart"></i></a>
+		</div>
+	</div>
+	<div class="product__property-container" onclick="document.location = '/tomter-och-omraden/tomter/arilds-backe-tomt-1'">
+			<div class="product__property list-designation" data-match-width="list-designation">
+				<span>Fast. bet.:</span>&nbsp;<span>Stubbarp 6:33</span>
+			</div>
+
+			<div class="product__property list-lotsize" data-match-width="list-lotsize">
+				<span>Tomtarea:</span>&nbsp;<span data-dynamicsort-attr="lotsize" data-dynamicsort-value="840">840 kvm</span>
+			</div>
+
+			<div class="product__property empty list-price" data-match-width="list-price">&nbsp;</div>
+
+		<div class="product__property list-status" data-match-width="list-status">
+            <span>Status:</span>&nbsp;<span>S&#xE5;ld</span>
+		</div>
+
+	</div>
+</article>
+
+
+					</li>
+					<li class="product-list__item" data-list-id="e61558f9-1d02-4f73-9c6c-aeffcb028494">
+						
+<article class="product__info">
+	<div class="product__info-header">
+		<div class="status-list" data-filter="status" data-status="4" data-dynamicsort-attr="status" data-dynamicsort-value="4" onclick="document.location = '/tomter-och-omraden/tomter/arilds-backe-tomt-10'">
+			<i class="icon-status-sold"></i>
+		</div>
+		<h4 itemprop="name" class="product__name" data-dynamicsort-attr="name" data-dynamicsort-value="Arilds backe, tomt 10" onclick="document.location = '/tomter-och-omraden/tomter/arilds-backe-tomt-10'">
+			Arilds backe, tomt 10
+		</h4>
+		<div class="product__favourite">
+			<a class="product__favourite__link--block" href="#" data-favourite-marker="52d658e5-ef4d-44e0-ab82-0054218154b1|/tomter-och-omraden/tomter/arilds-backe-tomt-10|landplot"><i class="icon-vh-heart"></i></a>
+		</div>
+	</div>
+	<div class="product__property-container" onclick="document.location = '/tomter-och-omraden/tomter/arilds-backe-tomt-10'">
+			<div class="product__property list-designation" data-match-width="list-designation">
+				<span>Fast. bet.:</span>&nbsp;<span>Stubbarp 6:42</span>
+			</div>
+
+			<div class="product__property list-lotsize" data-match-width="list-lotsize">
+				<span>Tomtarea:</span>&nbsp;<span data-dynamicsort-attr="lotsize" data-dynamicsort-value="847">847 kvm</span>
+			</div>
+
+			<div class="product__property empty list-price" data-match-width="list-price">&nbsp;</div>
+
+		<div class="product__property list-status" data-match-width="list-status">
+            <span>Status:</span>&nbsp;<span>S&#xE5;ld</span>
+		</div>
+
+	</div>
+</article>
+
+
+					</li>
+					<li class="product-list__item" data-list-id="e61558f9-1d02-4f73-9c6c-aeffcb028494">
+						
+<article class="product__info">
+	<div class="product__info-header">
+		<div class="status-list" data-filter="status" data-status="4" data-dynamicsort-attr="status" data-dynamicsort-value="4" onclick="document.location = '/tomter-och-omraden/tomter/arilds-backe-tomt-11'">
+			<i class="icon-status-sold"></i>
+		</div>
+		<h4 itemprop="name" class="product__name" data-dynamicsort-attr="name" data-dynamicsort-value="Arilds backe, tomt 11" onclick="document.location = '/tomter-och-omraden/tomter/arilds-backe-tomt-11'">
+			Arilds backe, tomt 11
+		</h4>
+		<div class="product__favourite">
+			<a class="product__favourite__link--block" href="#" data-favourite-marker="0875d95f-c702-438a-ba22-9e15edbcb709|/tomter-och-omraden/tomter/arilds-backe-tomt-11|landplot"><i class="icon-vh-heart"></i></a>
+		</div>
+	</div>
+	<div class="product__property-container" onclick="document.location = '/tomter-och-omraden/tomter/arilds-backe-tomt-11'">
+			<div class="product__property list-designation" data-match-width="list-designation">
+				<span>Fast. bet.:</span>&nbsp;<span>Stubbarp 6:43</span>
+			</div>
+
+			<div class="product__property list-lotsize" data-match-width="list-lotsize">
+				<span>Tomtarea:</span>&nbsp;<span data-dynamicsort-attr="lotsize" data-dynamicsort-value="927">927 kvm</span>
+			</div>
+
+			<div class="product__property empty list-price" data-match-width="list-price">&nbsp;</div>
+
+		<div class="product__property list-status" data-match-width="list-status">
+            <span>Status:</span>&nbsp;<span>S&#xE5;ld</span>
+		</div>
+
+	</div>
+</article>
+
+
+					</li>
+					<li class="product-list__item" data-list-id="e61558f9-1d02-4f73-9c6c-aeffcb028494">
+						
+<article class="product__info">
+	<div class="product__info-header">
+		<div class="status-list" data-filter="status" data-status="2" data-dynamicsort-attr="status" data-dynamicsort-value="3" onclick="document.location = '/tomter-och-omraden/tomter/arilds-backe-tomt-12'">
+			<i class="icon-status-booked"></i>
+		</div>
+		<h4 itemprop="name" class="product__name" data-dynamicsort-attr="name" data-dynamicsort-value="Arilds backe, tomt 12" onclick="document.location = '/tomter-och-omraden/tomter/arilds-backe-tomt-12'">
+			Arilds backe, tomt 12
+		</h4>
+		<div class="product__favourite">
+			<a class="product__favourite__link--block" href="#" data-favourite-marker="9dfb297b-4e7a-4c0a-9465-2e2ffa83c430|/tomter-och-omraden/tomter/arilds-backe-tomt-12|landplot"><i class="icon-vh-heart"></i></a>
+		</div>
+	</div>
+	<div class="product__property-container" onclick="document.location = '/tomter-och-omraden/tomter/arilds-backe-tomt-12'">
+			<div class="product__property list-designation" data-match-width="list-designation">
+				<span>Fast. bet.:</span>&nbsp;<span>Stubbarp 6:44</span>
+			</div>
+
+			<div class="product__property list-lotsize" data-match-width="list-lotsize">
+				<span>Tomtarea:</span>&nbsp;<span data-dynamicsort-attr="lotsize" data-dynamicsort-value="824">824 kvm</span>
+			</div>
+
+			<div class="product__property empty list-price" data-match-width="list-price">&nbsp;</div>
+
+		<div class="product__property list-status" data-match-width="list-status">
+            <span>Status:</span>&nbsp;<span>Bokad</span>
+		</div>
+
+	</div>
+</article>
+
+
+					</li>
+					<li class="product-list__item" data-list-id="e61558f9-1d02-4f73-9c6c-aeffcb028494">
+						
+<article class="product__info">
+	<div class="product__info-header">
+		<div class="status-list" data-filter="status" data-status="4" data-dynamicsort-attr="status" data-dynamicsort-value="4" onclick="document.location = '/tomter-och-omraden/tomter/arilds-backe-tomt-13'">
+			<i class="icon-status-sold"></i>
+		</div>
+		<h4 itemprop="name" class="product__name" data-dynamicsort-attr="name" data-dynamicsort-value="Arilds backe, tomt 13" onclick="document.location = '/tomter-och-omraden/tomter/arilds-backe-tomt-13'">
+			Arilds backe, tomt 13
+		</h4>
+		<div class="product__favourite">
+			<a class="product__favourite__link--block" href="#" data-favourite-marker="71e1d43e-a7e7-4fdc-a93e-4c751ca4bfd5|/tomter-och-omraden/tomter/arilds-backe-tomt-13|landplot"><i class="icon-vh-heart"></i></a>
+		</div>
+	</div>
+	<div class="product__property-container" onclick="document.location = '/tomter-och-omraden/tomter/arilds-backe-tomt-13'">
+			<div class="product__property list-designation" data-match-width="list-designation">
+				<span>Fast. bet.:</span>&nbsp;<span>Stubbarp 6:45</span>
+			</div>
+
+			<div class="product__property list-lotsize" data-match-width="list-lotsize">
+				<span>Tomtarea:</span>&nbsp;<span data-dynamicsort-attr="lotsize" data-dynamicsort-value="1115">1115 kvm</span>
+			</div>
+
+			<div class="product__property empty list-price" data-match-width="list-price">&nbsp;</div>
+
+		<div class="product__property list-status" data-match-width="list-status">
+            <span>Status:</span>&nbsp;<span>S&#xE5;ld</span>
+		</div>
+
+	</div>
+</article>
+
+
+					</li>
+					<li class="product-list__item" data-list-id="e61558f9-1d02-4f73-9c6c-aeffcb028494">
+						
+<article class="product__info">
+	<div class="product__info-header">
+		<div class="status-list" data-filter="status" data-status="4" data-dynamicsort-attr="status" data-dynamicsort-value="4" onclick="document.location = '/tomter-och-omraden/tomter/arilds-backe-tomt-2'">
+			<i class="icon-status-sold"></i>
+		</div>
+		<h4 itemprop="name" class="product__name" data-dynamicsort-attr="name" data-dynamicsort-value="Arilds backe, tomt 2" onclick="document.location = '/tomter-och-omraden/tomter/arilds-backe-tomt-2'">
+			Arilds backe, tomt 2
+		</h4>
+		<div class="product__favourite">
+			<a class="product__favourite__link--block" href="#" data-favourite-marker="1c3b6a0e-5765-445f-82c4-d2f9c21f901d|/tomter-och-omraden/tomter/arilds-backe-tomt-2|landplot"><i class="icon-vh-heart"></i></a>
+		</div>
+	</div>
+	<div class="product__property-container" onclick="document.location = '/tomter-och-omraden/tomter/arilds-backe-tomt-2'">
+			<div class="product__property list-designation" data-match-width="list-designation">
+				<span>Fast. bet.:</span>&nbsp;<span>Stubbarp 6:34</span>
+			</div>
+
+			<div class="product__property list-lotsize" data-match-width="list-lotsize">
+				<span>Tomtarea:</span>&nbsp;<span data-dynamicsort-attr="lotsize" data-dynamicsort-value="956">956 kvm</span>
+			</div>
+
+			<div class="product__property empty list-price" data-match-width="list-price">&nbsp;</div>
+
+		<div class="product__property list-status" data-match-width="list-status">
+            <span>Status:</span>&nbsp;<span>S&#xE5;ld</span>
+		</div>
+
+	</div>
+</article>
+
+
+					</li>
+					<li class="product-list__item" data-list-id="e61558f9-1d02-4f73-9c6c-aeffcb028494">
+						
+<article class="product__info">
+	<div class="product__info-header">
+		<div class="status-list" data-filter="status" data-status="4" data-dynamicsort-attr="status" data-dynamicsort-value="4" onclick="document.location = '/tomter-och-omraden/tomter/arilds-backe-tomt-3'">
+			<i class="icon-status-sold"></i>
+		</div>
+		<h4 itemprop="name" class="product__name" data-dynamicsort-attr="name" data-dynamicsort-value="Arilds backe, tomt 3" onclick="document.location = '/tomter-och-omraden/tomter/arilds-backe-tomt-3'">
+			Arilds backe, tomt 3
+		</h4>
+		<div class="product__favourite">
+			<a class="product__favourite__link--block" href="#" data-favourite-marker="c845eb39-8236-42b9-af00-c4a21fbf5459|/tomter-och-omraden/tomter/arilds-backe-tomt-3|landplot"><i class="icon-vh-heart"></i></a>
+		</div>
+	</div>
+	<div class="product__property-container" onclick="document.location = '/tomter-och-omraden/tomter/arilds-backe-tomt-3'">
+			<div class="product__property list-designation" data-match-width="list-designation">
+				<span>Fast. bet.:</span>&nbsp;<span>Stubbarp 6:35</span>
+			</div>
+
+			<div class="product__property list-lotsize" data-match-width="list-lotsize">
+				<span>Tomtarea:</span>&nbsp;<span data-dynamicsort-attr="lotsize" data-dynamicsort-value="963">963 kvm</span>
+			</div>
+
+			<div class="product__property empty list-price" data-match-width="list-price">&nbsp;</div>
+
+		<div class="product__property list-status" data-match-width="list-status">
+            <span>Status:</span>&nbsp;<span>S&#xE5;ld</span>
+		</div>
+
+	</div>
+</article>
+
+
+					</li>
+					<li class="product-list__item" data-list-id="e61558f9-1d02-4f73-9c6c-aeffcb028494">
+						
+<article class="product__info">
+	<div class="product__info-header">
+		<div class="status-list" data-filter="status" data-status="4" data-dynamicsort-attr="status" data-dynamicsort-value="4" onclick="document.location = '/tomter-och-omraden/tomter/arilds-backe-tomt-4'">
+			<i class="icon-status-sold"></i>
+		</div>
+		<h4 itemprop="name" class="product__name" data-dynamicsort-attr="name" data-dynamicsort-value="Arilds backe, tomt 4" onclick="document.location = '/tomter-och-omraden/tomter/arilds-backe-tomt-4'">
+			Arilds backe, tomt 4
+		</h4>
+		<div class="product__favourite">
+			<a class="product__favourite__link--block" href="#" data-favourite-marker="73ea48cc-536d-4dba-a2aa-c32e0af80b20|/tomter-och-omraden/tomter/arilds-backe-tomt-4|landplot"><i class="icon-vh-heart"></i></a>
+		</div>
+	</div>
+	<div class="product__property-container" onclick="document.location = '/tomter-och-omraden/tomter/arilds-backe-tomt-4'">
+			<div class="product__property list-designation" data-match-width="list-designation">
+				<span>Fast. bet.:</span>&nbsp;<span>Stubbarp 6:36</span>
+			</div>
+
+			<div class="product__property list-lotsize" data-match-width="list-lotsize">
+				<span>Tomtarea:</span>&nbsp;<span data-dynamicsort-attr="lotsize" data-dynamicsort-value="959">959 kvm</span>
+			</div>
+
+			<div class="product__property empty list-price" data-match-width="list-price">&nbsp;</div>
+
+		<div class="product__property list-status" data-match-width="list-status">
+            <span>Status:</span>&nbsp;<span>S&#xE5;ld</span>
+		</div>
+
+	</div>
+</article>
+
+
+					</li>
+					<li class="product-list__item" data-list-id="e61558f9-1d02-4f73-9c6c-aeffcb028494">
+						
+<article class="product__info">
+	<div class="product__info-header">
+		<div class="status-list" data-filter="status" data-status="4" data-dynamicsort-attr="status" data-dynamicsort-value="4" onclick="document.location = '/tomter-och-omraden/tomter/arilds-backe-tomt-5'">
+			<i class="icon-status-sold"></i>
+		</div>
+		<h4 itemprop="name" class="product__name" data-dynamicsort-attr="name" data-dynamicsort-value="Arilds backe, tomt 5" onclick="document.location = '/tomter-och-omraden/tomter/arilds-backe-tomt-5'">
+			Arilds backe, tomt 5
+		</h4>
+		<div class="product__favourite">
+			<a class="product__favourite__link--block" href="#" data-favourite-marker="493f1d9c-aa40-4ded-8dc0-a6f86d89b150|/tomter-och-omraden/tomter/arilds-backe-tomt-5|landplot"><i class="icon-vh-heart"></i></a>
+		</div>
+	</div>
+	<div class="product__property-container" onclick="document.location = '/tomter-och-omraden/tomter/arilds-backe-tomt-5'">
+			<div class="product__property list-designation" data-match-width="list-designation">
+				<span>Fast. bet.:</span>&nbsp;<span>Stubbarp 6:37</span>
+			</div>
+
+			<div class="product__property list-lotsize" data-match-width="list-lotsize">
+				<span>Tomtarea:</span>&nbsp;<span data-dynamicsort-attr="lotsize" data-dynamicsort-value="1255">1255 kvm</span>
+			</div>
+
+			<div class="product__property empty list-price" data-match-width="list-price">&nbsp;</div>
+
+		<div class="product__property list-status" data-match-width="list-status">
+            <span>Status:</span>&nbsp;<span>S&#xE5;ld</span>
+		</div>
+
+	</div>
+</article>
+
+
+					</li>
+					<li class="product-list__item" data-list-id="e61558f9-1d02-4f73-9c6c-aeffcb028494">
+						
+<article class="product__info">
+	<div class="product__info-header">
+		<div class="status-list" data-filter="status" data-status="4" data-dynamicsort-attr="status" data-dynamicsort-value="4" onclick="document.location = '/tomter-och-omraden/tomter/arilds-backe-tomt-6'">
+			<i class="icon-status-sold"></i>
+		</div>
+		<h4 itemprop="name" class="product__name" data-dynamicsort-attr="name" data-dynamicsort-value="Arilds backe, tomt 6" onclick="document.location = '/tomter-och-omraden/tomter/arilds-backe-tomt-6'">
+			Arilds backe, tomt 6
+		</h4>
+		<div class="product__favourite">
+			<a class="product__favourite__link--block" href="#" data-favourite-marker="1cdf8145-e659-4713-9c78-db8ff6d0679b|/tomter-och-omraden/tomter/arilds-backe-tomt-6|landplot"><i class="icon-vh-heart"></i></a>
+		</div>
+	</div>
+	<div class="product__property-container" onclick="document.location = '/tomter-och-omraden/tomter/arilds-backe-tomt-6'">
+			<div class="product__property list-designation" data-match-width="list-designation">
+				<span>Fast. bet.:</span>&nbsp;<span>Stubbarp 6:38</span>
+			</div>
+
+			<div class="product__property list-lotsize" data-match-width="list-lotsize">
+				<span>Tomtarea:</span>&nbsp;<span data-dynamicsort-attr="lotsize" data-dynamicsort-value="1158">1158 kvm</span>
+			</div>
+
+			<div class="product__property empty list-price" data-match-width="list-price">&nbsp;</div>
+
+		<div class="product__property list-status" data-match-width="list-status">
+            <span>Status:</span>&nbsp;<span>S&#xE5;ld</span>
+		</div>
+
+	</div>
+</article>
+
+
+					</li>
+					<li class="product-list__item" data-list-id="e61558f9-1d02-4f73-9c6c-aeffcb028494">
+						
+<article class="product__info">
+	<div class="product__info-header">
+		<div class="status-list" data-filter="status" data-status="4" data-dynamicsort-attr="status" data-dynamicsort-value="4" onclick="document.location = '/tomter-och-omraden/tomter/arilds-backe-tomt-7'">
+			<i class="icon-status-sold"></i>
+		</div>
+		<h4 itemprop="name" class="product__name" data-dynamicsort-attr="name" data-dynamicsort-value="Arilds backe, tomt 7" onclick="document.location = '/tomter-och-omraden/tomter/arilds-backe-tomt-7'">
+			Arilds backe, tomt 7
+		</h4>
+		<div class="product__favourite">
+			<a class="product__favourite__link--block" href="#" data-favourite-marker="c5ee1dcf-fbe0-4e4e-89b1-4329206c278a|/tomter-och-omraden/tomter/arilds-backe-tomt-7|landplot"><i class="icon-vh-heart"></i></a>
+		</div>
+	</div>
+	<div class="product__property-container" onclick="document.location = '/tomter-och-omraden/tomter/arilds-backe-tomt-7'">
+			<div class="product__property list-designation" data-match-width="list-designation">
+				<span>Fast. bet.:</span>&nbsp;<span>Stubbarp 6:39</span>
+			</div>
+
+			<div class="product__property list-lotsize" data-match-width="list-lotsize">
+				<span>Tomtarea:</span>&nbsp;<span data-dynamicsort-attr="lotsize" data-dynamicsort-value="823">823 kvm</span>
+			</div>
+
+			<div class="product__property empty list-price" data-match-width="list-price">&nbsp;</div>
+
+		<div class="product__property list-status" data-match-width="list-status">
+            <span>Status:</span>&nbsp;<span>S&#xE5;ld</span>
+		</div>
+
+	</div>
+</article>
+
+
+					</li>
+					<li class="product-list__item" data-list-id="e61558f9-1d02-4f73-9c6c-aeffcb028494">
+						
+<article class="product__info">
+	<div class="product__info-header">
+		<div class="status-list" data-filter="status" data-status="4" data-dynamicsort-attr="status" data-dynamicsort-value="4" onclick="document.location = '/tomter-och-omraden/tomter/arilds-backe-tomt-8'">
+			<i class="icon-status-sold"></i>
+		</div>
+		<h4 itemprop="name" class="product__name" data-dynamicsort-attr="name" data-dynamicsort-value="Arilds backe, tomt 8" onclick="document.location = '/tomter-och-omraden/tomter/arilds-backe-tomt-8'">
+			Arilds backe, tomt 8
+		</h4>
+		<div class="product__favourite">
+			<a class="product__favourite__link--block" href="#" data-favourite-marker="c3cba612-d037-4ab3-80f5-b37dbfde0d88|/tomter-och-omraden/tomter/arilds-backe-tomt-8|landplot"><i class="icon-vh-heart"></i></a>
+		</div>
+	</div>
+	<div class="product__property-container" onclick="document.location = '/tomter-och-omraden/tomter/arilds-backe-tomt-8'">
+			<div class="product__property list-designation" data-match-width="list-designation">
+				<span>Fast. bet.:</span>&nbsp;<span>Stubbarp 6:40</span>
+			</div>
+
+			<div class="product__property list-lotsize" data-match-width="list-lotsize">
+				<span>Tomtarea:</span>&nbsp;<span data-dynamicsort-attr="lotsize" data-dynamicsort-value="941">941 kvm</span>
+			</div>
+
+			<div class="product__property empty list-price" data-match-width="list-price">&nbsp;</div>
+
+		<div class="product__property list-status" data-match-width="list-status">
+            <span>Status:</span>&nbsp;<span>S&#xE5;ld</span>
+		</div>
+
+	</div>
+</article>
+
+
+					</li>
+					<li class="product-list__item" data-list-id="e61558f9-1d02-4f73-9c6c-aeffcb028494">
+						
+<article class="product__info">
+	<div class="product__info-header">
+		<div class="status-list" data-filter="status" data-status="4" data-dynamicsort-attr="status" data-dynamicsort-value="4" onclick="document.location = '/tomter-och-omraden/tomter/arilds-backe-tomt-9'">
+			<i class="icon-status-sold"></i>
+		</div>
+		<h4 itemprop="name" class="product__name" data-dynamicsort-attr="name" data-dynamicsort-value="Arilds backe, tomt 9" onclick="document.location = '/tomter-och-omraden/tomter/arilds-backe-tomt-9'">
+			Arilds backe, tomt 9
+		</h4>
+		<div class="product__favourite">
+			<a class="product__favourite__link--block" href="#" data-favourite-marker="4df97f6e-2eaa-4798-b0ca-9b8e005a0bd2|/tomter-och-omraden/tomter/arilds-backe-tomt-9|landplot"><i class="icon-vh-heart"></i></a>
+		</div>
+	</div>
+	<div class="product__property-container" onclick="document.location = '/tomter-och-omraden/tomter/arilds-backe-tomt-9'">
+			<div class="product__property list-designation" data-match-width="list-designation">
+				<span>Fast. bet.:</span>&nbsp;<span>Stubbarp 6:41</span>
+			</div>
+
+			<div class="product__property list-lotsize" data-match-width="list-lotsize">
+				<span>Tomtarea:</span>&nbsp;<span data-dynamicsort-attr="lotsize" data-dynamicsort-value="965">965 kvm</span>
+			</div>
+
+			<div class="product__property empty list-price" data-match-width="list-price">&nbsp;</div>
+
+		<div class="product__property list-status" data-match-width="list-status">
+            <span>Status:</span>&nbsp;<span>S&#xE5;ld</span>
+		</div>
+
+	</div>
+</article>
+
+
+					</li>
+			</ul>
+			<div class="product-list__show-more-container">
+				<div data-more-id="e61558f9-1d02-4f73-9c6c-aeffcb028494" class="product-list__show-more">
+					<div>
+						<a>Visa flera</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+<section data-litium-block-id="72cbce3a-cc8c-4574-af58-e82d41992c7e"><span id="/block/losvirkeshus-av-hogsta-kvalite" style="position: relative; top: -100px;"></span>
+    <div class="imageandtext image-left background-color-sand15" id="guid-99c90f43-1d7d-49c1-a8b6-cc5d9f3b4ad2" data-spy="navigation" data-title="L&#xF6;svirkeshus av h&#xF6;gsta kvalit&#xE9;" data-spy-show="False" data-spy-order="0">
+        <div class="row ">
+                <a href="https://www.varbergshus.se/att-bygga-hus" target="" data-toggle="" class="imageandtext__image background-position-middle text-height">
+                    <img src="https://www.varbergshus.se/imagecache/7AE2DE11-3750-488E-B454-C21534BB619E/placeholder.png#id=9b37b4d5-76b9-4355-a305-7b46ec23f757" class="background-position-middle" style="width: 100%;" />
+                </a>
+        <div class="imageandtext__text  imageandtext__color-Sand15 text-height">
+            <div class="text-color-black text-container">
+                    <h3>L&#xF6;svirkeshus av h&#xF6;gsta kvalit&#xE9;</h3>
+
+
+                <div class="imageandtext__content">
+                    <div>
+                        <p>Hos oss f&aring;r du ett unikt hem, byggt br&auml;da f&ouml;r br&auml;da och spik f&ouml;r spik, direkt p&aring; din tomt. Vi f&ouml;ljer dina &ouml;nskem&aring;l noggrant och levererar till ett fast pris, utan &ouml;verraskningar. V&aring;ra erfarna huss&auml;ljare, som &auml;ven &auml;r husdesigners, hj&auml;lper dig att anpassa en av v&aring;ra befintliga husmodeller eller rita ett helt skr&auml;ddarsytt hus som passar perfekt f&ouml;r just din tomt. Att rita hus med oss &auml;r ingenting vi tar betalt f&ouml;r.</p>
+
+                    </div>
+                </div>
+                <div class="imageandtext__links imageandtext__productmodel">
+            <div class="link1  ">
+                <a class="button " href="https://www.varbergshus.se/att-bygga-hus" data-toggle="" target="">Att bygga hus med oss</a>
+            </div>
+                </div>
+            </div>
+        </div>
+        </div>
+    </div>
+
+</section>
+<section data-litium-block-id="2ebb1fbc-dcab-418b-81e0-f5cf1dbd9466"><span id="/block/visningar" style="position: relative; top: -100px;"></span>
+
+</section>
+<section data-litium-block-id="cc26eeeb-61f4-42d3-ac5f-329529cef9ef"><span id="/block/intresseanmalan1" style="position: relative; top: -100px;"></span>
+</section>
+<section data-litium-block-id="7a401aca-1ae4-4781-b4bf-8c7476d2304c"><span id="/block/andra-tomter-i-narheten" style="position: relative; top: -100px;"></span>
+
+	<div class="row block-margins background-color-sand15" id="guid-3a802b56-027a-49de-98bf-ecad9dbcef58" data-spy="navigation" data-title="Andra tomter i n&#xE4;rheten" data-spy-show="False" data-spy-order="0">
+		<div class="columns small-12 text-center">
+			<h2 class="block-title">Andra tomter i n&#xE4;rheten</h2>
+			<p class="block-description"></p>
+		</div>
+
+		<div class="columns small-12 large-12 product-detail otherprojects">
+			<ul class="product-detail__items">
+					<li class="product__container">
+						
+<style>
+ 	.houseingselector-overview-svg {
+		height: 100%;
+		position: absolute;
+		top: 0;
+		left: 0;
+	}
+</style>
+
+<div class="grid">
+	<div class="product__figure-container">
+		<a href="https://www.varbergshus.se/tomter-och-omraden/omraden/ostra-lerberget" class="product__figure" style="background-repeat: norepeat; background-size: cover; overflow:hidden; background-image: url('https://www.varbergshus.se/imagecache/7AE2DE11-3750-488E-B454-C21534BB619E/placeholder.png#id=16b04742-74bb-4bc3-8479-722167486ca4');" data-seoimg-title="" data-seoimg-alt="" data-seoimg-url="/imagecache/7AE2DE11-3750-488E-B454-C21534BB619E/placeholder.png#id=16b04742-74bb-4bc3-8479-722167486ca4"></a>
+		<div class="product__favourite">
+			<a class="product__favourite__link--block" href="#" data-favourite-marker="7a3ffcad-19a7-4e6b-8a75-01e7cca0b139|/tomter-och-omraden/omraden/ostra-lerberget|project"><i class="icon-vh-heart"></i></a>
+		</div>
+	</div>
+
+	<article class="product__info" onclick="document.location = '/tomter-och-omraden/omraden/ostra-lerberget'">
+		<div class="product--area__name"><span>H&#xF6;gan&#xE4;s</span></div>
+
+		<h4 itemprop="name" class="product__name product-project_header" data-match-height="product-landplot_header" data-dynamicsort-attr="name" data-dynamicsort-value="Omr&#xE5;de: &#xD6;stra Lerberget">Omr&#xE5;de: &#xD6;stra Lerberget</h4>
+
+		<div class="project__info" data-match-height="project__info">
+			<div class="product__status">
+				<i class="icon-status-planned"></i> <span>Kommande</span>
+			</div>
+
+			<div class="product__facts product__facts-related" data-match-height="product__facts-related">
+						<span>10 av 10 tomter kvar</span>
+			</div>
+		</div>
+	</article>
+</div>
+<div class="list">
+	<article class="product__info">
+		<div class="list__header">
+			<h4 itemprop="name" class="product__name" onclick="document.location = '/tomter-och-omraden/omraden/ostra-lerberget'">
+				<i class="icon-status-planned"></i> Omr&#xE5;de: &#xD6;stra Lerberget
+			</h4>
+			<div class="product__favourite">
+				<a href="#" data-favourite-marker="7a3ffcad-19a7-4e6b-8a75-01e7cca0b139|/tomter-och-omraden/omraden/ostra-lerberget|project"><i class="icon-vh-heart"></i></a>
+			</div>
+		</div>
+		<div class="list__info" onclick="document.location = '/tomter-och-omraden/omraden/ostra-lerberget'">
+			<div class="product__property-container">
+				<div class="product__property area LPareaName" data-match-width="LPareaName">
+					<span class="municipality">H&#xF6;gan&#xE4;s</span>
+						<span class="district">, Sk&#xE5;ne</span>
+				</div>
+							<div class="product__property empty priceFrom" data-match-width="priceFrom">
+								<span>&nbsp;</span>
+								<span>&nbsp;</span>
+							</div>
+							<div class="product__property property availability" data-match-width="availability">
+								<span>Lediga:</span>
+								<span>10 av 10</span>
+							</div>
+							<div class="product__property property status" data-match-width="status">
+								<span>Status:</span>
+								<span>Kommande</span>
+							</div>
+					<div class="product__property empty exhibitions" data-match-width="exhibitions">
+						<span>&nbsp;</span>
+					</div>
+			</div>
+		</div>
+	</article>
+</div>
+
+
+					</li>
+					<li class="product__container">
+						
+<style>
+ 	.houseingselector-overview-svg {
+		height: 100%;
+		position: absolute;
+		top: 0;
+		left: 0;
+	}
+</style>
+
+<div class="grid">
+	<div class="product__figure-container">
+		<a href="https://www.varbergshus.se/tomter-och-omraden/omraden/omrade-mjohult-hoganas" class="product__figure" style="background-repeat: norepeat; background-size: cover; overflow:hidden; background-image: url('https://www.varbergshus.se/imagecache/7AE2DE11-3750-488E-B454-C21534BB619E/placeholder.png#id=a137512f-ce8a-4e3e-bfc8-89fcc1b36e85');" data-seoimg-title="Illustrationsbild fr&#xE5;n &#xE5;ker" data-seoimg-alt="" data-seoimg-url="/imagecache/7AE2DE11-3750-488E-B454-C21534BB619E/placeholder.png#id=a137512f-ce8a-4e3e-bfc8-89fcc1b36e85"></a>
+		<div class="product__favourite">
+			<a class="product__favourite__link--block" href="#" data-favourite-marker="e9e9cb04-0782-4776-b9ab-d74b8098543f|/tomter-och-omraden/omraden/omrade-mjohult-hoganas|project"><i class="icon-vh-heart"></i></a>
+		</div>
+	</div>
+
+	<article class="product__info" onclick="document.location = '/tomter-och-omraden/omraden/omrade-mjohult-hoganas'">
+		<div class="product--area__name"><span>H&#xF6;gan&#xE4;s</span></div>
+
+		<h4 itemprop="name" class="product__name product-project_header" data-match-height="product-landplot_header" data-dynamicsort-attr="name" data-dynamicsort-value="Omr&#xE5;de: Mj&#xF6;hult">Omr&#xE5;de: Mj&#xF6;hult</h4>
+
+		<div class="project__info" data-match-height="project__info">
+			<div class="product__status">
+				<i class="icon-status-salesongoing"></i> <span>F&#xF6;rs&#xE4;ljning p&#xE5;g&#xE5;r</span>
+			</div>
+
+			<div class="product__facts product__facts-related" data-match-height="product__facts-related">
+						<span>Priser från   800 000 kr<br />3 av 3 tomter kvar</span>
+			</div>
+		</div>
+	</article>
+</div>
+<div class="list">
+	<article class="product__info">
+		<div class="list__header">
+			<h4 itemprop="name" class="product__name" onclick="document.location = '/tomter-och-omraden/omraden/omrade-mjohult-hoganas'">
+				<i class="icon-status-salesongoing"></i> Omr&#xE5;de: Mj&#xF6;hult
+			</h4>
+			<div class="product__favourite">
+				<a href="#" data-favourite-marker="e9e9cb04-0782-4776-b9ab-d74b8098543f|/tomter-och-omraden/omraden/omrade-mjohult-hoganas|project"><i class="icon-vh-heart"></i></a>
+			</div>
+		</div>
+		<div class="list__info" onclick="document.location = '/tomter-och-omraden/omraden/omrade-mjohult-hoganas'">
+			<div class="product__property-container">
+				<div class="product__property area LPareaName" data-match-width="LPareaName">
+					<span class="municipality">H&#xF6;gan&#xE4;s</span>
+						<span class="district">, Sk&#xE5;ne</span>
+				</div>
+							<div class="product__property property priceFrom" data-match-width="priceFrom">
+								<span>Pris fr&#xE5;n:</span>
+								<span>  800 000 kr</span>
+							</div>
+							<div class="product__property property availability" data-match-width="availability">
+								<span>Lediga:</span>
+								<span>3 av 3</span>
+							</div>
+							<div class="product__property property status" data-match-width="status">
+								<span>Status:</span>
+								<span>Försäljning pågår</span>
+							</div>
+					<div class="product__property empty exhibitions" data-match-width="exhibitions">
+						<span>&nbsp;</span>
+					</div>
+			</div>
+		</div>
+	</article>
+</div>
+
+
+					</li>
+			</ul>
+		</div>
+	</div>
+</section>
+<section data-litium-block-id="72d871db-3e16-4f84-af5e-1ecfe4caeb98"><span id="/block/materialval" style="position: relative; top: -100px;"></span>
+
+<div class="article_slider_block block-margins background-color-white" id="guid-2b6cc872-5e73-4716-9ed1-f023821c3fc5" data-spy="navigation" data-title="Materialval" data-spy-show="False" data-spy-order="0">
+    <h2 class="block-title">
+        Materialval
+    </h2>
+
+    <div class="block-description">
+        Hos oss kan du v&#xE4;lja mellan m&#xE5;nga h&#xE4;rliga inredningsval till ditt nybyggda hus. Som kund hos oss f&#xE5;r du en egen materialvalsr&#xE5;dgivare som hj&#xE4;lper till med materialvalen.
+    </div>
+
+    <div class="carousel-frame text-center" data-module=./slider data-ride="" data-fullwidth="1" data-keyboard="0" data-interval="false" data-swipe="1" data-indicator="1" data-infinite="0" data-mobile-infinite="0" data-slides-to-scroll="0">
+        <div class="carousel textpuffblock " style="">
+
+            <div class="carousel-inner" data-columns="3">
+                    <div class="carousel-item first-item" style="padding-bottom: 80px;">
+                        <div style="">
+                                <div class="carousel-image" data-seoimg-title="Foto av Varbergshus V20094" data-seoimg-alt="Brunt k&#xF6;k med stor k&#xF6;ks&#xF6;." data-seoimg-url="/imagecache/b7b371df-1c10-4fcb-8f07-f65882a74294-1024x576/V20094_interi&#xF6;r_k&#xF6;k.png#id=b7b371df-1c10-4fcb-8f07-f65882a74294" style="background-image: url('https://www.varbergshus.se/imagecache/b7b371df-1c10-4fcb-8f07-f65882a74294-1024x576/V20094_interi&#xF6;r_k&#xF6;k.png#id=b7b371df-1c10-4fcb-8f07-f65882a74294'); cursor: pointer; pointer-events: auto!important;" onclick="document.location='/att-bygga-hus/vad-ingar/kok'"></div>
+
+                                <h2 class="block-article-title">K&#xF6;k</h2>
+                            <p class="block-article-description">F&#xF6;r m&#xE5;nga &#xE4;r k&#xF6;ket det mest centrala rummet i hemmet. H&#xE4;r finner du inspiration.</p>
+
+                                <a href="https://www.varbergshus.se/att-bygga-hus/vad-ingar/kok" class="block-link" >K&#xF6;k</a>
+                        </div>
+                    </div>
+                    <div class="carousel-item " style="padding-bottom: 80px;">
+                        <div style="">
+                                <div class="carousel-image" data-seoimg-title="Foto av Varbergshus V21012" data-seoimg-alt="Badrum med svarta detaljer och vitt badkar." data-seoimg-url="/imagecache/63b5ff13-b3d9-40b9-91ca-5045577c58dc-1024x576/V21012_interi&#xF6;r_badrum_.png#id=63b5ff13-b3d9-40b9-91ca-5045577c58dc" style="background-image: url('https://www.varbergshus.se/imagecache/63b5ff13-b3d9-40b9-91ca-5045577c58dc-1024x576/V21012_interi&#xF6;r_badrum_.png#id=63b5ff13-b3d9-40b9-91ca-5045577c58dc'); cursor: pointer; pointer-events: auto!important;" onclick="document.location='/att-bygga-hus/vad-ingar/badrum'"></div>
+
+                                <h2 class="block-article-title">Badrum</h2>
+                            <p class="block-article-description">Badrummet ska skapa ro och vara en lugn plats. L&#xE4;s mer om v&#xE5;ra leverant&#xF6;rer.</p>
+
+                                <a href="https://www.varbergshus.se/att-bygga-hus/vad-ingar/badrum" class="block-link" >Badrum</a>
+                        </div>
+                    </div>
+                    <div class="carousel-item last-item" style="padding-bottom: 80px;">
+                        <div style="">
+                                <div class="carousel-image" data-seoimg-title="Foto av Varbergshus V22006" data-seoimg-alt="Inbjudande, stilren hall i varma naturtoner." data-seoimg-url="/imagecache/b06f4ed7-6cd9-4b35-b691-1a85d99235d7-1024x576/v22006_interi&#xF6;r_hall_.png#id=b06f4ed7-6cd9-4b35-b691-1a85d99235d7" style="background-image: url('https://www.varbergshus.se/imagecache/b06f4ed7-6cd9-4b35-b691-1a85d99235d7-1024x576/v22006_interi&#xF6;r_hall_.png#id=b06f4ed7-6cd9-4b35-b691-1a85d99235d7'); cursor: pointer; pointer-events: auto!important;" onclick="document.location='/att-bygga-hus/vad-ingar/ovrig-interior'"></div>
+
+                                <h2 class="block-article-title">&#xD6;vrig interi&#xF6;r </h2>
+                            <p class="block-article-description">F&#xF6;rutom k&#xF6;k och badrum kan du g&#xF6;ra inredningsval i andra rum. </p>
+
+                                <a href="https://www.varbergshus.se/att-bygga-hus/vad-ingar/ovrig-interior" class="block-link" >&#xD6;vrig inredning</a>
+                        </div>
+                    </div>
+            </div>
+            <ol class="carousel-indicators" style="bottom: 12px;"></ol>
+        </div>
+
+    </div>
+</div></section>
+<section data-litium-block-id="fa798c25-61c6-4bc5-8c25-922fdacd39c1"><span id="/block/vara-husmodeller" style="position: relative; top: -100px;"></span>
+    <div class="imageandtext image-left background-color-aubergine15" id="guid-0251d69c-7914-44ff-a7dc-d1885808bb03" data-spy="navigation" data-title="V&#xE5;ra husmodeller" data-spy-show="False" data-spy-order="0">
+        <div class="row ">
+                <a href="https://www.varbergshus.se/husmodeller" target="" data-toggle="" class="imageandtext__image background-position-middle text-height">
+                    <img src="https://www.varbergshus.se/imagecache/7AE2DE11-3750-488E-B454-C21534BB619E/placeholder.png#id=f6aab590-5eff-49a6-91d9-ea8f23d92e09" class="background-position-middle" alt="Visualisering av ett modernt 1-planshus, husmodellen &#xD6;lman&#xE4;s,  i l&#xF6;svirke fr&#xE5;n Varbergshus" style="width: 100%;" />
+                </a>
+        <div class="imageandtext__text  imageandtext__color-Aubergine15 text-height">
+            <div class="text-color-black text-container">
+                    <h3>V&#xE5;ra husmodeller</h3>
+
+
+                <div class="imageandtext__content">
+                    <div>
+                        <p>Vi ritar unika hus varje dag. Vissa g&aring;nger &auml;ndrar vi lite p&aring; en befintlig planl&ouml;sning, andra g&aring;nger b&ouml;rjar vi p&aring; tomma ark. Vi tar inte betalt f&ouml;r att rita om en planl&ouml;sning eller rita ett hus unikt till dig.</p>
+
+                    </div>
+                </div>
+                <div class="imageandtext__links ">
+            <div class="link1 both ">
+                <a class="button " href="https://www.varbergshus.se/husmodeller" data-toggle="" target="">Se alla v&#xE5;ra husmodeller</a>
+            </div>
+            <div style="align-self: center; margin-top: 0;" class="link2  both">
+                <a href="https://www.varbergshus.se/kontakta-oss" class="block-link" target="">Kontakta en husdesigner</a>
+            </div>
+                </div>
+            </div>
+        </div>
+        </div>
+    </div>
+
+</section>
+
+
+
+    </main>
+
+    
+
+
+<footer class="footer footer--desktop">
+	<section class="footer__section">
+		<div>		<h3>Hitta snabbt</h3>
+		<ul class="footer__links">
+				<li><a href="https://www.varbergshus.se/kontakta-oss">Kontakta oss</a></li>
+				<li><a href="https://www.varbergshus.se/bestall-katalog">Best&#xE4;ll katalog</a></li>
+				<li><a href="https://www.varbergshus.se/kontakta-oss/anmal-dig-till-nyhetsbrev">Anm&#xE4;l dig till nyhetsbrev</a></li>
+				<li><a href="https://www.varbergshus.se/kontakta-oss/reklamation">Reklamation</a></li>
+				<li><a href="https://www.varbergshus.se/kontakta-oss/integritetspolicy">Integritetspolicy</a></li>
+				<!-- OneTrust Cookies Settings button start -->
+				<li><a class="optanon-show-settings">&#xC4;ndra integritetsinst&#xE4;llningar (Cookies)</a></li>
+				<!-- OneTrust Cookies Settings button end -->
+		</ul>
+</div>
+		<div>		<h3>Huvudkontor</h3>
+		<div class="footer__contact">
+			<p>Telefon: <a href="tel:&#x2B;46340666470" data-ga="track" data-category="Kontakt" data-action="Kontakta huvudkontor" data-label="Kontakta huvudkontor - Telefon">0340-66 64 70</a></p>
+			<p>E-post: <a href="mailto:varbergshus@derome.se" data-ga="track" data-category="Kontakt" data-action="Kontakta huvudkontor" data-label="Kontakta huvudkontor - E-post">varbergshus@derome.se</a></p>
+		</div>
+		<div class="footer_address">
+			<p>Huvudkontor:</p>
+			<p>St&#xE5;lgatan 7</p>
+			<p>432 32 Varberg</p>
+		</div>
+</div>
+		<div>		<h3>Om Varbergshus</h3>
+		<div class="footer__text">
+			<p>Varbergshus erbjuder tr&auml;hus i l&ouml;svirke till privatpersoner och Varbergshus &auml;r en del av&nbsp;<a href="http://www.derome.se" target="_blank">Derome</a>, Sveriges st&ouml;rsta familje&auml;gda tr&auml;industri.</p>
+
+<p>L&auml;s mer om <a href="https://www.varbergshus.se/kontakta-oss/om-oss">Varbergshus</a>.</p>
+
+<p>Varbergshus bygger hus i&nbsp;Ale, Alings&aring;s, Bjuv, Bollebygd, Bor&aring;s, Brom&ouml;lla, Burl&ouml;v, B&aring;stad, Esl&ouml;v, Falkenberg, G&ouml;teborg, Halmstad, Helsingborg, H&auml;rryda, H&auml;ssleholm, H&ouml;gan&auml;s, H&ouml;rby, H&ouml;&ouml;r, Klippan, Kristianstad, Kungsbacka, Kung&auml;lv, K&auml;vlinge, Laholm, Landskrona, Lerum, Lilla Edet, Lomma, Lund, Lysekil, Malm&ouml;, Mark, Munkedal, M&ouml;lndal, Orust, Osby, Partille, Perstorp, Simrishamn, Sj&ouml;bo, Skurup, Soten&auml;s, Staffanstorp, Stenungsund, Str&ouml;mstad, Sval&ouml;v, Svedala, Tanum, Tj&ouml;rn, Tomelilla, Trelleborg, Trollh&auml;ttan, Uddevalla, Varberg, Vellinge, Ystad, &Aring;storp, &Auml;ngelholm, &Ouml;rkelljunga och &Ouml;stra G&ouml;inge.</p>
+
+		</div>
+		<div class="footer__copy">
+			© Derome AB 2026, Alla rättigheter förbehållna
+		</div>
+</div>
+	</section>
+	<section class="footer__section-social">
+		<div class="footer__social">
+				<a href="https://www.varbergshus.se/artiklar/sociala-medier" target="_blank"><img width="36" height="36" alt="Facebook" title="Facebook" src="https://www.varbergshus.se/storage/0C8D66CDC982463629889B1D825E3B5927741229361C3137D45C453738DD25B2/ca6eb9d12e6c4eae9350a2d93ac2d87f/svg/media/4938753dc46244bd8fe678a41805007a/Facebook.svg" /></a>
+				<a href="https://www.varbergshus.se/artiklar/sociala-medier" target="_blank"><img width="36" height="36" alt="Instagram" title="Instagram" src="https://www.varbergshus.se/storage/6E824A1BD93BFCF5D5F6F74FDF29404AEE9749C57CB54961C49E3654F6FFF58E/bc81ac8f53ce4c00bdf3011213c4ab8d/svg/media/7e4ebf91209a435c84130ba1dd8f4daa/Instagram.svg" /></a>
+				<a href="https://www.varbergshus.se/artiklar/sociala-medier" target="_blank"><img width="36" height="36" alt="YouTube" title="YouTube" src="https://www.varbergshus.se/storage/A5FB582BD724EB19D20D21A53CD37062D1216457BA2C4FC533763022F160AC15/6b80b3379e4c4fd4af2aa85b1f47f382/svg/media/5138fe1510124513998f9d443d9134b2/Youtube.svg" /></a>
+				<a href="https://www.varbergshus.se/artiklar/sociala-medier" target="_blank"><img width="36" height="36" alt="Pintrest" title="Pintrest" src="https://www.varbergshus.se/storage/CC630E14AA79BA8DB4748584500ED3F597EA4EDA38EF4F72896A9BF4981DEB2D/20ded8b6558c425bb3d16dc1e97fb3e9/svg/media/c6d1a3177a79477aa38df33e4a5cac73/Pintrest.svg" /></a>
+				<a href="https://www.varbergshus.se/artiklar/sociala-medier" target="_blank"><img width="36" height="36" alt="TikTok" title="TikTok" src="https://www.varbergshus.se/imagecache/26900d57-95ea-4a75-817c-3150f8c20bac-38x38/tiktok_vhus .png#id=26900d57-95ea-4a75-817c-3150f8c20bac" /></a>
+		</div>
+	</section>
+</footer>
+
+<footer class="footer footer--mobile">
+	<div class="footer-column">
+		<div class="footer-title">
+			Hitta snabbt
+		</div>
+		<div>
+            <ul class="footer__links">
+                    <li><a href="https://www.varbergshus.se/kontakta-oss">Kontakta oss</a></li>
+                    <li><a href="https://www.varbergshus.se/bestall-katalog">Best&#xE4;ll katalog</a></li>
+                    <li><a href="https://www.varbergshus.se/kontakta-oss/anmal-dig-till-nyhetsbrev">Anm&#xE4;l dig till nyhetsbrev</a></li>
+                    <li><a href="https://www.varbergshus.se/kontakta-oss/reklamation">Reklamation</a></li>
+                    <li><a href="https://www.varbergshus.se/kontakta-oss/integritetspolicy">Integritetspolicy</a></li>
+                    <!-- OneTrust Cookies Settings button start -->
+                    <li><a class="optanon-show-settings">&#xC4;ndra integritetsinst&#xE4;llningar (Cookies)</a></li>
+                    <!-- OneTrust Cookies Settings button end -->
+            </ul>
+		</div>
+	</div>
+	<div class="footer-column">
+		<div class="footer-title">
+			Huvudkontor
+		</div>
+		<div>
+				<div class="footer__contact">
+					<p>Telefon: <a href="tel:&#x2B;46340666470" data-ga="track" data-category="Kontakt" data-action="Kontakta huvudkontor" data-label="Kontakta huvudkontor - Telefon">0340-66 64 70</a></p>
+					<p>E-post: <a href="mailto:varbergshus@derome.se" data-ga="track" data-category="Kontakt" data-action="Kontakta huvudkontor" data-label="Kontakta huvudkontor - E-post">varbergshus@derome.se</a></p>
+				</div>
+				<div class="footer_address">
+					<p>Huvudkontor:</p>
+					<p>St&#xE5;lgatan 7</p>
+					<p>432 32 Varberg</p>
+				</div>
+		</div>
+	</div>
+	<div class="footer-column">
+		<div class="footer-title">
+			Om Varbergshus
+		</div>
+		<div>
+			<div class="footer__text">
+				<p>Varbergshus erbjuder tr&auml;hus i l&ouml;svirke till privatpersoner och Varbergshus &auml;r en del av&nbsp;<a href="http://www.derome.se" target="_blank">Derome</a>, Sveriges st&ouml;rsta familje&auml;gda tr&auml;industri.</p>
+
+<p>L&auml;s mer om <a href="https://www.varbergshus.se/kontakta-oss/om-oss">Varbergshus</a>.</p>
+
+<p>Varbergshus bygger hus i&nbsp;Ale, Alings&aring;s, Bjuv, Bollebygd, Bor&aring;s, Brom&ouml;lla, Burl&ouml;v, B&aring;stad, Esl&ouml;v, Falkenberg, G&ouml;teborg, Halmstad, Helsingborg, H&auml;rryda, H&auml;ssleholm, H&ouml;gan&auml;s, H&ouml;rby, H&ouml;&ouml;r, Klippan, Kristianstad, Kungsbacka, Kung&auml;lv, K&auml;vlinge, Laholm, Landskrona, Lerum, Lilla Edet, Lomma, Lund, Lysekil, Malm&ouml;, Mark, Munkedal, M&ouml;lndal, Orust, Osby, Partille, Perstorp, Simrishamn, Sj&ouml;bo, Skurup, Soten&auml;s, Staffanstorp, Stenungsund, Str&ouml;mstad, Sval&ouml;v, Svedala, Tanum, Tj&ouml;rn, Tomelilla, Trelleborg, Trollh&auml;ttan, Uddevalla, Varberg, Vellinge, Ystad, &Aring;storp, &Auml;ngelholm, &Ouml;rkelljunga och &Ouml;stra G&ouml;inge.</p>
+
+			</div>
+		</div>
+	</div>
+	<section class="footer__section-social">
+		<div class="footer__social">
+				<a href="https://www.varbergshus.se/artiklar/sociala-medier" target="_blank"><img width="36" height="36" alt="Facebook" title="Facebook" src="https://www.varbergshus.se/storage/0C8D66CDC982463629889B1D825E3B5927741229361C3137D45C453738DD25B2/ca6eb9d12e6c4eae9350a2d93ac2d87f/svg/media/4938753dc46244bd8fe678a41805007a/Facebook.svg" /></a>
+				<a href="https://www.varbergshus.se/artiklar/sociala-medier" target="_blank"><img width="36" height="36" alt="Instagram" title="Instagram" src="https://www.varbergshus.se/storage/6E824A1BD93BFCF5D5F6F74FDF29404AEE9749C57CB54961C49E3654F6FFF58E/bc81ac8f53ce4c00bdf3011213c4ab8d/svg/media/7e4ebf91209a435c84130ba1dd8f4daa/Instagram.svg" /></a>
+				<a href="https://www.varbergshus.se/artiklar/sociala-medier" target="_blank"><img width="36" height="36" alt="YouTube" title="YouTube" src="https://www.varbergshus.se/storage/A5FB582BD724EB19D20D21A53CD37062D1216457BA2C4FC533763022F160AC15/6b80b3379e4c4fd4af2aa85b1f47f382/svg/media/5138fe1510124513998f9d443d9134b2/Youtube.svg" /></a>
+				<a href="https://www.varbergshus.se/artiklar/sociala-medier" target="_blank"><img width="36" height="36" alt="Pintrest" title="Pintrest" src="https://www.varbergshus.se/storage/CC630E14AA79BA8DB4748584500ED3F597EA4EDA38EF4F72896A9BF4981DEB2D/20ded8b6558c425bb3d16dc1e97fb3e9/svg/media/c6d1a3177a79477aa38df33e4a5cac73/Pintrest.svg" /></a>
+				<a href="https://www.varbergshus.se/artiklar/sociala-medier" target="_blank"><img width="36" height="36" alt="TikTok" title="TikTok" src="https://www.varbergshus.se/imagecache/26900d57-95ea-4a75-817c-3150f8c20bac-38x38/tiktok_vhus .png#id=26900d57-95ea-4a75-817c-3150f8c20bac" /></a>
+		</div>
+	</section>
+	<div class="footer__copy">
+		© Derome AB 2026, Alla rättigheter förbehållna
+	</div>
+</footer>
+
+
+    
+
+    <div id="globalNotification"></div>
+
+    <script>
+
+        var ImageCache = {"7e7d246c-cf78-4b95-8d50-e4d99a7b5865":[{"url":"/imagecache/7e7d246c-cf78-4b95-8d50-e4d99a7b5865-800x800/Annika Kroon.jpg","width":800,"height":800}],"8df76aa5-d4a9-4e55-a1ee-e58ac5ace30d":[{"url":"/imagecache/8df76aa5-d4a9-4e55-a1ee-e58ac5ace30d-1024x992/SF Höganäs.jpg","width":1024,"height":992},{"url":"/imagecache/8df76aa5-d4a9-4e55-a1ee-e58ac5ace30d-1280x1240/SF Höganäs.jpg","width":1280,"height":1240},{"url":"/imagecache/8df76aa5-d4a9-4e55-a1ee-e58ac5ace30d-1600x1550/SF Höganäs.jpg","width":1600,"height":1550},{"url":"/imagecache/8df76aa5-d4a9-4e55-a1ee-e58ac5ace30d-1920x1860/SF Höganäs.jpg","width":1920,"height":1860}],"273867d0-97b1-4733-9f5f-a9adbe768545":[{"url":"/imagecache/273867d0-97b1-4733-9f5f-a9adbe768545-1024x577/villa_angaviken_1m_exterior.jpg","width":1024,"height":577},{"url":"/imagecache/273867d0-97b1-4733-9f5f-a9adbe768545-1920x1081/villa_angaviken_1m_exterior.jpg","width":1920,"height":1081},{"url":"/imagecache/273867d0-97b1-4733-9f5f-a9adbe768545-1920x1081/villa_angaviken_1m_exterior.jpg","width":1920,"height":1081},{"url":"/imagecache/273867d0-97b1-4733-9f5f-a9adbe768545-1920x1081/villa_angaviken_1m_exterior.jpg","width":1920,"height":1081},{"url":"/imagecache/273867d0-97b1-4733-9f5f-a9adbe768545-532x300/villa_angaviken_1m_exterior.jpg","width":532,"height":300},{"url":"/imagecache/273867d0-97b1-4733-9f5f-a9adbe768545-177x100/villa_angaviken_1m_exterior.jpg","width":177,"height":100},{"url":"/imagecache/273867d0-97b1-4733-9f5f-a9adbe768545-1598x900/villa_angaviken_1m_exterior.jpg","width":1598,"height":900},{"url":"/imagecache/273867d0-97b1-4733-9f5f-a9adbe768545-1065x600/villa_angaviken_1m_exterior.jpg","width":1065,"height":600},{"url":"/imagecache/273867d0-97b1-4733-9f5f-a9adbe768545-355x200/villa_angaviken_1m_exterior.jpg","width":355,"height":200}],"6a8958d0-3c7c-47f6-937a-6ec24c11fd05":[{"url":"/imagecache/6a8958d0-3c7c-47f6-937a-6ec24c11fd05-534x600/Planlösning_Ängaviken_1_M.jpg","width":534,"height":600},{"url":"/imagecache/6a8958d0-3c7c-47f6-937a-6ec24c11fd05-300x337/Planlösning_Ängaviken_1_M.jpg","width":300,"height":337}],"dc4a9b44-fc8e-400c-ae02-bafb74a9f26e":[{"url":"/imagecache/dc4a9b44-fc8e-400c-ae02-bafb74a9f26e-534x600/Planlösning_Ängaviken_2_M_T.png","width":534,"height":600},{"url":"/imagecache/dc4a9b44-fc8e-400c-ae02-bafb74a9f26e-300x337/Planlösning_Ängaviken_2_M_T.png","width":300,"height":337}],"5955f265-5bc0-46ad-b961-cd2a21484067":[{"url":"/imagecache/5955f265-5bc0-46ad-b961-cd2a21484067-534x600/Planlösning_Ängaviken_3_M_T.png","width":534,"height":600},{"url":"/imagecache/5955f265-5bc0-46ad-b961-cd2a21484067-300x337/Planlösning_Ängaviken_3_M_T.png","width":300,"height":337}],"26a3e0ba-7746-476b-b719-264785658018":[{"url":"/imagecache/26a3e0ba-7746-476b-b719-264785658018-1024x576/villa_torekov_2t_exterior.png","width":1024,"height":576},{"url":"/imagecache/26a3e0ba-7746-476b-b719-264785658018-1920x1080/villa_torekov_2t_exterior.png","width":1920,"height":1080},{"url":"/imagecache/26a3e0ba-7746-476b-b719-264785658018-1920x1080/villa_torekov_2t_exterior.png","width":1920,"height":1080},{"url":"/imagecache/26a3e0ba-7746-476b-b719-264785658018-1920x1080/villa_torekov_2t_exterior.png","width":1920,"height":1080},{"url":"/imagecache/26a3e0ba-7746-476b-b719-264785658018-533x300/villa_torekov_2t_exterior.png","width":533,"height":300},{"url":"/imagecache/26a3e0ba-7746-476b-b719-264785658018-1066x600/villa_torekov_2t_exterior.png","width":1066,"height":600},{"url":"/imagecache/26a3e0ba-7746-476b-b719-264785658018-1600x900/villa_torekov_2t_exterior.png","width":1600,"height":900}],"8344c001-97a9-48eb-baab-3586ca1be593":[{"url":"/imagecache/8344c001-97a9-48eb-baab-3586ca1be593-421x300/Villa Torekov 2T.png","width":421,"height":300},{"url":"/imagecache/8344c001-97a9-48eb-baab-3586ca1be593-842x600/Villa Torekov 2T.png","width":842,"height":600}],"a4fbfbf7-7e0a-440b-b442-b8fdf78357db":[{"url":"/imagecache/a4fbfbf7-7e0a-440b-b442-b8fdf78357db-421x300/Villa Torekov 1T.png","width":421,"height":300},{"url":"/imagecache/a4fbfbf7-7e0a-440b-b442-b8fdf78357db-842x600/Villa Torekov 1T.png","width":842,"height":600}],"068b11f2-0daf-43b8-b001-af20ae4c09c3":[{"url":"/imagecache/068b11f2-0daf-43b8-b001-af20ae4c09c3-421x300/Villa Torekov 3T.png","width":421,"height":300},{"url":"/imagecache/068b11f2-0daf-43b8-b001-af20ae4c09c3-842x600/Villa Torekov 3T.png","width":842,"height":600}],"6f874e2d-fbb2-4b6c-901d-69f3af34db24":[{"url":"/imagecache/6f874e2d-fbb2-4b6c-901d-69f3af34db24-1024x576/villa_ramsvik_m_exterior.png","width":1024,"height":576},{"url":"/imagecache/6f874e2d-fbb2-4b6c-901d-69f3af34db24-1920x1080/villa_ramsvik_m_exterior.png","width":1920,"height":1080},{"url":"/imagecache/6f874e2d-fbb2-4b6c-901d-69f3af34db24-1920x1080/villa_ramsvik_m_exterior.png","width":1920,"height":1080},{"url":"/imagecache/6f874e2d-fbb2-4b6c-901d-69f3af34db24-1920x1080/villa_ramsvik_m_exterior.png","width":1920,"height":1080},{"url":"/imagecache/6f874e2d-fbb2-4b6c-901d-69f3af34db24-533x300/villa_ramsvik_m_exterior.png","width":533,"height":300},{"url":"/imagecache/6f874e2d-fbb2-4b6c-901d-69f3af34db24-1066x600/villa_ramsvik_m_exterior.png","width":1066,"height":600},{"url":"/imagecache/6f874e2d-fbb2-4b6c-901d-69f3af34db24-1600x900/villa_ramsvik_m_exterior.png","width":1600,"height":900}],"ba5ff5aa-eeae-43c6-b905-bde9fb5573fc":[{"url":"/imagecache/ba5ff5aa-eeae-43c6-b905-bde9fb5573fc-345x300/Ramsvik_planlösning_K1.png","width":345,"height":300},{"url":"/imagecache/ba5ff5aa-eeae-43c6-b905-bde9fb5573fc-690x600/Ramsvik_planlösning_K1.png","width":690,"height":600}],"ece206fc-d935-4996-b8d4-58af5ad21944":[{"url":"/imagecache/ece206fc-d935-4996-b8d4-58af5ad21944-300x300/Ramsvik_planlösning_K2.png","width":300,"height":300},{"url":"/imagecache/ece206fc-d935-4996-b8d4-58af5ad21944-600x600/Ramsvik_planlösning_K2.png","width":600,"height":600}],"fa2a1979-2b37-4172-8975-5737177aeffc":[{"url":"/imagecache/fa2a1979-2b37-4172-8975-5737177aeffc-1024x576/Villa_Solhaga_1T_exterior.png","width":1024,"height":576},{"url":"/imagecache/fa2a1979-2b37-4172-8975-5737177aeffc-1920x1080/Villa_Solhaga_1T_exterior.png","width":1920,"height":1080},{"url":"/imagecache/fa2a1979-2b37-4172-8975-5737177aeffc-1920x1080/Villa_Solhaga_1T_exterior.png","width":1920,"height":1080},{"url":"/imagecache/fa2a1979-2b37-4172-8975-5737177aeffc-1920x1080/Villa_Solhaga_1T_exterior.png","width":1920,"height":1080},{"url":"/imagecache/fa2a1979-2b37-4172-8975-5737177aeffc-533x300/Villa_Solhaga_1T_exterior.png","width":533,"height":300},{"url":"/imagecache/fa2a1979-2b37-4172-8975-5737177aeffc-1066x600/Villa_Solhaga_1T_exterior.png","width":1066,"height":600},{"url":"/imagecache/fa2a1979-2b37-4172-8975-5737177aeffc-1600x900/Villa_Solhaga_1T_exterior.png","width":1600,"height":900}],"e33fec67-3af0-47ea-a638-203f2505d111":[{"url":"/imagecache/e33fec67-3af0-47ea-a638-203f2505d111-400x300/Solhaga 1T plan 1.png","width":400,"height":300},{"url":"/imagecache/e33fec67-3af0-47ea-a638-203f2505d111-800x600/Solhaga 1T plan 1.png","width":800,"height":600}],"873ac7b4-911a-4f23-8df2-f4d49495f118":[{"url":"/imagecache/873ac7b4-911a-4f23-8df2-f4d49495f118-1024x576/260107 Tomtmarkering Arild.png","width":1024,"height":576},{"url":"/imagecache/873ac7b4-911a-4f23-8df2-f4d49495f118-1920x1080/260107 Tomtmarkering Arild.png","width":1920,"height":1080},{"url":"/imagecache/873ac7b4-911a-4f23-8df2-f4d49495f118-1920x1080/260107 Tomtmarkering Arild.png","width":1920,"height":1080},{"url":"/imagecache/873ac7b4-911a-4f23-8df2-f4d49495f118-1920x1080/260107 Tomtmarkering Arild.png","width":1920,"height":1080}],"62f099ba-537c-416d-9853-b7de7d07f550":[{"url":"/imagecache/62f099ba-537c-416d-9853-b7de7d07f550-1024x576/Arild_tomter.jpg","width":1024,"height":576},{"url":"/imagecache/62f099ba-537c-416d-9853-b7de7d07f550-1920x1080/Arild_tomter.jpg","width":1920,"height":1080},{"url":"/imagecache/62f099ba-537c-416d-9853-b7de7d07f550-1920x1080/Arild_tomter.jpg","width":1920,"height":1080},{"url":"/imagecache/62f099ba-537c-416d-9853-b7de7d07f550-1920x1080/Arild_tomter.jpg","width":1920,"height":1080}],"77eb369b-df37-49ec-8ed4-92eb45821d4c":[{"url":"/imagecache/77eb369b-df37-49ec-8ed4-92eb45821d4c-1024x576/Arild_hav.jpg","width":1024,"height":576},{"url":"/imagecache/77eb369b-df37-49ec-8ed4-92eb45821d4c-1920x1080/Arild_hav.jpg","width":1920,"height":1080},{"url":"/imagecache/77eb369b-df37-49ec-8ed4-92eb45821d4c-1920x1080/Arild_hav.jpg","width":1920,"height":1080},{"url":"/imagecache/77eb369b-df37-49ec-8ed4-92eb45821d4c-1920x1080/Arild_hav.jpg","width":1920,"height":1080}],"ac711799-10f4-4ff3-8eb3-8b826ca13841":[{"url":"/imagecache/ac711799-10f4-4ff3-8eb3-8b826ca13841-1024x576/Arild_hamn.jpg","width":1024,"height":576},{"url":"/imagecache/ac711799-10f4-4ff3-8eb3-8b826ca13841-1920x1080/Arild_hamn.jpg","width":1920,"height":1080},{"url":"/imagecache/ac711799-10f4-4ff3-8eb3-8b826ca13841-1920x1080/Arild_hamn.jpg","width":1920,"height":1080},{"url":"/imagecache/ac711799-10f4-4ff3-8eb3-8b826ca13841-1920x1080/Arild_hamn.jpg","width":1920,"height":1080}],"b9a6916d-890b-41fd-a1ec-dccce8aad07f":[{"url":"/imagecache/b9a6916d-890b-41fd-a1ec-dccce8aad07f-1024x576/bänk_arild.jpg","width":1024,"height":576},{"url":"/imagecache/b9a6916d-890b-41fd-a1ec-dccce8aad07f-1920x1080/bänk_arild.jpg","width":1920,"height":1080},{"url":"/imagecache/b9a6916d-890b-41fd-a1ec-dccce8aad07f-1920x1080/bänk_arild.jpg","width":1920,"height":1080},{"url":"/imagecache/b9a6916d-890b-41fd-a1ec-dccce8aad07f-1920x1080/bänk_arild.jpg","width":1920,"height":1080}],"3ef0f41e-395d-4269-ae3a-de89fc0d3a04":[{"url":"/imagecache/3ef0f41e-395d-4269-ae3a-de89fc0d3a04-1024x576/Strandlyckan M Variant 1920x1080.jpg","width":1024,"height":576},{"url":"/imagecache/3ef0f41e-395d-4269-ae3a-de89fc0d3a04-1920x1080/Strandlyckan M Variant 1920x1080.jpg","width":1920,"height":1080},{"url":"/imagecache/3ef0f41e-395d-4269-ae3a-de89fc0d3a04-1920x1080/Strandlyckan M Variant 1920x1080.jpg","width":1920,"height":1080},{"url":"/imagecache/3ef0f41e-395d-4269-ae3a-de89fc0d3a04-1920x1080/Strandlyckan M Variant 1920x1080.jpg","width":1920,"height":1080}],"b7418505-6d76-46fd-be4c-b422d51f914d":[{"url":"/imagecache/b7418505-6d76-46fd-be4c-b422d51f914d-1024x576/Strandlyckan interiör 1920x1080.jpg","width":1024,"height":576},{"url":"/imagecache/b7418505-6d76-46fd-be4c-b422d51f914d-1920x1080/Strandlyckan interiör 1920x1080.jpg","width":1920,"height":1080},{"url":"/imagecache/b7418505-6d76-46fd-be4c-b422d51f914d-1920x1080/Strandlyckan interiör 1920x1080.jpg","width":1920,"height":1080},{"url":"/imagecache/b7418505-6d76-46fd-be4c-b422d51f914d-1920x1080/Strandlyckan interiör 1920x1080.jpg","width":1920,"height":1080}],"8f403433-0c5d-4b69-89c5-6d7486ffef57":[{"url":"/imagecache/8f403433-0c5d-4b69-89c5-6d7486ffef57-1024x576/Torekov 2T Variant 1920x1080.jpg","width":1024,"height":576},{"url":"/imagecache/8f403433-0c5d-4b69-89c5-6d7486ffef57-1920x1080/Torekov 2T Variant 1920x1080.jpg","width":1920,"height":1080},{"url":"/imagecache/8f403433-0c5d-4b69-89c5-6d7486ffef57-1920x1080/Torekov 2T Variant 1920x1080.jpg","width":1920,"height":1080},{"url":"/imagecache/8f403433-0c5d-4b69-89c5-6d7486ffef57-1920x1080/Torekov 2T Variant 1920x1080.jpg","width":1920,"height":1080}],"4b9196a0-ed4c-4112-aa7d-accc8136f971":[{"url":"/imagecache/4b9196a0-ed4c-4112-aa7d-accc8136f971-1024x576/ÄngalyckanBlå 1920x1080 utan människor.jpg","width":1024,"height":576},{"url":"/imagecache/4b9196a0-ed4c-4112-aa7d-accc8136f971-1920x1080/ÄngalyckanBlå 1920x1080 utan människor.jpg","width":1920,"height":1080},{"url":"/imagecache/4b9196a0-ed4c-4112-aa7d-accc8136f971-1920x1080/ÄngalyckanBlå 1920x1080 utan människor.jpg","width":1920,"height":1080},{"url":"/imagecache/4b9196a0-ed4c-4112-aa7d-accc8136f971-1920x1080/ÄngalyckanBlå 1920x1080 utan människor.jpg","width":1920,"height":1080}],"a2a5cf5c-7caa-4f90-9d63-5a4f7757ce50":[{"url":"/imagecache/a2a5cf5c-7caa-4f90-9d63-5a4f7757ce50-593x771/260421-Tomtkarta-Arild-.jpg","width":593,"height":771}],"9b37b4d5-76b9-4355-a305-7b46ec23f757":[{"url":"/imagecache/9b37b4d5-76b9-4355-a305-7b46ec23f757-1024x576/lifestyle_skiss_planlosning_materialval_varbergshus.jpg","width":1024,"height":576},{"url":"/imagecache/9b37b4d5-76b9-4355-a305-7b46ec23f757-1920x1080/lifestyle_skiss_planlosning_materialval_varbergshus.jpg","width":1920,"height":1080},{"url":"/imagecache/9b37b4d5-76b9-4355-a305-7b46ec23f757-1920x1080/lifestyle_skiss_planlosning_materialval_varbergshus.jpg","width":1920,"height":1080},{"url":"/imagecache/9b37b4d5-76b9-4355-a305-7b46ec23f757-1920x1080/lifestyle_skiss_planlosning_materialval_varbergshus.jpg","width":1920,"height":1080}],"16b04742-74bb-4bc3-8479-722167486ca4":[{"url":"/imagecache/16b04742-74bb-4bc3-8479-722167486ca4-1024x576/Östra Lerberget översikt_vy1_logo_inzoomad_1920x1080.jpg","width":1024,"height":576},{"url":"/imagecache/16b04742-74bb-4bc3-8479-722167486ca4-1920x1080/Östra Lerberget översikt_vy1_logo_inzoomad_1920x1080.jpg","width":1920,"height":1080},{"url":"/imagecache/16b04742-74bb-4bc3-8479-722167486ca4-1920x1080/Östra Lerberget översikt_vy1_logo_inzoomad_1920x1080.jpg","width":1920,"height":1080},{"url":"/imagecache/16b04742-74bb-4bc3-8479-722167486ca4-1920x1080/Östra Lerberget översikt_vy1_logo_inzoomad_1920x1080.jpg","width":1920,"height":1080},{"url":"/imagecache/16b04742-74bb-4bc3-8479-722167486ca4-533x300/Östra Lerberget översikt_vy1_logo_inzoomad_1920x1080.jpg","width":533,"height":300},{"url":"/imagecache/16b04742-74bb-4bc3-8479-722167486ca4-1600x900/Östra Lerberget översikt_vy1_logo_inzoomad_1920x1080.jpg","width":1600,"height":900},{"url":"/imagecache/16b04742-74bb-4bc3-8479-722167486ca4-1066x600/Östra Lerberget översikt_vy1_logo_inzoomad_1920x1080.jpg","width":1066,"height":600}],"a137512f-ce8a-4e3e-bfc8-89fcc1b36e85":[{"url":"/imagecache/a137512f-ce8a-4e3e-bfc8-89fcc1b36e85-1024x576/Mjöhult 1920x1080 tomtmarkering.png","width":1024,"height":576},{"url":"/imagecache/a137512f-ce8a-4e3e-bfc8-89fcc1b36e85-1920x1080/Mjöhult 1920x1080 tomtmarkering.png","width":1920,"height":1080},{"url":"/imagecache/a137512f-ce8a-4e3e-bfc8-89fcc1b36e85-1920x1080/Mjöhult 1920x1080 tomtmarkering.png","width":1920,"height":1080},{"url":"/imagecache/a137512f-ce8a-4e3e-bfc8-89fcc1b36e85-1920x1080/Mjöhult 1920x1080 tomtmarkering.png","width":1920,"height":1080},{"url":"/imagecache/a137512f-ce8a-4e3e-bfc8-89fcc1b36e85-533x300/Mjöhult 1920x1080 tomtmarkering.png","width":533,"height":300},{"url":"/imagecache/a137512f-ce8a-4e3e-bfc8-89fcc1b36e85-1600x900/Mjöhult 1920x1080 tomtmarkering.png","width":1600,"height":900},{"url":"/imagecache/a137512f-ce8a-4e3e-bfc8-89fcc1b36e85-1066x600/Mjöhult 1920x1080 tomtmarkering.png","width":1066,"height":600}],"b7b371df-1c10-4fcb-8f07-f65882a74294":[{"url":"/imagecache/b7b371df-1c10-4fcb-8f07-f65882a74294-1024x576/V20094_interiör_kök.png","width":1024,"height":576},{"url":"/imagecache/b7b371df-1c10-4fcb-8f07-f65882a74294-1920x1080/V20094_interiör_kök.png","width":1920,"height":1080},{"url":"/imagecache/b7b371df-1c10-4fcb-8f07-f65882a74294-1920x1080/V20094_interiör_kök.png","width":1920,"height":1080},{"url":"/imagecache/b7b371df-1c10-4fcb-8f07-f65882a74294-1920x1080/V20094_interiör_kök.png","width":1920,"height":1080}],"63b5ff13-b3d9-40b9-91ca-5045577c58dc":[{"url":"/imagecache/63b5ff13-b3d9-40b9-91ca-5045577c58dc-1024x576/V21012_interiör_badrum_.png","width":1024,"height":576},{"url":"/imagecache/63b5ff13-b3d9-40b9-91ca-5045577c58dc-1920x1080/V21012_interiör_badrum_.png","width":1920,"height":1080},{"url":"/imagecache/63b5ff13-b3d9-40b9-91ca-5045577c58dc-1920x1080/V21012_interiör_badrum_.png","width":1920,"height":1080},{"url":"/imagecache/63b5ff13-b3d9-40b9-91ca-5045577c58dc-1920x1080/V21012_interiör_badrum_.png","width":1920,"height":1080}],"b06f4ed7-6cd9-4b35-b691-1a85d99235d7":[{"url":"/imagecache/b06f4ed7-6cd9-4b35-b691-1a85d99235d7-1024x576/v22006_interiör_hall_.png","width":1024,"height":576},{"url":"/imagecache/b06f4ed7-6cd9-4b35-b691-1a85d99235d7-1920x1080/v22006_interiör_hall_.png","width":1920,"height":1080},{"url":"/imagecache/b06f4ed7-6cd9-4b35-b691-1a85d99235d7-1920x1080/v22006_interiör_hall_.png","width":1920,"height":1080},{"url":"/imagecache/b06f4ed7-6cd9-4b35-b691-1a85d99235d7-1920x1080/v22006_interiör_hall_.png","width":1920,"height":1080}],"f6aab590-5eff-49a6-91d9-ea8f23d92e09":[{"url":"/imagecache/f6aab590-5eff-49a6-91d9-ea8f23d92e09-1024x576/Ölmanäs M 1920x1080.png","width":1024,"height":576},{"url":"/imagecache/f6aab590-5eff-49a6-91d9-ea8f23d92e09-1920x1080/Ölmanäs M 1920x1080.png","width":1920,"height":1080},{"url":"/imagecache/f6aab590-5eff-49a6-91d9-ea8f23d92e09-1920x1080/Ölmanäs M 1920x1080.png","width":1920,"height":1080},{"url":"/imagecache/f6aab590-5eff-49a6-91d9-ea8f23d92e09-1920x1080/Ölmanäs M 1920x1080.png","width":1920,"height":1080},{"url":"/imagecache/f6aab590-5eff-49a6-91d9-ea8f23d92e09-533x300/Ölmanäs M 1920x1080.png","width":533,"height":300},{"url":"/imagecache/f6aab590-5eff-49a6-91d9-ea8f23d92e09-1600x900/Ölmanäs M 1920x1080.png","width":1600,"height":900},{"url":"/imagecache/f6aab590-5eff-49a6-91d9-ea8f23d92e09-1066x600/Ölmanäs M 1920x1080.png","width":1066,"height":600}],"26900d57-95ea-4a75-817c-3150f8c20bac":[{"url":"/imagecache/26900d57-95ea-4a75-817c-3150f8c20bac-38x38/tiktok_vhus .png","width":38,"height":38}]};
+    
+    //Autoimage script
+    (function () {
+        var images = [];
+
+        var observer = null;
+
+        var devicePixelRatio = 1;
+
+        var updateDevicePixelRatio = function () {
+            devicePixelRatio = window.devicePixelRatio;
+            if (typeof devicePixelRatio === "undefined")
+                devicePixelRatio = 1;
+        }
+
+        var addElement = function (element) {
+            var id = null;
+            var url = null;
+            var title = null;
+
+            if (element.tagName.toLowerCase() == "img") {
+                url = element.src;
+            } else {
+                url = element.style.backgroundImage.slice(4, -1).replace(/['"]/g, "");
+            }
+
+            if (url == null || url == "")
+                return;
+
+            if (element.hasAttribute("data-autoimage-id")) {
+                id = element.getAttribute("data-autoimage-id");
+            } else {
+                var index = url.indexOf("#id=");
+                if (index >= 0)
+                    id = url.substring(index + 4);
+
+                if (id == null)
+                    return;
+
+                element.setAttribute("data-autoimage-id", id);
+            }
+
+            if (element.hasAttribute("title")) {
+                title = element.getAttribute("title");
+            } 
+
+            var imageData = ImageCache[id];
+
+            if (imageData == null)
+                return;
+
+            var urls = [];
+
+            var currentImage = null;
+            for (var j = 0; j < imageData.length; j++) {
+                if (url.includes(imageData[j].url))
+                    currentImage = imageData[j];
+                urls.push(imageData[j]);
+            }
+
+            var image = { element: element, width: 0, height: 0, url: "", loaded: false, urls: urls, loader: new Image(), imgWidth: currentImage != null ? currentImage.width : 0, imgHeight: currentImage != null ? currentImage.height : 0, title: title != null ? title : "" }
+            var setLoader = function (img) {
+                img.loader.onload = function () {
+                    if (img.element.tagName.toLowerCase() == "img") {
+                        img.element.src = this.src;
+                    } else {
+                        img.element.style.backgroundImage = "url('" + this.src + "')";
+                    }
+                    if (img.element.onautoimage != null)
+                        img.element.onautoimage(this.width, this.height);
+                };
+            };
+            setLoader(image);
+            images.push(image);
+            observer.observe(element, { attributes: true });
+        };
+
+        var max = function (element) {
+            if (!element.hasAttribute("data-autoimage-id"))
+                return { width: 0, height: 0 };
+
+            id = element.getAttribute("data-autoimage-id");
+
+            var imageData = ImageCache[id];
+
+            if (imageData == null)
+                return;
+
+            var currentImage = null;
+            for (var i = 0; i < imageData.length; i++) {
+                if (currentImage == null || currentImage.width < imageData[i].width || currentImage.height < imageData[i].height)
+                    currentImage = imageData[i];
+            }
+
+            return { width: currentImage.width, height: currentImage.height };
+        }
+
+        var init = function (root) {
+            if (typeof root === 'undefined')
+                root = document;
+
+            var elements = root.querySelectorAll("*");
+
+            for (var i = 0; i < elements.length; i++)
+                addElement(elements[i]);
+        };
+
+        var shouldHandle = false;
+        var handling = false;
+
+        var handle = function () {
+
+            if (handling) {
+                shouldHandle = true;
+                return;
+            }
+            handling = true;
+
+            window.requestAnimationFrame(function () {
+                for (var i = 0; i < images.length; i++) {
+                    var img = images[i];
+                    var element = img.element;
+
+                    var rect = element.getBoundingClientRect();
+                    var width = (rect.right - rect.left) * devicePixelRatio;
+                    var height = (rect.bottom - rect.top) * devicePixelRatio;
+
+                    if (!img.loaded && (rect.right < -(window.innerWidth * 1.5) || rect.left > (window.innerWidth * 1.5)))
+                        continue;
+
+                    if (!img.loaded && rect.top > window.scrollY + (window.innerHeight * 1.5))
+                        continue;
+
+                    if (img.width == width && img.height == height)
+                        continue;
+
+                    var newUrl = null;
+
+                    //If no url is found, try to find custom url
+                    if (img.urls.length > 0) {
+                        newUrl = img.urls[0];
+                        for (var j = 0; j < img.urls.length; j++) {
+                            if (img.urls[j].width < newUrl.width || img.urls[j].height < newUrl.height)
+                                newUrl = img.urls[j];
+                        }
+                        for (var j = 0; j < img.urls.length; j++) {
+                            if ((newUrl.width < width || newUrl.height < height) && img.urls[j].width > newUrl.width && img.urls[j].height > newUrl.height)
+                                newUrl = img.urls[j];
+                        }
+                    }
+
+                    if (newUrl.width <= img.imgWidth && newUrl.height <= img.imgHeight)
+                        continue;
+
+                    img.loaded = true;
+                    img.width = width;
+                    img.height = height;
+                    img.imgWidth = newUrl.width;
+                    img.imgHeight = newUrl.height;
+
+                    if (newUrl != null && img.url != newUrl.url) {
+                        img.url = newUrl.url;
+
+                        img.loader.src = img.url;
+                    }
+                }
+
+                handling = false;
+
+                if (shouldHandle) {
+                    shouldHandle = false;
+                    handle();
+                }
+            });
+        };
+
+        var setCookie = function () {
+            document.cookie = "imagecache-width=" + window.innerWidth + "; path=/";
+            document.cookie = "imagecache-height=" + window.innerHeight + "; path=/";
+            document.cookie = "imagecache-ratio=" + devicePixelRatio + "; path=/";
+        }
+
+        observer = new MutationObserver(function (mutations) {
+            handle();
+        });
+
+        window.addEventListener("scroll", function (e) {
+            handle();
+        });
+
+        window.addEventListener("resize", function (e) {
+            updateDevicePixelRatio();
+            handle();
+            setCookie();
+        });
+
+        updateDevicePixelRatio();
+
+        init();
+
+        handle();
+
+        setCookie();
+
+        document.autoimage = {
+            add: function (el) {
+                addElement(el);
+                handle();
+            },
+            addRange: function (els) {
+                Array.prototype.forEach.call(els, function (el) {
+                    addElement(el);
+                });
+                handle();
+            },
+            check: function (root) {
+                init(root);
+            },
+            handle: function () {
+                handle();
+            },
+            max: function (el) {
+                return max(el);
+            }
+        };
+    })();
+</script>
+    
+    
+<script type="module" src="https://www.varbergshus.se/ui/vendors~app.1cc7e6b3a4b3c1ff0b59.js?v=Z0YIc_bNV2H8PgUGhGuOcXcfnpYs41knZHCRHQMLRxs"></script>
+<script type="module" src="https://www.varbergshus.se/ui/app.5deddf5ea66ebf6409d8.js?v=VMMJHVIxzHtAuy_QwIET_2ASqIbyemjiSq1M9KIe41o"></script>
+    <script>
+				(function () {
+
+    const init = (knownId, data) => {
+
+        const _houseSelectorKnownId = knownId;
+        const _houseSelectorViews = data.views;
+        const _houseSelectorHouses = data.houses;
+        const _houseSelectorFilters = data.filters;
+
+        var infoBoxes = {};
+
+        var isTouch = false;
+        var selectedHouse = null;
+
+        if (window.addEventListener) {
+            window.addEventListener('touchstart', function () {
+                isTouch = true;
+            });
+        }
+
+        const showInfo = (house) => {
+            var info = infoBoxes[house.id];
+            if (info.timeout !== 0)
+                clearTimeout(info.timeout);
+            info.timeout = setTimeout(() => {
+                info.timeout = 0;
+                info.el.classList.add("houseselector__info-visible");
+                info.showCallbacks.forEach(c => c());
+            }, 50);
+        };
+
+        const hideInfo = (house) => {
+            var info = infoBoxes[house.id];
+            if (info.timeout !== 0)
+                clearTimeout(info.timeout);
+            info.timeout = setTimeout(() => {
+                selectedHouse = null;
+                info.timeout = 0;
+                info.el.classList.remove("houseselector__info-visible");
+                info.hideCallbacks.forEach(c => c());
+            }, 50);
+        };
+
+        const addShowCallback = (house, c) => {
+            infoBoxes[house.id].showCallbacks.push(c);
+        };
+
+        const addHideCallback = (house, c) => {
+            infoBoxes[house.id].hideCallbacks.push(c);
+        };
+
+        var parentEl = document.getElementById(_houseSelectorKnownId).parentElement;
+
+        //parentEl.style.overflow = "hidden";
+
+        const viewsEl = parentEl.querySelector(".houseselector__views");
+
+        var activeFilters = {};
+
+        const updateFilterValues = () => {
+            var filters = parentEl.querySelector(".houseselector__filters");
+            if (!filters)
+                return;
+
+            Object.keys(activeFilters).forEach(filterName => {
+                if (activeFilters[filterName].min > activeFilters[filterName].max)
+                    activeFilters[filterName].max = activeFilters[filterName].min;
+            });
+
+            Array.prototype.forEach.call(filters.querySelectorAll("[data-min]"), e => {
+                e.value = activeFilters[e.getAttribute("data-min")].min + "";
+            });
+
+            Array.prototype.forEach.call(filters.querySelectorAll("[data-max]"), e => {
+                e.value = activeFilters[e.getAttribute("data-max")].max + "";
+            });
+        };
+
+        const resetFilters = () => {
+            _houseSelectorFilters.forEach(filter => {
+                activeFilters[filter.name] = {
+                    min: filter.ranges.length == 0 ? 0 : filter.ranges[0],
+                    max: filter.ranges.length == 0 ? 0 : filter.ranges[filter.ranges.length - 1]
+                };
+            });
+
+            updateFilterValues();
+        };
+
+        const filterHouses = () => {
+            updateFilterValues();
+
+            var visibleCount = 0;
+            var houseVisible = {};
+            _houseSelectorHouses.forEach(house => {
+                var visible = true;
+                Object.keys(activeFilters).forEach(filterName => {
+                    house.information.forEach(info => {
+                        if (filterName !== info.name)
+                            return;
+                        var filter = activeFilters[filterName];
+                        var val = parseInt(info.value);
+                        visible &= val >= filter.min && val <= filter.max;
+                    });
+                });
+                houseVisible[house.id] = visible;
+                visibleCount += visible ? 1 : 0;
+            });
+
+            Array.prototype.forEach.call(parentEl.querySelectorAll(".houseselector__filters [data-found]"), e => {
+                e.innerText = visibleCount;
+            });
+
+            _houseSelectorViews.forEach(view => {
+                _houseSelectorHouses.forEach(house => {
+                    var overlayEl = parentEl.querySelector("[data-id='overlay-" + view + "." + house.id + "']");
+
+                    if (!overlayEl)
+                        return;
+
+                    overlayEl.style.display = houseVisible[house.id] ? "" : "none";
+                });
+            });
+        };
+
+        //Move filters and then initialize
+        (function () {
+            var filters = parentEl.querySelector(".houseselector__filters");
+            if (!filters)
+                return;
+            filters.parentElement.removeChild(filters);
+            viewsEl.appendChild(filters);
+
+            //Initialize data elements
+            Array.prototype.forEach.call(filters.querySelectorAll("[data-total]"), e => {
+                e.innerText = _houseSelectorHouses.length;
+            });
+
+            Array.prototype.forEach.call(filters.querySelectorAll("[data-min]"), e => {
+                e.addEventListener("change", () => {
+                    activeFilters[e.getAttribute("data-min")].min = parseInt(e.value);
+                    filterHouses();
+                });
+            });
+
+            Array.prototype.forEach.call(filters.querySelectorAll("[data-max]"), e => {
+                e.addEventListener("change", () => {
+                    activeFilters[e.getAttribute("data-max")].max = parseInt(e.value);
+                    filterHouses();
+                });
+            });
+
+            Array.prototype.forEach.call(filters.querySelectorAll("[data-hide]"), e => {
+                e.addEventListener("click", () => {
+                    filters.classList.remove("houseselector__filters-visible");
+                });
+            });
+
+            Array.prototype.forEach.call(filters.querySelectorAll("[data-show]"), e => {
+                e.addEventListener("click", () => {
+                    filters.classList.add("houseselector__filters-visible");
+                });
+            });
+
+            Array.prototype.forEach.call(filters.querySelectorAll("[data-clear]"), e => {
+                e.addEventListener("click", () => {
+                    resetFilters();
+                    filterHouses();
+                });
+            });
+
+            Array.prototype.forEach.call(filters.querySelectorAll("[data-overlays-show]"), e => {
+                e.addEventListener("click", () => {
+                    _houseSelectorViews.forEach(view => {
+                        _houseSelectorHouses.forEach(house => {
+                            var overlayEl = parentEl.querySelector("[data-id='overlay-" + view + "." + house.id + "']");
+                            if (!overlayEl)
+                                return;
+                            overlayEl.classList.add("houseselector__overlay-selected");
+                        });
+                    });
+                });
+            });
+
+            Array.prototype.forEach.call(filters.querySelectorAll("[data-overlays-hide]"), e => {
+                e.addEventListener("click", () => {
+                    _houseSelectorViews.forEach(view => {
+                        _houseSelectorHouses.forEach(house => {
+                            var overlayEl = parentEl.querySelector("[data-id='overlay-" + view + "." + house.id + "']");
+                            if (!overlayEl)
+                                return;
+                            overlayEl.classList.remove("houseselector__overlay-selected");
+                        });
+                    });
+                });
+            });
+
+            var filtersBtn = parentEl.querySelector(".houseselector__filters-btn");
+            if (!filtersBtn)
+                return;
+            filtersBtn.parentElement.removeChild(filtersBtn);
+            viewsEl.insertBefore(filtersBtn, filters);
+
+            filtersBtn.addEventListener("click", () => {
+                filters.classList.toggle("houseselector__filters-visible");
+            });
+        })();
+
+        //Apply filter to houses
+        resetFilters();
+        filterHouses();
+
+        parentEl.querySelector(".houseselector__view-scroll").addEventListener("scroll", () => {
+            if (!selectedHouse)
+                return;
+            var info = infoBoxes[selectedHouse.id];
+            info.showCallbacks.forEach(c => c());
+        });
+
+        _houseSelectorHouses.forEach(house => {
+            var infoEl = parentEl.querySelector("[data-id='info-" + house.id + "']");
+            infoBoxes[house.id] = {
+                el: infoEl,
+                timeout: 0,
+                showCallbacks: [],
+                hideCallbacks: []
+            };
+
+            infoEl.addEventListener("mouseover", (e) => {
+                e.preventDefault();
+
+                showInfo(house);
+            });
+
+            infoEl.addEventListener("mouseout", (e) => {
+                e.preventDefault();
+
+                hideInfo(house);
+            });
+
+            infoEl.addEventListener("click", (e) => {
+                if (viewsEl.classList.contains("houseselector__views-zoom") || e.target.tagName.toUpperCase() == "A")
+                    return;
+
+                e.preventDefault();
+
+                if (isTouch) {
+                    if (selectedHouse === house) {
+                        if (house.url.startsWith('http')) {
+                            window.open(house.url, '_blank');
+                        } else {
+                            document.location = house.url;
+                        }
+                    } else {
+                        selectedHouse = house;
+                    }
+                } else {
+                    if (house.url.startsWith('http')) {
+                        window.open(house.url, '_blank');
+                    } else {
+                        document.location = house.url;
+                    }
+                }
+            });
+        });
+
+        var views = [];
+
+        _houseSelectorViews.forEach(view => {
+            var viewEl = parentEl.querySelector("[data-id='view-" + view + "']");
+            views.push(viewEl);
+
+            _houseSelectorHouses.forEach(house => {
+                var overlayEl = parentEl.querySelector("[data-id='overlay-" + view + "." + house.id + "']");
+
+                if (!overlayEl)
+                    return;
+
+                var infoEl = parentEl.querySelector("[data-id='info-" + house.id + "']");
+
+                if (house.overlayColor)
+                    overlayEl.style.fill = "rgb(" + house.overlayColor.r + ", " + house.overlayColor.g + ", " + house.overlayColor.b + ")";
+
+                if (house.isAvailable)
+                    overlayEl.classList.add("houseselector__overlay-available1");
+                else
+                    overlayEl.classList.add("houseselector__overlay-available0");
+
+                overlayEl.classList.add("houseselector__overlay");
+                overlayEl.classList.remove("houseselector__invisible");
+
+                overlayEl.addEventListener("mouseover", (e) => {
+                    e.preventDefault();
+
+                    addShowCallback(house, () => {
+                        overlayEl.classList.add("houseselector__overlay-hover");
+
+                        var parentRect = overlayEl.parentElement.getBoundingClientRect();
+                        var rect = overlayEl.getBoundingClientRect();
+
+                        infoEl.style.bottom = (parentRect.height - (rect.top - parentRect.top) - 5 + viewEl.parentElement.scrollTop) + "px";
+
+                        //Center info box to overlay
+                        var infoRect = infoEl.getBoundingClientRect();
+                        var left = (rect.left + (rect.width / 2) - (infoRect.width / 2));
+
+                        if (left < 0)
+                            left = 0;
+
+                        if (left + infoRect.width > window.innerWidth)
+                            left = window.innerWidth - infoRect.width;
+
+                        infoEl.style.left = left + "px";
+                    });
+
+                    showInfo(house);
+                });
+
+                overlayEl.addEventListener("mouseout", (e) => {
+                    e.preventDefault();
+
+                    addHideCallback(house, () => {
+                        overlayEl.classList.remove("houseselector__overlay-hover");
+                    });
+
+                    hideInfo(house);
+                });
+
+                overlayEl.addEventListener("click", (e) => {
+                    e.preventDefault();
+
+                    if (isTouch) {
+                        if (selectedHouse === house) {
+                            if (house.url.startsWith('http')) {
+                                window.open(house.url, '_blank');
+                            } else {
+                                document.location = house.url;
+                            }
+                        } else {
+                            selectedHouse = house;
+                        }
+                    } else {
+                        if (house.url.startsWith('http')) {
+                            window.open(house.url, '_blank');
+                        } else {
+                            document.location = house.url;
+                        }
+                    }
+                });
+            });
+        });
+
+        parentEl.querySelector(".houseselector__zoom")?.addEventListener("click", (e) => {
+            e.preventDefault();
+
+            viewsEl.classList.toggle("houseselector__views-zoom");
+        });
+
+        //Touch zoom handling
+        (function () {
+            var touchX = null;
+            var touchY = null;
+            parentEl.addEventListener("touchstart", (e) => {
+                if (e.touches.length == 2) {
+                    e.preventDefault();
+                    touchX = [e.touches[0].pageX, e.touches[1].pageX, e.touches[0].pageX, e.touches[1].pageX];
+                    touchY = [e.touches[0].pageY, e.touches[1].pageY, e.touches[0].pageY, e.touches[1].pageY];
+                }
+
+            });
+            parentEl.addEventListener("touchmove", (e) => {
+                if (e.touches.length == 2 && touchX !== null && touchY !== null) {
+                    touchX[2] = e.touches[0].pageX;
+                    touchX[3] = e.touches[1].pageX;
+                    touchY[2] = e.touches[0].pageY;
+                    touchY[3] = e.touches[1].pageY;
+                }
+            });
+            parentEl.addEventListener("touchend", (e) => {
+                if (touchX !== null && touchY !== null) {
+
+                    var dist1 = Math.hypot(
+                        touchX[0] - touchX[1],
+                        touchY[0] - touchY[1]
+                    );
+                    var dist2 = Math.hypot(
+                        touchX[2] - touchX[3],
+                        touchY[2] - touchY[3]
+                    );
+
+                    if (dist1 > dist2) {
+                        viewsEl.classList.remove("houseselector__views-zoom");
+                    } else
+                        if (dist1 < dist2) {
+                            viewsEl.classList.add("houseselector__views-zoom");
+                        }
+
+                    touchX = null;
+                    touchY = null;
+                }
+            });
+        })();
+
+        if (views.length > 1) {
+            var activeView = 0;
+
+            const activateView = (view) => {
+                view.style.pointerEvents = "";
+                view.style.opacity = 1;
+            };
+            const deactivateView = (view) => {
+                view.style.pointerEvents = "none";
+                view.style.opacity = 0;
+            };
+            const prevView = () => {
+                deactivateView(views[activeView]);
+
+                activeView--;
+                if (activeView < 0)
+                    activeView = views.length - 1;
+
+                activateView(views[activeView]);
+            };
+            const nextView = () => {
+                deactivateView(views[activeView]);
+
+                activeView++;
+                if (activeView >= views.length)
+                    activeView = 0;
+
+                activateView(views[activeView]);
+            };
+
+            activateView(views[0]);
+            for (var i = 1; i < views.length; i++) {
+                deactivateView(views[i]);
+            }
+
+            parentEl.querySelector(".houseselector__previus")?.addEventListener("click", (e) => {
+                e.preventDefault();
+
+                prevView();
+            });
+
+            parentEl.querySelector(".houseselector__next")?.addEventListener("click", (e) => {
+                e.preventDefault();
+
+                nextView();
+            });
+
+            (function () {
+                var touchstartX = null;
+                parentEl.addEventListener("touchstart", (e) => {
+                    touchstartX = e.changedTouches[0].screenX;
+                });
+                parentEl.addEventListener("touchend", (e) => {
+                    if (!viewsEl.classList.contains("houseselector__views-zoom")) {
+                        if (e.changedTouches[0].screenX > touchstartX + 50)
+                            nextView();
+                        if (e.changedTouches[0].screenX < touchstartX - 50)
+                            prevView();
+                    }
+                    touchstartX = null;
+                });
+            })();
+
+            _houseSelectorViews.forEach(view => {
+                _houseSelectorViews.forEach(view2 => {
+                    var overlayEl = parentEl.querySelector("[data-id='overlay-" + view + "." + view2 + "']");
+
+                    if (!overlayEl)
+                        return;
+
+                    overlayEl.style.fill = "rgba(0, 255, 0, 0.3)";
+
+                    var viewEl = parentEl.querySelector("[data-id='view-" + view2 + "']");
+
+                    //Found perspective overlay
+                    overlayEl.addEventListener("mouseover", (e) => {
+                        e.preventDefault();
+
+                        overlayEl.style.fill = "rgba(0, 255, 0, 0.5)";
+                    });
+
+                    overlayEl.addEventListener("mouseout", (e) => {
+                        e.preventDefault();
+
+                        overlayEl.style.fill = "rgba(0, 255, 0, 0.3)";
+                    });
+
+                    overlayEl.addEventListener("click", (e) => {
+                        e.preventDefault();
+
+                        for (var i = 0; i < views.length; i++) {
+                            if (views[i] != viewEl)
+                                continue;
+                            deactivateView(views[activeView]);
+                            activateView(views[i]);
+                            activeView = i;
+                            break;
+                        }
+                    });
+                });
+            });
+        }
+    };
+
+    if (typeof houseSelector === 'undefined' || !houseSelector) {
+        return;
+    }
+
+    Object.keys(houseSelector).forEach(knownId => {
+        init(knownId, houseSelector[knownId]);
+    });
+})();
+			</script>
+
+    <a href="#" id="back-to-top">
+        <i class="icon-vh-top-arrow"></i>
+    </a>
+    <script>
+        Array.prototype.forEach.call(document.querySelectorAll('[name="litium-request-context"]'), el => {
+            el.value = JSON.stringify(window.__litium.requestContext);
+        });
+    </script>
+</body>
+</html>
